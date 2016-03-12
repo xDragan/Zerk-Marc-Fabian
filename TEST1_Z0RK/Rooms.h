@@ -5,7 +5,7 @@ using namespace std;
 class Room{
 public:
 	//bool n, s, e, w;
-	Exit room;
+	Exit* room;
 public:
 	void Look(const char);
 	Room(char* _name, char* _description);

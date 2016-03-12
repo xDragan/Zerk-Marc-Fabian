@@ -8,20 +8,21 @@ using namespace std;
 		//placeholder for testing below:
 		char name = *_name;
 		char description = *_description;
-		Exit room;
+		
 	}
 	void Look(const char _description){
 		cout << "test  : " << _description << endl;
 	}
+	Exit* room;
 	
-
 	//bool n, s, e, w;
 
 
-
+	/*
 int main(){
 	Room test("blabla", "test");
 	test.room.n= true;
 
 	return 0;
 }
+*/
