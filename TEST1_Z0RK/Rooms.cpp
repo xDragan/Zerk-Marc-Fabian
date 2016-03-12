@@ -13,7 +13,7 @@ using namespace std;
 	void Look(const char _description){
 		cout << "test  : " << _description << endl;
 	}
-	Exit* room;
+	Exit* dir;
 	
 	//bool n, s, e, w;
 

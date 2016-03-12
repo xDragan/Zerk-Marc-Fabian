@@ -2,7 +2,7 @@
 #include "Exit.h"
 class Exit{
 
-	bool n = false, s = false, e = false, w = false;
+	bool n = true, s = true, e = true, w = true;
 	int position;
 	void far_look(const char* description){
 
