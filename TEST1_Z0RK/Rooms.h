@@ -8,18 +8,17 @@
 
 class Room{
 public:
-	char name[30];
-public:
 	char retname();
 	char retdesc();
 	void Look();
+
 public:
-	
+	char name[20];
+	char description[200];
 	Room(char* _name, char* _description);
 	~Room();
 private: 
-	// char name;
-	char description[300];
+
 
 
 };

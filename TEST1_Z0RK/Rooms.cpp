@@ -5,23 +5,23 @@
 #include "World.h"
 
 
-char name[30];
-char description[300];
+char name[20];
+char description[200];
 	Room::Room(char* _name, char* _description){
-		//placeholder for testing below:
-		name[30] = *_name;
-		description[300] = *_description;
-		
+		strcpy_s(name, _name);
+		strcpy_s(description, _description);
+
 	}
 	char Room::retname(){
-		return name[30];
+		return name[20];
 	}
 	char Room::retdesc(){
-		return description[300];
+		return description[200];
 	}
 	void Room::Look(){
-		printf("%s\n", name);
-		printf("%s", description);
+	
+	printf("NAME: %s\n", name);
+	printf("DESC: %s\n", description);
 	}
 
 	//char GetNombre(){ return name; }

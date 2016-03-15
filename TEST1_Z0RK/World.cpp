@@ -23,7 +23,7 @@ World::World(){
 	 test[17] = new Room("Subway Entrance", "You are in the subway entrance");
 	 test[20] = new Room("Enemy Base", "Seems like you are in Bob's base...");
 	 test[24] = new Room("Enemy Base", "With this type of decoration  this might be Lizz base...");
-	 subway = new Room("Subway 1st", "The center of the subway");
+	 subway = new Room("Subway Exit", "The center of the subway");
 	 // new exits [n exits]
 	 numb[0] = new Exit(test[0], test[1], "You see a forest with a bright light in the end",e,false);
 	 numb[1] = new Exit(test[1], test[0], "You see a deep forest", w, false);
