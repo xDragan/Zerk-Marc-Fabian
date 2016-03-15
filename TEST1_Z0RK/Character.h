@@ -1,13 +1,19 @@
+#ifndef _Character
+#define _Character
 #include <iostream>
-using namespace std;
+#include <stdio.h>
+#include "Rooms.h"
 
 class Character{
-	
+
 public:
-	Character(string, int);
+
+public:
+	Character(char*);
 	~Character();
 private:
-		int hp;
-		string name;
-
+		char name;
+		Room* actual;
+		// punter a l habitacio on esta (va cambiant amb una funcio go(salida) que modifica la habitacio actual
 };
+#endif

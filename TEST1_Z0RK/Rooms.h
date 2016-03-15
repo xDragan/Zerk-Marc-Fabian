@@ -1,18 +1,27 @@
+#ifndef _Rooms
+#define _Rooms
 #include <iostream>
-using namespace std;
+#include <stdio.h>
+#include "Exit.h"
+
 
 
 class Room{
 public:
-	//bool n, s, e, w;
-	Exit* dir;
+	char name[30];
 public:
-	void Look(const char);
+	char retname();
+	char retdesc();
+	void Look();
+public:
+	
 	Room(char* _name, char* _description);
-private:
-	char name;
-	char description;
+	~Room();
+private: 
+	// char name;
+	char description[300];
 
 
 };
+#endif
 

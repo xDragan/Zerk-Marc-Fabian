@@ -1,28 +1,27 @@
 #include <iostream>
+#include <stdio.h>
 #include "Rooms.h"
 #include "Exit.h"
-using namespace std;
+#include "World.h"
 
 
+char name[30];
+char description[300];
 	Room::Room(char* _name, char* _description){
 		//placeholder for testing below:
-		char name = *_name;
-		char description = *_description;
+		name[30] = *_name;
+		description[300] = *_description;
 		
 	}
-	void Look(const char _description){
-		cout << "test  : " << _description << endl;
+	char Room::retname(){
+		return name[30];
 	}
-	Exit* dir;
-	
-	//bool n, s, e, w;
+	char Room::retdesc(){
+		return description[300];
+	}
+	void Room::Look(){
+		printf("%s", name);
+		printf("%s", description);
+	}
 
-
-	/*
-int main(){
-	Room test("blabla", "test");
-	test.room.n= true;
-
-	return 0;
-}
-*/
+	//char GetNombre(){ return name; }
