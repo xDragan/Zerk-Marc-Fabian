@@ -19,9 +19,7 @@ char description[200];
 		return description[200];
 	}
 	void Room::Look(){
-	
-	printf("NAME: %s\n", name);
-	printf("DESC: %s\n", description);
+	printf("%s\n", description);
 	}
 
 	//char GetNombre(){ return name; }

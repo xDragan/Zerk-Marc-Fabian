@@ -2,17 +2,15 @@
 #include <stdlib.h>
 #include <iostream>
 #include "World.h"
+#include "main.h"
 
 int main(){
+	int i;
+	zorkworld=new World;
 	
-	World* zorkworld=new World;
-	
-
-
-	//zorkworld.player.actual = zorkworld.test[2];
-	//zorkworld.keyboard("look");
 	zorkworld->player->actual = zorkworld->test[2];
-	zorkworld->keyboard("look");
+	zorkworld->keyboard("look s");
+	//zorkworld->numb[2]->lookdescript();
 
 	
 	system("pause");

@@ -4,6 +4,7 @@
 #include "Rooms.h"
 #include "Character.h"
 #define N_ROOM 25
+#define N_EXIT 58
 
 // private ni lectura ni modificar
 // const si lectura no modificar
@@ -14,10 +15,11 @@ public:
 	World();
 	~World();
 	void impo();
+	void Go(dir);
 public:
 	Room* test[N_ROOM];
-	Room* subway;// 
-	Exit* numb[58];
+	Room* subway;
+	Exit* numb[N_EXIT];
 	Character* player;
 private:
 	int i;

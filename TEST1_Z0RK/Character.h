@@ -5,7 +5,8 @@
 #include "Rooms.h"
 
 class Character{
-
+public:
+	int i;
 public:
 	Room* actual;
 public:

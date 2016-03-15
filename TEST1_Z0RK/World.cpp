@@ -97,11 +97,75 @@ World::World(){
 };
 
 bool World::keyboard(const char* input){
-
+	int exit;
 	bool keycheck = true;
 
-	if (input == "look"){
+	if (input == "look"){ // to look you room
 		player->actual->Look();
 	}
+	// to look what exits you see from your room:
+	else if (input == "look north" || input == "look n"){
+		//player->LookTo(n);
+		exit=0;
+		for (i = 0; i < N_EXIT; i++){
+			if ((numb[i]->origin == player->actual) && (n == numb[i]->direction)){
+				numb[i]->lookdescript(); exit++;
+			}
+		}
+		if (exit == 0){ printf("I can't see nothing in that direction\n"); }
+	}
+	else if (input == "look south" || input == "look s"){
+		exit = 0;
+		for (i = 0; i < N_EXIT; i++){
+			if ((numb[i]->origin == player->actual) && (s == numb[i]->direction)){
+				numb[i]->lookdescript(); exit++;
+			}
+		}
+		if (exit == 0){ printf("I can't see nothing in that direction\n"); }
+	}
+	else if (input == "look east" || input == "look e"){
+		exit = 0;
+		for (i = 0; i < N_EXIT; i++){
+			if ((numb[i]->origin == player->actual) && (e == numb[i]->direction)){
+				numb[i]->lookdescript(); exit++;
+			}
+		}
+		if (exit == 0){ printf("I can't see nothing in that direction\n"); }
+	}
+	else if (input == "look west" || input == "look w"){
+		exit = 0;
+		for (i = 0; i < N_EXIT; i++){
+			if ((numb[i]->origin == player->actual) && (w == numb[i]->direction)){
+				numb[i]->lookdescript(); exit++;
+			}
+		}
+		if (exit == 0){ printf("I can't see nothing in that direction\n"); }
+	}
+	//now the other basic inputs for movement north south east west
+	else if (input == "north" || input == "n"){
+		Go(n);
+	}
+	else if (input == "south" || input == "s"){
+		Go(s);
+	}
+	else if (input == "east" || input == "e"){
+		Go(e);
+	}
+	else if (input == "west" || input == "w"){
+		Go(w);
+	}
 		return keycheck;
+}
+
+
+void World::Go(dir nsew){
+	int i, exit=0;
+	for (i = 0; i < N_EXIT; i++)
+	if (numb[i]->origin == player->actual&& nsew == numb[i]->direction){
+		player->actual = numb[i]->destiny; 
+		exit++;
+	}
+	if (exit == 0){
+		printf("I can't go to that direction\n");
+	}
 }
