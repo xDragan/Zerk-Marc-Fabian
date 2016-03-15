@@ -5,9 +5,10 @@
 
 int main(){
 	
-	World* myworld;
+	World* zorkworld;
 	
-	myworld->test[2]->retname();
+	zorkworld->player->actual = zorkworld->test[2];
+	zorkworld->keyboard("look");
 	//char neim[30] = myworld.test[2].name;
 	//printf("%s",neim);
 	

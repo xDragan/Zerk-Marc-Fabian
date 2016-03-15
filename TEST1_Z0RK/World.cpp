@@ -96,13 +96,12 @@ World::World(){
 	
 };
 
-bool keyboard(const char* input){
+bool World::keyboard(const char* input){
 
 	bool keycheck = true;
-	char looktest[200]=player->actual;
+
 	if (input == "look"){
-		
+		player->actual->Look();
 	}
-
-
+		return keycheck;
 }

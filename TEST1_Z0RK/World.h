@@ -9,7 +9,7 @@
 // const si lectura no modificar
 class World{
 public:
-	bool keyboard(const char);
+	bool keyboard(const char* input);
 public:
 	World();
 	~World();
@@ -18,9 +18,9 @@ public:
 	Room* test[N_ROOM];
 	Room* subway;// 
 	Exit* numb[58];
+	Character* player;
 private:
 	int i;
-	Character* player;
 	//Room* Base, *House, *Forest;
 	//Room* test[5][5];
 };

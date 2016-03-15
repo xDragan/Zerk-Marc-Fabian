@@ -7,13 +7,12 @@
 class Character{
 
 public:
-
+	Room* actual;
 public:
 	Character(char*);
 	~Character();
 private:
 		char name;
-		Room* actual;
 		// punter a l habitacio on esta (va cambiant amb una funcio go(salida) que modifica la habitacio actual
 };
 #endif
