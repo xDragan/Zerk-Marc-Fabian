@@ -5,12 +5,15 @@
 
 int main(){
 	
-	World* zorkworld;
+	World* zorkworld=new World;
 	
+
+
+	//zorkworld.player.actual = zorkworld.test[2];
+	//zorkworld.keyboard("look");
 	zorkworld->player->actual = zorkworld->test[2];
 	zorkworld->keyboard("look");
-	//char neim[30] = myworld.test[2].name;
-	//printf("%s",neim);
+
 	
 	system("pause");
 	return 0;
