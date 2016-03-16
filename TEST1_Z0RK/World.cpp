@@ -181,5 +181,6 @@ bool World::keyboard(const char* input){
 	else if (input == "open west" || input == "open w"){
 		Open(w);
 	}
+	else { keycheck= false; }
 		return keycheck;
 }

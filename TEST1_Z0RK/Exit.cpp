@@ -28,6 +28,21 @@ void World::Open(dir direct){
 
 }
 
+void World::Close(dir direct){
+	int i, exit = 0;
+	for (i = 0; i < N_EXIT; i++){
+		if ((numb[i]->origin == player->actual) && (direct == numb[i]->direction)){
+			if (numb[i]->door == false && numb[i]==numb[44]){
+				numb[i]->door = true; exit++;
+				printf("The door is now closed\n");
+			}
+			else if (numb[i] == numb[44]){ printf("The door is already closed\n"); exit++; }
+		}
+	}
+	if (exit == 0){ printf("There is no door there\n"); }
+
+}
+
 //char name[30]; //strcpy del class room
 //char des[300]; //strcpy del class room
 bool door;

@@ -18,6 +18,7 @@ public:
 	void impo();
 	void Go(dir);
 	void Open(dir);
+	void Close(dir);
 public:
 	Room* test[N_ROOM];
 	Room* subway;
