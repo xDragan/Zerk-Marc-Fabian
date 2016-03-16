@@ -13,10 +13,10 @@ World::World(){
 	 // new room[n room]
 
 	for (i = 0; i < N_ROOM; i++){
-		 if (i != 2 && i != 5 && i != 9 && i != 17 && i != 20 && i != 24){
+		 if (i != 2 && i != 5 && i != 9 && i != 17 && i != 20 && i != 24){// test are rooms
 			 test[i] = new Room("Forest", "You are in the forest");
 		 }
-	 }
+	 }// test are rooms
 	 test[2] = new Room("Base", "You are in your Base");
 	 test[5] = new Room("Safe House", "You are in an unknown Safe House");
 	 test[9] = new Room("Safe House", "You are in an unknown Safe House");
@@ -24,7 +24,7 @@ World::World(){
 	 test[20] = new Room("Enemy Base", "Seems like you are in Bob's base...");
 	 test[24] = new Room("Enemy Base", "With this type of decoration  this might be Lizz base...");
 	 subway = new Room("Subway Exit", "You are in the center of the subway");
-	 // new exits [n exits]
+	 // new exits [n exits] // numb are exits
 	 numb[0] = new Exit(test[0], test[1], "You see a forest with a bright light in the end",e,false);
 	 numb[1] = new Exit(test[1], test[0], "You see a deep forest", w, false);
 	 numb[2] = new Exit(test[1], test[6], "You see a forest with a bright light coming from somewhere", s, false);
@@ -84,7 +84,7 @@ World::World(){
 	 numb[56] = new Exit(test[23], test[22], "You see a deep forest", w, false);
 	 numb[57] = new Exit(test[24], test[19], "You see a deep forest", n, false);
 	 numb[58] = new Exit(subway, test[17], "You see a bright light coming from upstairs", n, false);
-	
+	 // numb are exits
 };
 
 bool World::keyboard(const char* input){ //input check

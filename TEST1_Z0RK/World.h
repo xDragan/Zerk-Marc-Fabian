@@ -19,9 +19,9 @@ public:
 	void Open(dir);
 	void Close(dir);
 public:
-	Room* test[N_ROOM];
+	Room* test[N_ROOM]; // test are rooms
 	Room* subway;
-	Exit* numb[N_EXIT];
+	Exit* numb[N_EXIT]; // numb are exits
 	Character* player;
 private:
 	int i;
