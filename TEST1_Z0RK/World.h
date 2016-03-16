@@ -4,7 +4,7 @@
 #include "Rooms.h"
 #include "Character.h"
 #define N_ROOM 25
-#define N_EXIT 58
+#define N_EXIT 59
 
 // private ni lectura ni modificar
 // const si lectura no modificar

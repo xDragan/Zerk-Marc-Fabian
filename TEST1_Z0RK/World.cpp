@@ -23,7 +23,7 @@ World::World(){
 	 test[17] = new Room("Subway Entrance", "You are in the subway entrance");
 	 test[20] = new Room("Enemy Base", "Seems like you are in Bob's base...");
 	 test[24] = new Room("Enemy Base", "With this type of decoration  this might be Lizz base...");
-	 subway = new Room("Subway Exit", "The center of the subway");
+	 subway = new Room("Subway Exit", "You are in the center of the subway");
 	 // new exits [n exits]
 	 numb[0] = new Exit(test[0], test[1], "You see a forest with a bright light in the end",e,false);
 	 numb[1] = new Exit(test[1], test[0], "You see a deep forest", w, false);
@@ -83,7 +83,7 @@ World::World(){
 	 numb[55] = new Exit(test[23], test[18], "You see a deep forest", n, false);
 	 numb[56] = new Exit(test[23], test[22], "You see a deep forest", w, false);
 	 numb[57] = new Exit(test[24], test[19], "You see a deep forest", n, false);
-
+	 numb[58] = new Exit(subway, test[17], "You see a bright light coming from upstairs", n, false);
 	 // for(que lee todas las salidas) para ver las salidas de cada habitacion (ya especificado origen y salida)
 
 	 // GO?
@@ -100,7 +100,7 @@ bool World::keyboard(const char* input){
 	int check;
 	bool keycheck = true;
 	char direct[6];
-	if (input == "look" || input == "l"){ // to look you room
+	if (strcmp(input, "look") == 0 || strcmp(input, "l") == 0){ // to look you room
 		player->actual->Look();
 	}
 	// to look what exits you see from your room:
@@ -129,7 +129,7 @@ bool World::keyboard(const char* input){
 				numb[i]->lookdescript(); check++;
 			}
 		}
-		if (exit == 0){ printf("I can't see nothing in that direction\n"); }
+		if (check == 0){ printf("I can't see nothing in that direction\n"); }
 	}
 	else if (strcmp(input, "look west") == 0 || strcmp(input, "look w") == 0){
 		check = 0;
@@ -154,7 +154,7 @@ bool World::keyboard(const char* input){
 		Go(w);
 	}
 	//input for open a door
-	else if (strcmp(input, "open") || strcmp(input, "o")){
+	else if (strcmp(input, "open")==0 || strcmp(input, "o")==0){
 		printf("Wich direction do you want to open?\n");
 		gets_s(direct);
 		if (strcmp(direct, "n") == 0 || strcmp(direct, "north") == 0){ // preguntar Ric sobre perque no em deixa comparar normal (direct == "n");
@@ -170,16 +170,16 @@ bool World::keyboard(const char* input){
 			Open(w);
 		}
 	}
-	else if (input == "open north" || input == "open n"){
+	else if (strcmp(input, "open north") == 0 || strcmp(input, "open n") == 0){
 		Open(n);
 	}
-	else if (input == "open south" || input == "open s"){
+	else if (strcmp(input, "open south") == 0 || strcmp(input, "open s") == 0){
 		Open(s);
 	}
-	else if (input == "open east" || input == "open e"){
+	else if (strcmp(input, "open east") == 0 || strcmp(input, "open e") == 0){
 		Open(e);
 	}
-	else if (input == "open west" || input == "open w"){
+	else if (strcmp(input, "open west") == 0 || strcmp(input, "open w") == 0){
 		Open(w);
 	}
 	//input for closing a door

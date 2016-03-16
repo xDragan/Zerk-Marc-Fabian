@@ -6,12 +6,13 @@
 int main(){
 	World* zorkworld=new World;
 	char input[20];
-	printf("Welcome to Zerk! a Zork type game created by Marc Fabian! ENJOY! :)\n");
+	printf("\t Welcome to Zerk! a Zork type game created by Marc Fabian! ENJOY! :)\n\n");
 	zorkworld->Help();
 	zorkworld->player->actual = zorkworld->test[2];
 
 	while (1){
 		printf("\n");
+		printf("___________________________________________________\n");
 		zorkworld->keyboard("look");
 		gets_s(input);
 
