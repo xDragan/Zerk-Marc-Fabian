@@ -8,6 +8,8 @@ Zerk
 	 - Look description of your base: look/l
 	 - Look to a direction: look north/look n, look south/look s... 
 	 - Open/Close a door: open, open north/open n, open south/open s...
-	 - Quit: quit\n\n\n");
-
+	 - Quit: quit/q
+	 - No caps allowed in commands
 Look the map in the wiki for bug testing and oriented gameplay
+
+
