@@ -9,13 +9,15 @@
 // private ni lectura ni modificar
 // const si lectura no modificar
 class World{
-public:
-	bool keyboard(const char* input);
+
 public:
 	World();
 	~World();
+public:
+	bool keyboard(const char* input);
 	void impo();
 	void Go(dir);
+	void Open(dir);
 public:
 	Room* test[N_ROOM];
 	Room* subway;

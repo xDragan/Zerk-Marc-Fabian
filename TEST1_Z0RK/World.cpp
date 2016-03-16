@@ -99,13 +99,12 @@ World::World(){
 bool World::keyboard(const char* input){
 	int exit;
 	bool keycheck = true;
-
+	char direct[6];
 	if (input == "look"){ // to look you room
 		player->actual->Look();
 	}
 	// to look what exits you see from your room:
 	else if (input == "look north" || input == "look n"){
-		//player->LookTo(n);
 		exit=0;
 		for (i = 0; i < N_EXIT; i++){
 			if ((numb[i]->origin == player->actual) && (n == numb[i]->direction)){
@@ -154,18 +153,33 @@ bool World::keyboard(const char* input){
 	else if (input == "west" || input == "w"){
 		Go(w);
 	}
+	else if (input == "open" || input == "o"){
+		printf("Wich direction i have to open?");
+		gets_s(direct);
+		if (strcmp(direct, "n") == 0 || strcmp(direct, "north") == 0){ // preguntar Ric sobre perque no em deixa comparar normal (direct == "n");
+			Open(n);
+		}
+		else if (strcmp(direct, "s") == 0 || strcmp(direct, "south") == 0){
+			Open(s);
+		}
+		else if (strcmp(direct, "e") == 0 || strcmp(direct, "east") == 0){
+			Open(e);
+		}
+		else if (strcmp(direct, "w") == 0 || strcmp(direct, "west") == 0){
+			Open(w);
+		}
+	}
+	else if (input == "open north" || input == "open n"){
+		Open(n);
+	}
+	else if (input == "open south" || input == "open s"){
+		Open(s);
+	}
+	else if (input == "open east" || input == "open e"){
+		Open(e);
+	}
+	else if (input == "open west" || input == "open w"){
+		Open(w);
+	}
 		return keycheck;
-}
-
-
-void World::Go(dir nsew){
-	int i, exit=0;
-	for (i = 0; i < N_EXIT; i++)
-	if (numb[i]->origin == player->actual&& nsew == numb[i]->direction){
-		player->actual = numb[i]->destiny; 
-		exit++;
-	}
-	if (exit == 0){
-		printf("I can't go to that direction\n");
-	}
 }

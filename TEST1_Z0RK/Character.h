@@ -12,8 +12,9 @@ public:
 public:
 	Character(char*);
 	~Character();
+	//void Go(dir);
 private:
 		char name;
-		// punter a l habitacio on esta (va cambiant amb una funcio go(salida) que modifica la habitacio actual
+		
 };
 #endif

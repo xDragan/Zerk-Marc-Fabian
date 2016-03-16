@@ -9,7 +9,7 @@ int main(){
 	zorkworld=new World;
 	
 	zorkworld->player->actual = zorkworld->test[2];
-	zorkworld->keyboard("look s");
+	zorkworld->keyboard("open");
 	//zorkworld->numb[2]->lookdescript();
 
 	

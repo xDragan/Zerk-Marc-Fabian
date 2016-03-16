@@ -3,8 +3,11 @@
 #include <iostream>
 #include "Rooms.h"
 enum dir{n,s,e,w};
+
 class Room;
 class Exit{
+public:
+	bool door;
 public:
 	Exit(Room* orig, Room* dest, char* description, dir,bool);
 	void lookdescript();
@@ -14,7 +17,6 @@ public:
 	dir direction;
 private:
 	char look[100];
-	bool door;
 };
 
 #endif
