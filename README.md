@@ -1,4 +1,8 @@
+ 
+Zerk 
+ 
  All you can do in this build is moving around the map with movement lock, look around and open/close doors
+ 
 	 - Commands:
 	 - Movement: north/n, south/s, east/e, west/w
 	 - Look description of your base: look/l
