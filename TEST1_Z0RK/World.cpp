@@ -97,64 +97,65 @@ World::World(){
 };
 
 bool World::keyboard(const char* input){
-	int exit;
+	int check;
 	bool keycheck = true;
 	char direct[6];
-	if (input == "look"){ // to look you room
+	if (input == "look" || input == "l"){ // to look you room
 		player->actual->Look();
 	}
 	// to look what exits you see from your room:
-	else if (input == "look north" || input == "look n"){
-		exit=0;
+	else if (strcmp(input, "look north") == 0 || strcmp(input, "look n") == 0){
+		check=0;
 		for (i = 0; i < N_EXIT; i++){
 			if ((numb[i]->origin == player->actual) && (n == numb[i]->direction)){
-				numb[i]->lookdescript(); exit++;
+				numb[i]->lookdescript(); check++;
 			}
 		}
-		if (exit == 0){ printf("I can't see nothing in that direction\n"); }
+		if (check == 0){ printf("I can't see nothing in that direction\n"); }
 	}
-	else if (input == "look south" || input == "look s"){
-		exit = 0;
+	else if (strcmp(input, "look south") == 0 || strcmp(input, "look s") == 0){
+		check = 0;
 		for (i = 0; i < N_EXIT; i++){
 			if ((numb[i]->origin == player->actual) && (s == numb[i]->direction)){
-				numb[i]->lookdescript(); exit++;
+				numb[i]->lookdescript(); check++;
 			}
 		}
-		if (exit == 0){ printf("I can't see nothing in that direction\n"); }
+		if (check == 0){ printf("I can't see nothing in that direction\n"); }
 	}
-	else if (input == "look east" || input == "look e"){
-		exit = 0;
+	else if (strcmp(input, "look east") == 0 || strcmp(input, "look e") == 0){
+		check = 0;
 		for (i = 0; i < N_EXIT; i++){
 			if ((numb[i]->origin == player->actual) && (e == numb[i]->direction)){
-				numb[i]->lookdescript(); exit++;
+				numb[i]->lookdescript(); check++;
 			}
 		}
 		if (exit == 0){ printf("I can't see nothing in that direction\n"); }
 	}
-	else if (input == "look west" || input == "look w"){
-		exit = 0;
+	else if (strcmp(input, "look west") == 0 || strcmp(input, "look w") == 0){
+		check = 0;
 		for (i = 0; i < N_EXIT; i++){
 			if ((numb[i]->origin == player->actual) && (w == numb[i]->direction)){
-				numb[i]->lookdescript(); exit++;
+				numb[i]->lookdescript(); check++;
 			}
 		}
-		if (exit == 0){ printf("I can't see nothing in that direction\n"); }
+		if (check == 0){ printf("I can't see nothing in that direction\n"); }
 	}
 	//now the other basic inputs for movement north south east west
-	else if (input == "north" || input == "n"){
+	else if (strcmp(input, "north")==0 || strcmp(input, "n")==0){
 		Go(n);
 	}
-	else if (input == "south" || input == "s"){
+	else if (strcmp(input, "south")==0 || strcmp(input, "s")==0){
 		Go(s);
 	}
-	else if (input == "east" || input == "e"){
+	else if (strcmp(input, "east") == 0 || strcmp(input, "e") == 0){
 		Go(e);
 	}
-	else if (input == "west" || input == "w"){
+	else if (strcmp(input, "west") == 0 || strcmp(input, "w") == 0){
 		Go(w);
 	}
-	else if (input == "open" || input == "o"){
-		printf("Wich direction i have to open?");
+	//input for open a door
+	else if (strcmp(input, "open") || strcmp(input, "o")){
+		printf("Wich direction do you want to open?\n");
 		gets_s(direct);
 		if (strcmp(direct, "n") == 0 || strcmp(direct, "north") == 0){ // preguntar Ric sobre perque no em deixa comparar normal (direct == "n");
 			Open(n);
@@ -181,6 +182,67 @@ bool World::keyboard(const char* input){
 	else if (input == "open west" || input == "open w"){
 		Open(w);
 	}
-	else { keycheck= false; }
-		return keycheck;
+	//input for closing a door
+	else if (strcmp(input, "close") == 0 || strcmp(input, "c") == 0){
+		printf("Wich direction i have to close?");
+		gets_s(direct);
+		if (strcmp(direct, "n") == 0 || strcmp(direct, "north") == 0){ // preguntar Ric sobre perque no em deixa comparar normal (direct == "n");
+			Close(n);
+		}
+		else if (strcmp(direct, "s") == 0 || strcmp(direct, "south") == 0){
+			Close(s);
+		}
+		else if (strcmp(direct, "e") == 0 || strcmp(direct, "east") == 0){
+			Close(e);
+		}
+		else if (strcmp(direct, "w") == 0 || strcmp(direct, "west") == 0){
+			Close(w);
+		}
+	}
+	else if (strcmp(input, "close north") == 0 || strcmp(input, "close n") == 0){
+		Close(n);
+	}
+	else if (strcmp(input, "close south") == 0 || strcmp(input, "close s") == 0){
+		Close(s);
+	}
+	else if (strcmp(input, "close east") == 0 || strcmp(input, "close e") == 0){
+		Close(e);
+	}
+	else if (strcmp(input, "close west") == 0 || strcmp(input, "close w") == 0){
+		Close(w);
+	}
+	//help input
+	else if (strcmp(input, "help") == 0 || strcmp(input, "h") == 0){
+		Help();
+	}
+	//quit
+	else if (strcmp(input, "quit") == 0 || strcmp(input, "q") == 0){
+		printf("\n\t\tThanks for playing!\n\n");
+		system("pause");
+		exit(0);
+	} 
+	else{
+		keycheck = false;
+	}
+	
+	return keycheck;
 }
+
+void World:: Help(){
+
+	printf("All you can do in this build is moving around the map with movement lock, look around and open/close doors\n");
+	printf("- Commands:\n");
+	printf("\t- Movement: north/n, south/s, east/e, west/w\n");
+	printf("\t- Look description of your base: look/l\n");
+	printf("\t- Look to a direction: look north/look n, look south/look s... \n");
+	printf("\t- Open/Close a door: open, open north/open n, open south/open s...\n  ");
+	printf("\t- Quit: quit\n\n\n");
+};
+
+World::~World(){
+	delete[] numb;
+	delete subway;
+	delete[] test;
+	delete player;
+
+};

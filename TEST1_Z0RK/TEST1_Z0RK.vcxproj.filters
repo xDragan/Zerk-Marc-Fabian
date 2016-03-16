@@ -44,8 +44,5 @@
     <ClInclude Include="Exit.h">
       <Filter>Archivos de código fuente</Filter>
     </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>Archivos de código fuente</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

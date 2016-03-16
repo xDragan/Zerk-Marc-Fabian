@@ -9,15 +9,16 @@
 	Character::Character(char* _name){
 		char name= *_name;
 	}
+
 	void World::Go(dir nsew){
 		int i, exit = 0;
-		for (i = 0; i < N_EXIT; i++)
-		if (numb[i]->origin == player->actual && nsew == numb[i]->direction ){
-			if (numb[i]->door == false){
-			player->actual = numb[i]->destiny;
-			exit++;
+		for (i = 0; i < N_EXIT; i++){
+			if (numb[i]->origin == player->actual && nsew == numb[i]->direction &&numb[i]->door == false){
+				player->actual = numb[i]->destiny;
+				exit++;
+				break;
 			}
-			else{
+			else if (numb[i]->origin == player->actual && nsew == numb[i]->direction && numb[i]->door == true){
 				printf("There is a creepy door in this way...\n");
 			}
 		}
@@ -36,6 +37,8 @@
 	
 
 	};
+
+
 	*/
 
 

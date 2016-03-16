@@ -73,7 +73,6 @@
   <ItemGroup>
     <ClInclude Include="Character.h" />
     <ClInclude Include="Exit.h" />
-    <ClInclude Include="main.h" />
     <ClInclude Include="Rooms.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

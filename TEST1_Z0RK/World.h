@@ -16,6 +16,7 @@ public:
 public:
 	bool keyboard(const char* input);
 	void impo();
+	void Help();
 	void Go(dir);
 	void Open(dir);
 	void Close(dir);

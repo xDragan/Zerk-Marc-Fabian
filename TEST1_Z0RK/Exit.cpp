@@ -17,11 +17,11 @@ void World::Open(dir direct){
 	int i, exit=0;
 	for (i = 0; i < N_EXIT; i++){
 		if ((numb[i]->origin == player->actual) && (direct == numb[i]->direction)){
-			if (numb[i]->door == true){
+			if (numb[i]->door == true && numb[i]==numb[44]){
 			numb[i]->door = false; exit++; 
 			printf("The door is now open and you can go that way\n");
 			}
-			else{ printf("You don't need to open nothing in that direction :)\n"); exit++; }
+			else if (numb[i] == numb[44]){ printf("You don't need to open nothing in that direction :)\n"); exit++; }
 		}
 	}
 	if (exit == 0){ printf("I can't open a door in that direction\n"); }

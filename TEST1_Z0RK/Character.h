@@ -11,7 +11,7 @@ public:
 	Room* actual;
 public:
 	Character(char*);
-	~Character();
+
 	//void Go(dir);
 private:
 		char name;
