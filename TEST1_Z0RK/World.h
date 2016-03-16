@@ -6,8 +6,6 @@
 #define N_ROOM 25
 #define N_EXIT 59
 
-// private ni lectura ni modificar
-// const si lectura no modificar
 class World{
 
 public:
@@ -27,7 +25,5 @@ public:
 	Character* player;
 private:
 	int i;
-	//Room* Base, *House, *Forest;
-	//Room* test[5][5];
 };
 #endif

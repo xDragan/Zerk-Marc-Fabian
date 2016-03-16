@@ -22,4 +22,3 @@ char description[200];
 	printf("%s\n", description);
 	}
 
-	//char GetNombre(){ return name; }

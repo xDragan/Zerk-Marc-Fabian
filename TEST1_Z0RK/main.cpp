@@ -7,9 +7,9 @@ int main(){
 	World* zorkworld=new World;
 	char input[20];
 	printf("\t Welcome to Zerk! a Zork type game created by Marc Fabian! ENJOY! :)\n\n");
-	zorkworld->Help();
-	zorkworld->player->actual = zorkworld->test[2];
-
+	zorkworld->Help();//type all comands at the start
+	zorkworld->player->actual = zorkworld->test[2];//puting player on starting room
+	//game loop
 	while (1){
 		printf("\n");
 		printf("___________________________________________________\n");

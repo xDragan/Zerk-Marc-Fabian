@@ -84,19 +84,10 @@ World::World(){
 	 numb[56] = new Exit(test[23], test[22], "You see a deep forest", w, false);
 	 numb[57] = new Exit(test[24], test[19], "You see a deep forest", n, false);
 	 numb[58] = new Exit(subway, test[17], "You see a bright light coming from upstairs", n, false);
-	 // for(que lee todas las salidas) para ver las salidas de cada habitacion (ya especificado origen y salida)
-
-	 // GO?
-
-	 //movimiento ejemplo: norte
-	 // mirar si hay habitaciones al norte
-	 // mirar que habitaciones con direccion norte tienen origen tu habitacion actual
-	// cambiar habitacion actual del jugador al destino
-
 	
 };
 
-bool World::keyboard(const char* input){
+bool World::keyboard(const char* input){ //input check
 	int check;
 	bool keycheck = true;
 	char direct[6];
@@ -228,7 +219,7 @@ bool World::keyboard(const char* input){
 	return keycheck;
 }
 
-void World:: Help(){
+void World:: Help(){//help commands
 
 	printf("All you can do in this build is moving around the map with movement lock, look around and open/close doors\n");
 	printf("- Commands:\n");
@@ -239,7 +230,7 @@ void World:: Help(){
 	printf("\t- Quit: quit\n\n\n");
 };
 
-World::~World(){
+World::~World(){//destructor deleting dynamic memory
 	delete[] numb;
 	delete subway;
 	delete[] test;

@@ -43,8 +43,6 @@ void World::Close(dir direct){
 
 }
 
-//char name[30]; //strcpy del class room
-//char des[300]; //strcpy del class room
 bool door;
 dir direction;
 	
