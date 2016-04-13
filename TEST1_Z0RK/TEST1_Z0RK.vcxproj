@@ -74,6 +74,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Exit.h" />
     <ClInclude Include="Rooms.h" />
+    <ClInclude Include="Vector.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

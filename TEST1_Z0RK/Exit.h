@@ -10,7 +10,7 @@ public:
 	bool door;
 public:
 	Exit(Room* orig, Room* dest, char* description, dir,bool);
-	void lookdescript();
+	void lookdescript()const;
 public:
 	Room* origin;
 	Room* destiny;

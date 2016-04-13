@@ -13,7 +13,7 @@ public:
 	void Look();
 
 public:
-	Room(char* _name, char* _description);
+	Room(const char* _name,const char* _description);
 private: 
 	char name[20];
 	char description[200];

@@ -3,7 +3,7 @@
 #include "World.h"
 #include "Rooms.h"
 #include "Exit.h"
-
+#include "Vector.h"
 
 World::World(){
 	int i;
@@ -11,8 +11,9 @@ World::World(){
 	//player (name, hp)
 	 player = new Character("Mark");
 	 // new room[n room]
+	vector<Room*>test(N_ROOM);
 
-	for (i = 0; i < N_ROOM; i++){
+	 for (i = 0; i < N_ROOM; i++){
 		 if (i != 2 && i != 5 && i != 9 && i != 17 && i != 20 && i != 24){// test are rooms
 			 test[i] = new Room("Forest", "You are in the forest");
 		 }
@@ -25,6 +26,7 @@ World::World(){
 	 test[24] = new Room("Enemy Base", "With this type of decoration  this might be Lizz base...");
 	 subway = new Room("Subway Exit", "You are in the center of the subway");
 	 // new exits [n exits] // numb are exits
+	 vector<Exit*>numb(N_EXIT);
 	 numb[0] = new Exit(test[0], test[1], "You see a forest with a bright light in the end",e,false);
 	 numb[1] = new Exit(test[1], test[0], "You see a deep forest", w, false);
 	 numb[2] = new Exit(test[1], test[6], "You see a forest with a bright light coming from somewhere", s, false);
@@ -98,8 +100,8 @@ bool World::keyboard(const char* input){ //input check
 	else if (strcmp(input, "look north") == 0 || strcmp(input, "look n") == 0){
 		check=0;
 		for (i = 0; i < N_EXIT; i++){
-			if ((numb[i]->origin == player->actual) && (n == numb[i]->direction)){
-				numb[i]->lookdescript(); check++;
+			if ((numb[i].origin == player->actual) && (n == numb[i].direction)){
+				numb[i].lookdescript(); check++;
 			}
 		}
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
@@ -107,8 +109,8 @@ bool World::keyboard(const char* input){ //input check
 	else if (strcmp(input, "look south") == 0 || strcmp(input, "look s") == 0){
 		check = 0;
 		for (i = 0; i < N_EXIT; i++){
-			if ((numb[i]->origin == player->actual) && (s == numb[i]->direction)){
-				numb[i]->lookdescript(); check++;
+			if ((numb[i].origin == player->actual) && (s == numb[i].direction)){
+				numb[i].lookdescript(); check++;
 			}
 		}
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
@@ -116,8 +118,8 @@ bool World::keyboard(const char* input){ //input check
 	else if (strcmp(input, "look east") == 0 || strcmp(input, "look e") == 0){
 		check = 0;
 		for (i = 0; i < N_EXIT; i++){
-			if ((numb[i]->origin == player->actual) && (e == numb[i]->direction)){
-				numb[i]->lookdescript(); check++;
+			if ((numb[i].origin == player->actual) && (e == numb[i].direction)){
+				numb[i].lookdescript(); check++;
 			}
 		}
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
@@ -125,8 +127,8 @@ bool World::keyboard(const char* input){ //input check
 	else if (strcmp(input, "look west") == 0 || strcmp(input, "look w") == 0){
 		check = 0;
 		for (i = 0; i < N_EXIT; i++){
-			if ((numb[i]->origin == player->actual) && (w == numb[i]->direction)){
-				numb[i]->lookdescript(); check++;
+			if ((numb[i].origin == player->actual) && (w == numb[i].direction)){
+				numb[i].lookdescript(); check++;
 			}
 		}
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
@@ -219,7 +221,7 @@ bool World::keyboard(const char* input){ //input check
 	return keycheck;
 }
 
-void World:: Help(){//help commands
+void World:: Help()const{//help commands
 
 	printf("All you can do in this build is moving around the map with movement lock, look around and open/close doors\n");
 	printf("- Commands:\n");

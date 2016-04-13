@@ -14,16 +14,18 @@ public:
 public:
 	bool keyboard(const char* input);
 	void impo();
-	void Help();
+	void Help()const;
 	void Go(dir);
 	void Open(dir);
 	void Close(dir);
 public:
-	Room* test[N_ROOM]; // test are rooms
+	//Room* test[N_ROOM]; // test are rooms
+	Room* test;
 	Room* subway;
-	Exit* numb[N_EXIT]; // numb are exits
+	Exit* numb; // numb are exits
 	Character* player;
 private:
 	int i;
+	
 };
 #endif
