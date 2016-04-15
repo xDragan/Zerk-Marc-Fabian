@@ -14,7 +14,7 @@ public:
 
 public:
 	Room(const char* _name,const char* _description);
-private: 
+private:
 	char name[20];
 	char description[200];
 

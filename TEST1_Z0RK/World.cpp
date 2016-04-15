@@ -6,86 +6,99 @@
 #include "Vector.h"
 
 World::World(){
-	int i;
+	//int i;
 	
-	//player (name, hp)
+	//player (name)
 	 player = new Character("Mark");
-	 // new room[n room]
-	vector<Room*>test(N_ROOM);
-
-	 for (i = 0; i < N_ROOM; i++){
-		 if (i != 2 && i != 5 && i != 9 && i != 17 && i != 20 && i != 24){// test are rooms
-			 test[i] = new Room("Forest", "You are in the forest");
-		 }
-	 }// test are rooms
-	 test[2] = new Room("Base", "You are in your Base");
-	 test[5] = new Room("Safe House", "You are in an unknown Safe House");
-	 test[9] = new Room("Safe House", "You are in an unknown Safe House");
-	 test[17] = new Room("Subway Entrance", "You are in the subway entrance");
-	 test[20] = new Room("Enemy Base", "Seems like you are in Bob's base...");
-	 test[24] = new Room("Enemy Base", "With this type of decoration  this might be Lizz base...");
+	 // new room[n room]	 // test are rooms
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Base", "You are in your Base"));// [2]
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Safe House", "You are in an unknown Safe House"));
+	 test.pushback(new Room("Forest", "You are in the forest"));//[6]
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Safe House", "You are in an unknown Safe House"));
+	 test.pushback(new Room("Forest", "You are in the forest"));//[10]
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Subway Entrance", "You are in the subway entrance"));
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Enemy Base", "Seems like you are in Bob's base..."));//[20]
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Forest", "You are in the forest"));
+	 test.pushback(new Room("Enemy Base", "With this type of decoration  this might be Lizz base..."));//[24]
 	 subway = new Room("Subway Exit", "You are in the center of the subway");
-	 // new exits [n exits] // numb are exits
-	 vector<Exit*>numb(N_EXIT);
-	 numb[0] = new Exit(test[0], test[1], "You see a forest with a bright light in the end",e,false);
-	 numb[1] = new Exit(test[1], test[0], "You see a deep forest", w, false);
-	 numb[2] = new Exit(test[1], test[6], "You see a forest with a bright light coming from somewhere", s, false);
-	 numb[3] = new Exit(test[2], test[7], "You see a deep forest", s, false);
-	 numb[4] = new Exit(test[3], test[8], "You see a forest with a bright light coming from somewhere", s, false);
-	 numb[5] = new Exit(test[3], test[4], "You see a deep forest", e, false);
-	 numb[6] = new Exit(test[4], test[3], "You see a deep forest", w, false);
-	 numb[7] = new Exit(test[5], test[6], "You see a deep forest", e, false);
-	 numb[8] = new Exit(test[6], test[5], "You see a dirty and creppy safe house..", w, false);
-	 numb[9] = new Exit(test[6], test[1], "You see a deep forest", n, false);
-	 numb[10] = new Exit(test[6], test[7], "You see a forest with a bright light coming from somewhere", e, false);
-	 numb[11] = new Exit(test[6], test[11], "You see a deep forest", s, false);
-	 numb[12] = new Exit(test[7], test[6], "You see a forest with a bright light coming from somewhere", w, false);
-	 numb[13] = new Exit(test[7], test[2], "You see your clean and beautiful base", n, false);
-	 numb[14] = new Exit(test[7], test[8], "You see a forest with a bright light coming from somewhere", e, false);
-	 numb[15] = new Exit(test[7], test[12], "You see a forest with a bright light coming from somewhere", s, false);
-	 numb[16] = new Exit(test[8], test[3], "You see a deep forest ", n, false);
-	 numb[17] = new Exit(test[8], test[7], "You see a forest with a bright light coming from somewhere", w, false);
-	 numb[18] = new Exit(test[8], test[13], "You see a deep forest", s, false);
-	 numb[19] = new Exit(test[8], test[9], "You see a dirty and creppy safe house..", e, false);
-	 numb[20] = new Exit(test[9], test[8], "You see a deep forest", w, false);
-	 numb[21] = new Exit(test[10], test[11], "You see deep forest", e, false);
-	 numb[22] = new Exit(test[10], test[15], "You see a forest with a bright light coming from somewhere", s, false);
-	 numb[23] = new Exit(test[11], test[6], "You see a forest with a bright light coming from somewhere", n, false);
-	 numb[24] = new Exit(test[11], test[10], "You see a deep forest", w, false);
-	 numb[25] = new Exit(test[11], test[12], "You see a forest with a bright light coming from somewhere", e, false);
-	 numb[26] = new Exit(test[11], test[16], "You see a deep forest", s, false);
-	 numb[27] = new Exit(test[12], test[7], "You see a forest with a bright light coming from somewhere", n, false);
-	 numb[28] = new Exit(test[12], test[11], "You see a deep forest", w, false);
-	 numb[29] = new Exit(test[12], test[13], "You see a deep forest", e, false);
-	 numb[30] = new Exit(test[12], test[17], "You see a subway entrance", s, false);
-	 numb[31] = new Exit(test[13], test[8], "You see a forest with a bright light coming from somewhere", n, false);
-	 numb[32] = new Exit(test[13], test[12], "You see a forest with a bright light coming from somewhere", w, false);
-	 numb[33] = new Exit(test[13], test[14], "You see a deep forest", e, false);
-	 numb[34] = new Exit(test[13], test[18], "You see a deep forest", s, false);
-	 numb[35] = new Exit(test[14], test[13], "You see a deep forest", w, false);
-	 numb[36] = new Exit(test[14], test[19], "You see a forest with a bright light coming from somewhere", s, false);
-	 numb[37] = new Exit(test[15], test[10], "You see a deep forest", n, false);
-	 numb[38] = new Exit(test[15], test[16], "You see a forest with a bright light coming from somewhere", e, false);
-	 numb[39] = new Exit(test[15], test[20], "You see an enemy base... might be Bob one...", s, false);
-	 numb[40] = new Exit(test[16], test[11], "You see a deep forest", n, false);
-	 numb[41] = new Exit(test[16], test[15], "You see a forest with a bright light coming from somewhere", w, false);
-	 numb[42] = new Exit(test[16], test[21], "You see a deep forest", s, false);
-	 numb[43] = new Exit(test[17], test[12], "You see a deep forest", n, false);
-	 numb[44] = new Exit(test[17], subway, "You see a door into the subway", s, true);
-	 numb[45] = new Exit(test[18], test[13], "You see a deep forest", n, false);
-	 numb[46] = new Exit(test[18], test[19], "You see a deep forest", e, false);
-	 numb[47] = new Exit(test[18], test[23], "You see a deep forest", s, false);
-	 numb[48] = new Exit(test[19], test[18], "You see a deep forest", w, false);
-	 numb[49] = new Exit(test[19], test[24], "You see an enemy base... but it's not Bob one...", s, false);
-	 numb[50] = new Exit(test[20], test[15], "You see a deep forest", n, false);
-	 numb[51] = new Exit(test[21], test[16], "You see a deep forest", n, false);
-	 numb[52] = new Exit(test[21], test[22], "You see a deep forest", e, false);
-	 numb[53] = new Exit(test[22], test[21], "You see a deep forest", w, false);
-	 numb[54] = new Exit(test[22], test[23], "You see a deep forest", e, false);
-	 numb[55] = new Exit(test[23], test[18], "You see a deep forest", n, false);
-	 numb[56] = new Exit(test[23], test[22], "You see a deep forest", w, false);
-	 numb[57] = new Exit(test[24], test[19], "You see a deep forest", n, false);
-	 numb[58] = new Exit(subway, test[17], "You see a bright light coming from upstairs", n, false);
+	 player->actual =test[2];//puting player on starting room
+	 // new exits [n exits] 
+	 // numb are exits
+	 numb.pushback(new Exit(test[0], test[1], "You see a forest with a bright light in the end", e, false));
+	 numb.pushback(new Exit(test[1], test[0], "You see a deep forest", w, false));
+	 numb.pushback(new Exit(test[1], test[6], "You see a forest with a bright light coming from somewhere", s, false));
+	 numb.pushback(new Exit(test[2], test[7], "You see a deep forest", s, false));
+	 numb.pushback(new Exit(test[3], test[8], "You see a forest with a bright light coming from somewhere", s, false));
+	 numb.pushback(new Exit(test[3], test[4], "You see a deep forest", e, false));
+	 numb.pushback(new Exit(test[4], test[3], "You see a deep forest", w, false));
+	 numb.pushback(new Exit(test[5], test[6], "You see a deep forest", e, false));
+	 numb.pushback(new Exit(test[6], test[5], "You see a dirty and creppy safe house..", w, false));
+	 numb.pushback(new Exit(test[6], test[1], "You see a deep forest", n, false));
+	 numb.pushback(new Exit(test[6], test[7], "You see a forest with a bright light coming from somewhere", e, false));
+	 numb.pushback(new Exit(test[6], test[11], "You see a deep forest", s, false));
+	 numb.pushback(new Exit(test[7], test[6], "You see a forest with a bright light coming from somewhere", w, false));
+	 numb.pushback(new Exit(test[7], test[2], "You see your clean and beautiful base", n, false));
+	 numb.pushback(new Exit(test[7], test[8], "You see a forest with a bright light coming from somewhere", e, false));
+	 numb.pushback(new Exit(test[7], test[12], "You see a forest with a bright light coming from somewhere", s, false));
+	 numb.pushback(new Exit(test[8], test[3], "You see a deep forest ", n, false));
+	 numb.pushback(new Exit(test[8], test[7], "You see a forest with a bright light coming from somewhere", w, false));
+	 numb.pushback(new Exit(test[8], test[13], "You see a deep forest", s, false));
+	 numb.pushback(new Exit(test[8], test[9], "You see a dirty and creppy safe house..", e, false));
+	 numb.pushback(new Exit(test[9], test[8], "You see a deep forest", w, false));
+	 numb.pushback(new Exit(test[10], test[11], "You see deep forest", e, false));
+	 numb.pushback(new Exit(test[10], test[15], "You see a forest with a bright light coming from somewhere", s, false));
+	 numb.pushback(new Exit(test[11], test[6], "You see a forest with a bright light coming from somewhere", n, false));
+	 numb.pushback(new Exit(test[11], test[10], "You see a deep forest", w, false));
+	 numb.pushback(new Exit(test[11], test[12], "You see a forest with a bright light coming from somewhere", e, false));
+	 numb.pushback(new Exit(test[11], test[16], "You see a deep forest", s, false));
+	 numb.pushback(new Exit(test[12], test[7], "You see a forest with a bright light coming from somewhere", n, false));
+	 numb.pushback(new Exit(test[12], test[11], "You see a deep forest", w, false));
+	 numb.pushback(new Exit(test[12], test[13], "You see a deep forest", e, false));
+	 numb.pushback(new Exit(test[12], test[17], "You see a subway entrance", s, false));
+	 numb.pushback(new Exit(test[13], test[8], "You see a forest with a bright light coming from somewhere", n, false));
+	 numb.pushback(new Exit(test[13], test[12], "You see a forest with a bright light coming from somewhere", w, false));
+	 numb.pushback(new Exit(test[13], test[14], "You see a deep forest", e, false));
+	 numb.pushback(new Exit(test[13], test[18], "You see a deep forest", s, false));
+	 numb.pushback(new Exit(test[14], test[13], "You see a deep forest", w, false));
+	 numb.pushback(new Exit(test[14], test[19], "You see a forest with a bright light coming from somewhere", s, false));
+	 numb.pushback(new Exit(test[15], test[10], "You see a deep forest", n, false));
+	 numb.pushback(new Exit(test[15], test[16], "You see a forest with a bright light coming from somewhere", e, false));
+	 numb.pushback(new Exit(test[15], test[20], "You see an enemy base... might be Bob one...", s, false));
+	 numb.pushback(new Exit(test[16], test[11], "You see a deep forest", n, false));
+	 numb.pushback(new Exit(test[16], test[15], "You see a forest with a bright light coming from somewhere", w, false));
+	 numb.pushback(new Exit(test[16], test[21], "You see a deep forest", s, false));
+	 numb.pushback(new Exit(test[17], test[12], "You see a deep forest", n, false));
+	 numb.pushback(new Exit(test[17], subway, "You see a door into the subway", s, true));
+	 numb.pushback(new Exit(test[18], test[13], "You see a deep forest", n, false));
+	 numb.pushback(new Exit(test[18], test[19], "You see a deep forest", e, false));
+	 numb.pushback(new Exit(test[18], test[23], "You see a deep forest", s, false));
+	 numb.pushback(new Exit(test[19], test[18], "You see a deep forest", w, false));
+	 numb.pushback(new Exit(test[19], test[24], "You see an enemy base... but it's not Bob one...", s, false));
+	 numb.pushback(new Exit(test[20], test[15], "You see a deep forest", n, false));
+	 numb.pushback(new Exit(test[21], test[16], "You see a deep forest", n, false));
+	 numb.pushback(new Exit(test[21], test[22], "You see a deep forest", e, false));
+	 numb.pushback(new Exit(test[22], test[21], "You see a deep forest", w, false));
+	 numb.pushback(new Exit(test[22], test[23], "You see a deep forest", e, false));
+	 numb.pushback(new Exit(test[23], test[18], "You see a deep forest", n, false));
+	 numb.pushback(new Exit(test[23], test[22], "You see a deep forest", w, false));
+	 numb.pushback(new Exit(test[24], test[19], "You see a deep forest", n, false));
+	 numb.pushback(new Exit(subway, test[17], "You see a bright light coming from upstairs", n, false));
 	 // numb are exits
 };
 
@@ -100,8 +113,8 @@ bool World::keyboard(const char* input){ //input check
 	else if (strcmp(input, "look north") == 0 || strcmp(input, "look n") == 0){
 		check=0;
 		for (i = 0; i < N_EXIT; i++){
-			if ((numb[i].origin == player->actual) && (n == numb[i].direction)){
-				numb[i].lookdescript(); check++;
+			if ((numb[i]->origin == player->actual) && (n == numb[i]->direction)){
+				numb[i]->lookdescript(); check++;
 			}
 		}
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
@@ -109,8 +122,8 @@ bool World::keyboard(const char* input){ //input check
 	else if (strcmp(input, "look south") == 0 || strcmp(input, "look s") == 0){
 		check = 0;
 		for (i = 0; i < N_EXIT; i++){
-			if ((numb[i].origin == player->actual) && (s == numb[i].direction)){
-				numb[i].lookdescript(); check++;
+			if ((numb[i]->origin == player->actual) && (s == numb[i]->direction)){
+				numb[i]->lookdescript(); check++;
 			}
 		}
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
@@ -118,8 +131,8 @@ bool World::keyboard(const char* input){ //input check
 	else if (strcmp(input, "look east") == 0 || strcmp(input, "look e") == 0){
 		check = 0;
 		for (i = 0; i < N_EXIT; i++){
-			if ((numb[i].origin == player->actual) && (e == numb[i].direction)){
-				numb[i].lookdescript(); check++;
+			if ((numb[i]->origin == player->actual) && (e == numb[i]->direction)){
+				numb[i]->lookdescript(); check++;
 			}
 		}
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
@@ -127,8 +140,8 @@ bool World::keyboard(const char* input){ //input check
 	else if (strcmp(input, "look west") == 0 || strcmp(input, "look w") == 0){
 		check = 0;
 		for (i = 0; i < N_EXIT; i++){
-			if ((numb[i].origin == player->actual) && (w == numb[i].direction)){
-				numb[i].lookdescript(); check++;
+			if ((numb[i]->origin == player->actual) && (w == numb[i]->direction)){
+				numb[i]->lookdescript(); check++;
 			}
 		}
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
@@ -220,6 +233,51 @@ bool World::keyboard(const char* input){ //input check
 	
 	return keycheck;
 }
+void World::Open(dir direct){
+	int i, exit = 0;
+	for (i = 0; i < N_EXIT; i++){
+		if ((numb[i]->origin == player->actual) && (direct == numb[i]->direction)){
+			if (numb[i]->door == true && i == 44){
+				numb[i]->door = false; exit++;
+				printf("The door is now open and you can go that way\n");
+			}
+			else if (i == 44){ printf("You don't need to open nothing in that direction :)\n"); exit++; }
+		}
+	}
+	if (exit == 0){ printf("I can't open a door in that direction\n"); }
+
+}
+
+void World::Close(dir direct){
+	int i, exit = 0;
+	for (i = 0; i < N_EXIT; i++){
+		if ((numb[i]->origin == player->actual) && (direct == numb[i]->direction)){
+			if (numb[i]->door == false && i == 44){
+				numb[i]->door = true; exit++;
+				printf("The door is now closed\n");
+			}
+			else if (i == 44){ printf("The door is already closed\n"); exit++; }
+		}
+	}
+	if (exit == 0){ printf("There is no door there\n"); }
+
+}
+void World::Go(dir nsew){
+	int i, exit = 0;
+	for (i = 0; i < N_EXIT; i++){
+		if (numb[i]->origin == player->actual && nsew == numb[i]->direction &&numb[i]->door == false){
+			player->actual = numb[i]->destiny;
+			exit++;
+			break;
+		}
+		else if (numb[i]->origin == player->actual && nsew == numb[i]->direction && numb[i]->door == true){
+			printf("There is a creepy door in this way...\n");
+		}
+	}
+	if (exit == 0){
+		printf("I can't go to that direction\n");
+	}
+}
 
 void World:: Help()const{//help commands
 
@@ -233,9 +291,9 @@ void World:: Help()const{//help commands
 };
 
 World::~World(){//destructor deleting dynamic memory
-	delete[] numb;
+	//delete[] numb;
 	delete subway;
-	delete[] test;
+	//delete[] test;
 	delete player;
 
 };

@@ -1,26 +1,33 @@
 #ifndef _Vector
 #define _Vector
 #include <assert.h>
+#define N_EXIT 59
 
 typedef unsigned int uint;
 template <class TIPUS>
 
 class vector{
-	TIPUS* buffer=nullptr;
-	uint capacity = 5;
+	TIPUS* buffer = nullptr;
+	uint capacity = 5; 
 	uint num_elements = 0;
 public:
-	TIPUS& operator[](int numb){
-		assert(numb <= N_ROOM);
+	TIPUS operator[](uint numb)const{
+		assert(numb <= N_EXIT);
 		return buffer[numb];
 	}
-	vector(int capacity){
+	TIPUS& operator[](uint numb){
+		assert(numb <= N_EXIT);
+		return buffer[numb];
+	}
+	vector(){
 		buffer = new TIPUS[capacity];
-		printf("por defecto");
 	}
 	vector(const vector& vector) :capacity(vector.capacity), num_elements(vector.num_elements){
 		buffer = new TIPUS[capacity];
-		printf("de copia");
+		for (unsigned int i = 0; 0 < num_elements; ++i)
+		{
+			buffer[i] = vector.buffer[i];
+		}
 	}
 	~vector(){
 		delete[]buffer;
@@ -33,29 +40,75 @@ public:
 			temp = new TIPUS[capacity];
 			for (int i = 0; i < capacity; i++){
 				*(temp + i) = *(buffer + i);
-			}-
-				delete[]buffer;
+			}
+			delete[]buffer;
 			buffer = temp;
 			//delete[]temp;
 		}
 		*(buffer + num_elements++) = colocar;
 	}
 	void pushfront(const TIPUS& colocar){
-
-		if (capacity == num_elements){
+		TYPE* temp = nullptr;
+		if (num_elements == capacity)
+		{
 			capacity *= 2;
+			temp = new TYPE[capacity];
+			for (int i = 0; i < capacity; i++)
+			{
+				*(temp + i) = *(buffer + i);
+			}
+			delete[]buffer;
+			buffer = temp;
 		}
-		TIPUS* temp;
-		temp = new TIPUS[capacity];
-		for (int i = 1, j = 0; i < capacity; i++, j++){
-			*(temp + i) = *(buffer + j);
+		for (TYPE i = num_elements; i >= 0; i--)
+		{
+			*(buffer + i + 1) = *(buffer + i);
 		}
-		delete[]buffer;
-		buffer = temp;
-		*(buffer + 0) = colocar;
+		*buffer = colocar;
+		num_elements++;
 	}
-	void printvec(TIPUS& buffer)const{//metode constant que rebi un vector k els imprimeixi
+	bool empty() const
+	{
+		return num_elements == 0;
 	}
-	// empty() clean () size() capacity() pop.back()elimina ultim element shrink_to_fit()elimina memoria sobrant
+
+	void clear()
+	{
+		num_elements = 0;
+	}
+
+	uint size() const
+	{
+		return num_elements;
+	}
+
+	uint width()const
+	{
+		returncapacity;
+	}
+
+	void shrink_to_fit()
+	{
+		if (capacity != num_elements)
+		{
+			TIPUS *temp = nullptr;
+			capacity = num_elements;
+			temp = new TIPUS[capacity];
+			for (int i = 0; i < capacity; i++)
+			{
+				temp[i] = buffer[i];
+			}
+			delete[]buffer;
+			buffer = temp;
+		}
+	}
+
+	void pop_back()
+	{
+		if (num_elements > 0)
+		{
+			num_elements--;
+		}
+	}
 };
 #endif

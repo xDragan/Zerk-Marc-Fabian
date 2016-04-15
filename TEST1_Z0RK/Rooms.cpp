@@ -5,8 +5,6 @@
 #include "World.h"
 
 
-char name[20];
-char description[200];
 	Room::Room(const char* _name,const char* _description){
 		strcpy_s(name, _name);
 		strcpy_s(description, _description);

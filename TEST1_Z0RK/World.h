@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Rooms.h"
 #include "Character.h"
+#include "Vector.h"
 #define N_ROOM 25
 #define N_EXIT 59
 
@@ -19,11 +20,10 @@ public:
 	void Open(dir);
 	void Close(dir);
 public:
-	//Room* test[N_ROOM]; // test are rooms
-	Room* test;
-	Room* subway;
-	Exit* numb; // numb are exits
-	Character* player;
+	vector<Room*>test;	// test are rooms
+	Room* subway=nullptr;
+	vector<Exit*>numb; // numb are exits
+	Character* player= nullptr;
 private:
 	int i;
 	
