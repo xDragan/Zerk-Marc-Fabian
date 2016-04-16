@@ -16,6 +16,7 @@ public:
 	MyString(const MyString &other);
 	~MyString();
 public:
+	void my_gets(char*); // testing
 	const char *ret_str() const;
 	uint length()const;
 	const uint width() const;

@@ -24,6 +24,9 @@
 	}
 
 //methods
+	void MyString::my_gets(char* string){     //testing
+		buffer = string; 
+	} 
 	const char* MyString::ret_str() const{ //returns string (private access)
 		return buffer;
 	}

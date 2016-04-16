@@ -13,7 +13,7 @@ public:
 	World();
 	~World();
 public:
-	bool keyboard(const char* input);
+	bool keyboard(MyString& input);
 	void impo();
 	void Help()const;
 	void Go(dir);

@@ -6,7 +6,6 @@
 #include "Vector.h"
 
 World::World(){
-	//int i;
 	
 	//player (name)
 	 player = new Character;
@@ -102,15 +101,16 @@ World::World(){
 	 // numb are exits
 };
 
-bool World::keyboard(const char* input){ //input check
+bool World::keyboard(MyString& input){ //input check
 	int check;
 	bool keycheck = true;
 	char direct[6];
-	if (strcmp(input, "look") == 0 || strcmp(input, "l") == 0){ // to look you room
+	MyString direction;
+	if (input == "look" || input == "l"){ // to look you room
 		player->actual->Look();
 	}
 	// to look what exits you see from your room:
-	else if (strcmp(input, "look north") == 0 || strcmp(input, "look n") == 0){
+	else if (input == "look north" || input == "look n"){
 		check=0;
 		for (i = 0; i < N_EXIT; i++){
 			if ((numb[i]->origin == player->actual) && (n == numb[i]->direction)){
@@ -119,7 +119,7 @@ bool World::keyboard(const char* input){ //input check
 		}
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
 	}
-	else if (strcmp(input, "look south") == 0 || strcmp(input, "look s") == 0){
+	else if (input == "look south" || input == "look s"){
 		check = 0;
 		for (i = 0; i < N_EXIT; i++){
 			if ((numb[i]->origin == player->actual) && (s == numb[i]->direction)){
@@ -128,7 +128,7 @@ bool World::keyboard(const char* input){ //input check
 		}
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
 	}
-	else if (strcmp(input, "look east") == 0 || strcmp(input, "look e") == 0){
+	else if (input == "look east" || input == "look e"){
 		check = 0;
 		for (i = 0; i < N_EXIT; i++){
 			if ((numb[i]->origin == player->actual) && (e == numb[i]->direction)){
@@ -137,7 +137,7 @@ bool World::keyboard(const char* input){ //input check
 		}
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
 	}
-	else if (strcmp(input, "look west") == 0 || strcmp(input, "look w") == 0){
+	else if (input == "look west" || input == "look w"){
 		check = 0;
 		for (i = 0; i < N_EXIT; i++){
 			if ((numb[i]->origin == player->actual) && (w == numb[i]->direction)){
@@ -147,82 +147,84 @@ bool World::keyboard(const char* input){ //input check
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
 	}
 	//now the other basic inputs for movement north south east west
-	else if (strcmp(input, "north")==0 || strcmp(input, "n")==0){
+	else if (input == "north" || input == "n"){
 		Go(n);
 	}
-	else if (strcmp(input, "south")==0 || strcmp(input, "s")==0){
+	else if (input == "south" || input == "s"){
 		Go(s);
 	}
-	else if (strcmp(input, "east") == 0 || strcmp(input, "e") == 0){
+	else if (input == "east" || input == "e"){
 		Go(e);
 	}
-	else if (strcmp(input, "west") == 0 || strcmp(input, "w") == 0){
+	else if (input == "west" || input == "w" ){
 		Go(w);
 	}
 	//input for open a door
-	else if (strcmp(input, "open")==0 || strcmp(input, "o")==0){
+	else if (input == "open" || input == "o"){
 		printf("Wich direction do you want to open?\n");
 		gets_s(direct);
-		if (strcmp(direct, "n") == 0 || strcmp(direct, "north") == 0){ // preguntar Ric sobre perque no em deixa comparar normal (direct == "n");
+		direction = direct;
+		if (direction == "n" || direction == "north"){ // preguntar Ric sobre perque no em deixa comparar normal (direct == "n");
 			Open(n);
 		}
-		else if (strcmp(direct, "s") == 0 || strcmp(direct, "south") == 0){
+		else if (direction == "south" || direction == "s"){
 			Open(s);
 		}
-		else if (strcmp(direct, "e") == 0 || strcmp(direct, "east") == 0){
+		else if (direction == "east" || direction == "e"){
 			Open(e);
 		}
-		else if (strcmp(direct, "w") == 0 || strcmp(direct, "west") == 0){
+		else if (direction == "west" || direction == "w"){
 			Open(w);
 		}
 	}
-	else if (strcmp(input, "open north") == 0 || strcmp(input, "open n") == 0){
+	else if (input == "open north" || input == "open n"){
 		Open(n);
 	}
-	else if (strcmp(input, "open south") == 0 || strcmp(input, "open s") == 0){
+	else if (input == "open south" || input == "open s"){
 		Open(s);
 	}
-	else if (strcmp(input, "open east") == 0 || strcmp(input, "open e") == 0){
+	else if (input == "open east" || input == "open e"){
 		Open(e);
 	}
-	else if (strcmp(input, "open west") == 0 || strcmp(input, "open w") == 0){
+	else if (input == "open west" || input == "open w"){
 		Open(w);
 	}
 	//input for closing a door
-	else if (strcmp(input, "close") == 0 || strcmp(input, "c") == 0){
+	else if (input == "close" || input == "c"){
 		printf("Wich direction i have to close?");
 		gets_s(direct);
-		if (strcmp(direct, "n") == 0 || strcmp(direct, "north") == 0){ // preguntar Ric sobre perque no em deixa comparar normal (direct == "n");
+		direction = direct;
+		if (direction == "n" || direction == "north"){ // preguntar Ric sobre perque no em deixa comparar normal (direct == "n");
 			Close(n);
 		}
-		else if (strcmp(direct, "s") == 0 || strcmp(direct, "south") == 0){
+		else if (direction == "south" || direction == "s"){
 			Close(s);
 		}
-		else if (strcmp(direct, "e") == 0 || strcmp(direct, "east") == 0){
+		else if (direction == "east" || direction == "e"){
 			Close(e);
 		}
-		else if (strcmp(direct, "w") == 0 || strcmp(direct, "west") == 0){
+		else if (direction == "west" || direction == "w"){
 			Close(w);
 		}
 	}
-	else if (strcmp(input, "close north") == 0 || strcmp(input, "close n") == 0){
+	else if (input == "close north" || input == "close n"){
 		Close(n);
 	}
-	else if (strcmp(input, "close south") == 0 || strcmp(input, "close s") == 0){
+	else if (input == "close south" || input == "close s"){
 		Close(s);
 	}
-	else if (strcmp(input, "close east") == 0 || strcmp(input, "close e") == 0){
+	else if (input == "close east" || input == "close e"){
 		Close(e);
 	}
-	else if (strcmp(input, "close west") == 0 || strcmp(input, "close w") == 0){
+	else if (input == "close west" || input == "close w"){
 		Close(w);
 	}
 	//help input
-	else if (strcmp(input, "help") == 0 || strcmp(input, "h") == 0){
+	else if (input == "help" || input == "h"){
 		Help();
 	}
 	//quit
-	else if (strcmp(input, "quit") == 0 || strcmp(input, "q") == 0){
+	else if (input == "quit" || input == "q"){
 		printf("\n\t\tThanks for playing!\n\n");
 		system("pause");
 		exit(0);
