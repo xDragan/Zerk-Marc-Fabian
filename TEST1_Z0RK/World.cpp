@@ -9,7 +9,7 @@ World::World(){
 	//int i;
 	
 	//player (name)
-	 player = new Character("Mark");
+	 player = new Character;
 	 // new room[n room]	 // test are rooms
 	 test.pushback(new Room("Forest", "You are in the forest"));
 	 test.pushback(new Room("Forest", "You are in the forest"));

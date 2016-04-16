@@ -2,10 +2,11 @@
 #define _Exit
 #include <iostream>
 #include "Rooms.h"
+#include "Entity.h"
 enum dir{n,s,e,w};
 
-class Room;
-class Exit{
+
+class Exit:public Entity{
 public:
 	bool door;
 public:
@@ -15,8 +16,6 @@ public:
 	Room* origin;
 	Room* destiny;
 	dir direction;
-private:
-	char look[100];
 };
 
 #endif

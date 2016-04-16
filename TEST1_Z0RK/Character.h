@@ -10,9 +10,7 @@ public:
 public:
 	Room* actual;
 public:
-	Character(char*);
-private:
-		char name;
+	Character();
 		
 };
 #endif

@@ -5,18 +5,15 @@
 #include "World.h"
 
 
-	Room::Room(const char* _name,const char* _description){
-		strcpy_s(name, _name);
-		strcpy_s(description, _description);
-
+	Room::Room(const char* name,const char* description):Entity(name,description){
 	}
-	char Room::retname(){
-		return name[20];
+	MyString Room::retname()const{
+		return name;
 	}
-	char Room::retdesc(){
-		return description[200];
+	MyString Room::retdesc()const{
+		return description;
 	}
-	void Room::Look(){
+	void Room::Look()const{
 	printf("%s\n", description);
 	}
 

@@ -64,15 +64,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="MyString.cpp" />
     <ClCompile Include="Rooms.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Exit.h" />
+    <ClInclude Include="MyString.h" />
     <ClInclude Include="Rooms.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="World.h" />

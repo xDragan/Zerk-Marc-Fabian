@@ -1,24 +1,17 @@
 #ifndef _Rooms
 #define _Rooms
 #include <iostream>
-#include <stdio.h>
 #include "Exit.h"
 
 
 
-class Room{
+class Room :public Entity{
 public:
-	char retname();
-	char retdesc();
-	void Look();
-
+	MyString retname()const;
+	MyString retdesc()const;
+	void Look()const;
 public:
 	Room(const char* _name,const char* _description);
-private:
-	char name[20];
-	char description[200];
-
-
 };
 #endif
 

@@ -3,13 +3,8 @@
 #include "Exit.h"
 
 
-Exit::Exit(Room* orig, Room* dest, char* description, dir nsew,bool dor){
-	strcpy_s(look, description);
-	origin=orig;
-	destiny=dest;
-	direction = nsew;
-	door = dor;
+Exit::Exit(Room* origin, Room* destiny, char* description, dir direction,bool door):origin(origin),destiny(destiny),direction(direction),door(door),Entity(description){
 }
 void Exit::lookdescript()const{
-	printf("%s\n", look); 
+	printf("%s\n", description); 
 }
