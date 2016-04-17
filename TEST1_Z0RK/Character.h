@@ -6,7 +6,7 @@
 
 class Character{
 public:
-	int i;
+	int bag; //delimites nº of items you can have in your inventory
 public:
 	Room* actual;
 public:

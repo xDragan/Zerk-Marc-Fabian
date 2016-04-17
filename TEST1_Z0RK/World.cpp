@@ -4,6 +4,7 @@
 #include "Rooms.h"
 #include "Exit.h"
 #include "Vector.h"
+#include "Items.h"
 
 World::World(){
 	
@@ -99,6 +100,11 @@ World::World(){
 	 numb.pushback(new Exit(test[24], test[19], "You see a deep forest", n, false));
 	 numb.pushback(new Exit(subway, test[17], "You see a bright light coming from upstairs", n, false));
 	 // numb are exits
+
+	 //items:
+	 items.pushback(new Item("Torch", "A Torch that lights you further away", test[2]));
+	
+
 };
 
 bool World::keyboard(MyString& input){ //input check

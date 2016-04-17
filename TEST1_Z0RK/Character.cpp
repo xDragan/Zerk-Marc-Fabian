@@ -4,4 +4,5 @@
 
 
 	Character::Character(){
+		bag = 0;
 	}

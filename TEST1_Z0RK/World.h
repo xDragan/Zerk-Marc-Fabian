@@ -24,6 +24,7 @@ public:
 	Room* subway=nullptr;
 	vector<Exit*>numb; // numb are exits
 	Character* player= nullptr;
+	vector<Item*> items;
 private:
 	int i;
 	

@@ -1,3 +1,5 @@
+#ifndef _Entity
+#define _Entity
 #include <iostream>
 #include "MyString.h"
 
@@ -10,4 +12,7 @@ private:
 	MyString description;
 	friend class Room;
 	friend class Exit;
+	friend class Item;
 };
+
+#endif
