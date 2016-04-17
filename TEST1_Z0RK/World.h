@@ -6,6 +6,8 @@
 #include "Vector.h"
 #define N_ROOM 25
 #define N_EXIT 59
+#define N_ITEMS 1
+#define CAP_BAG 10 //capacity inventory/bag of the player
 
 class World{
 
@@ -19,6 +21,7 @@ public:
 	void Go(dir);
 	void Open(dir);
 	void Close(dir);
+	void Pick(MyString&);
 public:
 	vector<Room*>test;	// test are rooms
 	Room* subway=nullptr;

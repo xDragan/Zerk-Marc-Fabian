@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include "World.h"
+#include "Functions.h"
 
 int main(){
 	World* zorkworld=new World;
@@ -15,6 +16,7 @@ int main(){
 		printf("___________________________________________________\n");
 		zorkworld->player->actual->Look();
 		gets_s(input);
+		Minus(input, input);// changes player input to full lowercase so there is no problem later reading the input
 		command = input;
 		if (zorkworld->keyboard(command) == false){
 			printf("I can't understand this comand\n");

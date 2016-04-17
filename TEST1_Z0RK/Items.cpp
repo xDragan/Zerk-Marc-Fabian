@@ -4,6 +4,7 @@
 Item::Item(const char*name, const char*description, Room*location):Entity(name,description),location(location){
 	picked = false;
 	connect = false;
+	equiped = false;
 }
 void Item::Look() const{
 	printf("%s", name.ret_str());

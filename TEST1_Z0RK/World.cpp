@@ -5,6 +5,7 @@
 #include "Exit.h"
 #include "Vector.h"
 #include "Items.h"
+#include "Functions.h"
 
 World::World(){
 	
@@ -102,7 +103,7 @@ World::World(){
 	 // numb are exits
 
 	 //items:
-	 items.pushback(new Item("Torch", "A Torch that lights you further away", test[2]));
+	 items.pushback(new Item("torch", "A Torch that lights you further away", test[2]));
 	
 
 };
@@ -169,6 +170,7 @@ bool World::keyboard(MyString& input){ //input check
 	else if (input == "open" || input == "o"){
 		printf("Wich direction do you want to open?\n");
 		gets_s(direct);
+		Minus(direct, direct);
 		direction = direct;
 		if (direction == "n" || direction == "north"){ // preguntar Ric sobre perque no em deixa comparar normal (direct == "n");
 			Open(n);
@@ -199,6 +201,7 @@ bool World::keyboard(MyString& input){ //input check
 	else if (input == "close" || input == "c"){
 		printf("Wich direction i have to close?");
 		gets_s(direct);
+		Minus(direct, direct);
 		direction = direct;
 		if (direction == "n" || direction == "north"){ // preguntar Ric sobre perque no em deixa comparar normal (direct == "n");
 			Close(n);
@@ -235,6 +238,24 @@ bool World::keyboard(MyString& input){ //input check
 		system("pause");
 		exit(0);
 	} 
+	else if (input == "pick" || input == "p"){
+		check = 0;
+		for (i = 0; i < N_ITEMS; i++){
+			if (items[i]->location == player->actual){
+				check++;
+			}
+		}
+		if (check != 0){
+		printf("Wich thing i have to pick?\n");
+		gets_s(direct);
+		Minus(direct, direct);
+		direction = direct;
+		Pick(direction);//call pick function
+		}
+		else{
+			printf("There's nothing i can pick here..");
+		}
+	}
 	else{
 		keycheck = false;
 	}
@@ -284,6 +305,26 @@ void World::Go(dir nsew){
 	}
 	if (exit == 0){
 		printf("I can't go to that direction\n");
+	}
+}
+
+void World::Pick(MyString& object){
+	int i, check=0;
+	if (player->bag == CAP_BAG){
+		printf("Your inventory is full! You can only hold 10 items, search for a bigger bag or drop/combine items to make some space!\n");
+	}
+	else{
+		for (i = 0; i < N_ITEMS; i++){
+			if (items[i]->location == player->actual && object==items[i]->name.ret_str()){
+				printf("%s picked!", items[i]->name.ret_str());
+				items[i]->picked = true;
+				player->bag++;
+				check++;
+			}
+		}
+		if (check == 0){
+			printf("\nCan't see a %s in this room...", object.ret_str());
+		}
 	}
 }
 

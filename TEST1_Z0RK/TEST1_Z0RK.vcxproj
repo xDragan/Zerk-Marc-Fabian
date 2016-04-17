@@ -66,6 +66,7 @@
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Exit.cpp" />
+    <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Items.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -77,6 +78,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Exit.h" />
+    <ClInclude Include="Functions.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="MyString.h" />
     <ClInclude Include="Rooms.h" />
