@@ -273,14 +273,14 @@ bool World::keyboard(MyString& input){ //input check
 		Inventory();
 	}
 	else if (input == "equip" || input == "eq"){
-		check = 0;
+		check = 0; int test = 0;
 		for (i = 0; i < N_ITEMS; i++){
 			if (items[i]->picked == true){
 				check++;
 			}
 			if (items[i]->equiped == true){
 				printf("You already have 1 item equipped!");
-				break;
+				break; //FIX THISSSSSSS
 			}
 		}
 		if (check >= 1){
