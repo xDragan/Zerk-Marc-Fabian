@@ -11,7 +11,7 @@ private:
 	MyString name;
 	MyString description;
 	friend class Room;
-	friend class Exit;
+	friend class Exit; 
 	friend class Item;
 	friend class World;
 };

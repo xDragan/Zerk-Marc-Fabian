@@ -3,6 +3,7 @@
 #include "World.h"
 
 
-	Character::Character(){
+	Character::Character(int hp):hp(hp){
 		bag = 0;
+		attack = 5;
 	}

@@ -10,7 +10,7 @@
 World::World(){
 	
 	//player (name)
-	 player = new Character;
+	 player = new Character(100);
 	 // new room[n room]	 // test are rooms
 	 test.pushback(new Room("Forest", "You are in the forest"));
 	 test.pushback(new Room("Forest", "You are in the forest"));
@@ -103,8 +103,8 @@ World::World(){
 	 // numb are exits
 
 	 //items:
-	 items.pushback(new Item("torch", "A Torch that lights you further away", test[2]));
-	
+	 items.pushback(new Item("torch", "A Torch that lights you further away", test[2],10));
+	 items.pushback(new Item("coin", "A 5cent coin, gives you luck", test[7], 1));
 
 };
 
@@ -115,6 +115,7 @@ bool World::keyboard(MyString& input){ //input check
 	MyString direction;
 	if (input == "look" || input == "l"){ // to look you room
 		player->actual->Look();
+		LookItems();
 	}
 	// to look what exits you see from your room:
 	else if (input == "look north" || input == "look n"){
@@ -256,6 +257,79 @@ bool World::keyboard(MyString& input){ //input check
 			printf("There's nothing i can pick here..");
 		}
 	}
+	else if (input == "drop" || input == "d"){
+		if (player->bag!=0){
+			printf("Wich thing i have to drop?\n");
+			gets_s(direct);
+			Minus(direct, direct);
+			direction = direct;
+			Drop(direction);//call pick function
+		}
+		else{
+			printf("There's nothing i can drop...");
+		}
+	}
+	else if (input == "inventory" || input == "i" || input == "inv"){
+		Inventory();
+	}
+	else if (input == "equip" || input == "eq"){
+		check = 0;
+		for (i = 0; i < N_ITEMS; i++){
+			if (items[i]->picked == true){
+				check++;
+			}
+			if (items[i]->equiped == true){
+				printf("You already have 1 item equipped!");
+				break;
+			}
+		}
+		if (check >= 1){
+			printf("Wich item i have to equip?\n");
+			Inventory();
+			gets_s(direct);
+			Minus(direct, direct);
+			direction = direct;
+			Equip(direction);//call equip function
+		}
+		else if (check==0){
+			printf("You have no items to equip");
+		}
+	}
+	else if (input == "unequip" || input == "u" || input == "un"){
+		check = 0;
+		for (i = 0; i < N_ITEMS; i++){
+			if (items[i]->equiped == true){
+				check++;
+			}
+		}
+		if (check != 0){
+			printf("Wich item i have to unequip?\n");
+			gets_s(direct);
+			Minus(direct, direct);
+			direction = direct;
+			UnEquip(direction);//call unequip function
+		}
+		else{
+			printf("You have no items to unequip");
+		}
+	}
+	else if (input == "stats" || input == "stat"){
+		Stats();
+	}
+	else if (input == "combine" || input == "c" || input == "comb"){
+		check = 0;
+		for (i = 0; i < N_ITEMS; i++){
+			if (items[i]->picked == true){
+				check++;
+			}
+			if (check >= 2){
+				printf("Wich 2 items shall i combine?");
+			}
+			else{
+				printf("I need 2 or more items to combine them!");
+			}
+		}
+	}
 	else{
 		keycheck = false;
 	}
@@ -307,7 +381,15 @@ void World::Go(dir nsew){
 		printf("I can't go to that direction\n");
 	}
 }
-
+void World::LookItems(){
+	int i;
+	for (i = 0; i < N_ITEMS; i++){
+		if (items[i]->location == player->actual){
+			printf(", you can see a %s on the floor", items[i]->name.ret_str());
+		}
+	}
+	printf("\n");
+}
 void World::Pick(MyString& object){
 	int i, check=0;
 	if (player->bag == CAP_BAG){
@@ -326,6 +408,77 @@ void World::Pick(MyString& object){
 			printf("\nCan't see a %s in this room...", object.ret_str());
 		}
 	}
+}
+void World::Drop(MyString& object){
+	int check = 0;
+		for (i = 0; i < N_ITEMS; i++){
+			if (items[i]->picked=true && object==items[i]->name.ret_str()){
+				printf("%s droped!", items[i]->name.ret_str());
+				items[i]->picked = false;
+				player->bag--;
+				items[i]->location = player->actual;
+				check++;
+			}
+		}
+		if (check == 0){
+			printf("You don't have that item...");
+		}
+	
+}
+
+void World::Inventory(){
+	int i;
+	printf("\tINVENTORY (%i/10)\n\n", player->bag);
+	for (i = 0; i < N_ITEMS; i++){
+		if (items[i]->picked == true){
+			printf("\t- %s", items[i]->name.ret_str());
+			if (items[i]->equiped == true){
+				printf("  (equiped)\n");
+			}
+			else{
+				printf("\n");
+			}
+		}
+	}
+}
+
+void World::Equip(MyString& item){
+	int check = 0;
+	for (i = 0; i < N_ITEMS; i++){
+		if (items[i]->picked == true && items[i]->name==item){
+			items[i]->equiped = true;
+			player->attack += items[i]->attack_boost;
+			printf("Item equiped!");
+			player->bag--;
+			check++;
+		}
+	}
+	if (check == 0){
+		printf("I don't have that item!");
+	}	
+}
+
+void World::UnEquip(MyString& item){
+	int check = 0;
+	for (i = 0; i < N_ITEMS; i++){
+		if (items[i]->picked == true && items[i]->name == item){
+			items[i]->equiped = false;
+			player->attack -= items[i]->attack_boost;
+			printf("Item unequiped!");
+			check++;
+			player->bag++;
+		}
+	}
+	if (check == 0){
+		printf("I don't have that item equiped!");
+	}
+}
+
+void World::Stats(){
+
+	printf("\t-BAG: %i/10", player->bag);
+	printf("\t-ATTACK: %i", player->attack);
+	printf("\t-HP: %i/100", player->hp);
 }
 
 void World:: Help()const{//help commands

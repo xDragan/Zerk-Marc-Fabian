@@ -7,10 +7,12 @@
 class Character{
 public:
 	int bag; //delimites nº of items you can have in your inventory
+	int hp;
+	int attack;
 public:
 	Room* actual;
 public:
-	Character();
+	Character(int hp);
 		
 };
 #endif

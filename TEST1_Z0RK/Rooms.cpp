@@ -9,6 +9,6 @@
 	}
 
 	void Room::Look()const{
-	printf("%s\n", description.ret_str());
+	printf("%s", description.ret_str());
 	}
 

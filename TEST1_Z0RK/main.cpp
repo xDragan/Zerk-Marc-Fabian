@@ -15,6 +15,7 @@ int main(){
 		printf("\n");
 		printf("___________________________________________________\n");
 		zorkworld->player->actual->Look();
+		printf("\n");
 		gets_s(input);
 		Minus(input, input);// changes player input to full lowercase so there is no problem later reading the input
 		command = input;
