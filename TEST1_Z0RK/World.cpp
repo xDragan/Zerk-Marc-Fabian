@@ -456,19 +456,18 @@ void World::Drop(MyString& object){
 
 void World::Inventory(){
 	int i;
-	printf("\tINVENTORY (%i/10)\n\n", player->bag);
+	printf("\t\tINVENTORY (%i/10)\n\n", player->bag);
 	for (i = 0; i < N_ITEMS; i++){
 		if (items[i]->picked == true){
-			printf("\t- %s", items[i]->name.ret_str());
 			if (items[i]->equiped == true){
 				printf("  (equiped)");
 			}
 			if (items[i]->connect == true ){
-				printf("  (combined )\n");//, items[i]->combined->name
+				printf("and(combined)");//, items[i]->combined->name
 			}
-			else{
-				printf("\n");
-			}
+			printf("\t- %s | ", items[i]->name.ret_str());
+			printf("  %s\n", items[i]->description.ret_str());
+
 		}
 	}
 }
@@ -579,6 +578,7 @@ void World:: Help()const{//help commands
 	printf("\t- Uncombining items: use unc/uncombine/uncomb and will automatically uncombine the items you combined\n");
 	printf("\t- Inventory: i/inv/inventory, it shows inventory items and descriptions\n");
 	printf("\t- Stats: stats/stat, it shows your stats as a palyer (HP/ATTACK/ARMOR/BAG CAPACITY)\n");
+	printf("\t- NOTE: YOU CAN ONLY HAVE 1 ITEM EQUIPED AND 1 ITEM COMBINED AT A TIME, GAMEPLAY RESTRICTION\n");
 	printf("\t- Quit: quit\n\n\n");
 };
 
