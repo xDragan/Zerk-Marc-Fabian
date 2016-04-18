@@ -1,7 +1,7 @@
  
 Zerk 
  
- All you can do in this build is moving around the map with movement lock, look around and open/close doors
+ All you can do in this build is moving around the map with movement lock, look around, open/close doors and interaction with inventory/items as listed below:
  
 	 - Commands:
 	 - Movement: north/n, south/s, east/e, west/w
