@@ -27,6 +27,7 @@ public:
 	void Drop(MyString&);
 	void Equip(MyString&);
 	void UnEquip(MyString&);
+	void Combine(MyString&, MyString&);
 public:
 	vector<Room*>test;	// test are rooms
 	Room* subway=nullptr;

@@ -101,7 +101,6 @@ World::World(){
 	 numb.pushback(new Exit(test[24], test[19], "You see a deep forest", n, false));
 	 numb.pushback(new Exit(subway, test[17], "You see a bright light coming from upstairs", n, false));
 	 // numb are exits
-
 	 //items:
 	 items.pushback(new Item("torch", "A Torch that lights you further away", test[2],10));
 	 items.pushback(new Item("coin", "A 5cent coin, gives you luck", test[7], 1));
@@ -111,8 +110,10 @@ World::World(){
 bool World::keyboard(MyString& input){ //input check
 	int check;
 	bool keycheck = true;
-	char direct[6];
+	char direct[10];
+	char direct2[10];
 	MyString direction;
+	MyString direction2;
 	if (input == "look" || input == "l"){ // to look you room
 		player->actual->Look();
 		LookItems();
@@ -280,10 +281,11 @@ bool World::keyboard(MyString& input){ //input check
 			}
 			if (items[i]->equiped == true){
 				printf("You already have 1 item equipped!");
-				break; //FIX THISSSSSSS
+				test++;
+				//break; //FIX THISSSSSSS
 			}
 		}
-		if (check >= 1){
+		if (check >= 1&&test==0){
 			printf("Wich item i have to equip?\n");
 			Inventory();
 			gets_s(direct);
@@ -291,7 +293,7 @@ bool World::keyboard(MyString& input){ //input check
 			direction = direct;
 			Equip(direction);//call equip function
 		}
-		else if (check==0){
+		else if (check==0&&test==0){
 			printf("You have no items to equip");
 		}
 	}
@@ -322,12 +324,21 @@ bool World::keyboard(MyString& input){ //input check
 			if (items[i]->picked == true){
 				check++;
 			}
-			if (check >= 2){
-				printf("Wich 2 items shall i combine?");
-			}
-			else{
-				printf("I need 2 or more items to combine them!");
-			}
+		}
+		if (check >= 2){
+			printf("Wich 2 items shall i combine?");
+			printf("\nPut: ");
+			gets_s(direct);
+			Minus(direct, direct);
+			direction = direct;
+			printf("Into:");
+			gets_s(direct2);
+			Minus(direct, direct2);
+			direction2 = direct2;
+			Combine(direction, direction2);
+		}
+		else{
+			printf("I need 2 or more items to combine them!");
 		}
 	}
 	else{
@@ -409,6 +420,7 @@ void World::Pick(MyString& object){
 		}
 	}
 }
+
 void World::Drop(MyString& object){
 	int check = 0;
 		for (i = 0; i < N_ITEMS; i++){
@@ -433,7 +445,13 @@ void World::Inventory(){
 		if (items[i]->picked == true){
 			printf("\t- %s", items[i]->name.ret_str());
 			if (items[i]->equiped == true){
-				printf("  (equiped)\n");
+				printf("  (equiped)");
+			}
+			if (items[i]->connect == true && items[i]->equiped==true){
+				printf("  (combined with %s and equiped)\n", items[i]->combined->name);
+			}
+			else if (items[i]->connect == true){
+				printf("  (combined with %s\n)", items[i]->combined->name);
 			}
 			else{
 				printf("\n");
@@ -456,6 +474,7 @@ void World::Equip(MyString& item){
 	if (check == 0){
 		printf("I don't have that item!");
 	}	
+
 }
 
 void World::UnEquip(MyString& item){
@@ -472,6 +491,35 @@ void World::UnEquip(MyString& item){
 	if (check == 0){
 		printf("I don't have that item equiped!");
 	}
+}
+
+void World::Combine(MyString& item1, MyString& item2){
+	int check = 0,it1,it2;
+
+	for (i = 0; i < N_ITEMS; i++){
+		if (items[i]->name == item1 && items[i]->picked == true && items[i]->connect == false && items[i]->equiped == false){
+			check++;
+			it1=i;
+		}
+		if (items[i]->name == item2 && items[i]->picked == true && items[i]->connect == false && items[i]->equiped == false){
+			check++;
+			it2 = i;
+		}
+	}
+	if (check == 2){
+		printf("Items combined!");
+		items[it1]->connect = true;
+		items[it1]->combined = items[it2];
+		items[it2]->connect = true;
+		items[it2]->combined = items[it1];
+		player->bag--;
+		items[it1]->attack_boost += items[it2]->attack_boost;
+		items[it2]->attack_boost += items[it1]->attack_boost;
+	}
+	else{
+		printf("I can't combine those items...");
+	}
+
 }
 
 void World::Stats(){
