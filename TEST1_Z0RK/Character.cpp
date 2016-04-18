@@ -6,4 +6,5 @@
 	Character::Character(int hp):hp(hp){
 		bag = 0;
 		attack = 5;
+		armor = 0;
 	}

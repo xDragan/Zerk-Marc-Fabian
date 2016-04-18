@@ -7,6 +7,7 @@ class Entity{
 private:
 	Entity(const char* name, const char *desc);
 	Entity(const char *desc);
+	Entity();
 private:
 	MyString name;
 	MyString description;

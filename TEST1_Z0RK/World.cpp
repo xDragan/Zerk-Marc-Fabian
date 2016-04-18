@@ -102,9 +102,15 @@ World::World(){
 	 numb.pushback(new Exit(subway, test[17], "You see a bright light coming from upstairs", n, false));
 	 // numb are exits
 	 //items:
-	 items.pushback(new Item("torch", "A Torch that lights you further away", test[2],10));
-	 items.pushback(new Item("coin", "A 5cent coin, gives you luck", test[7], 1));
-
+	 items.pushback(new Item("torch", "A Torch that lights you further away", test[2],10,0));
+	 items.pushback(new Item("coin", "A 5cent coin, gives you luck", test[7], 1,1));
+	 items.pushback(new Item("kevlar helmet", "A kevlar helmet, gives you tons of armor", subway, 0, 70));
+	 items.pushback(new Item("dagger", "A fast dagger, gives you decent damage very fast", test[5], 40, 0));
+	 items.pushback(new Item("key", "A useless key... or not", test[9], 2, 0));
+	 items.pushback(new Item("katana", "A big katana, deals tons of damage", test[24], 90, 0));
+	 items.pushback(new Item("bulletproof shield", "A bulletproof shield, gives you some armor and a bit of damage", test[20], 5, 40));
+	 items.pushback(new Item("rock", "A rock", test[0], 5, 0));
+	 items.pushback(new Item("Map", "A worn map", test[4], 0, 0));
 };
 
 bool World::keyboard(MyString& input){ //input check
@@ -305,11 +311,7 @@ bool World::keyboard(MyString& input){ //input check
 			}
 		}
 		if (check != 0){
-			printf("Wich item i have to unequip?\n");
-			gets_s(direct);
-			Minus(direct, direct);
-			direction = direct;
-			UnEquip(direction);//call unequip function
+			UnEquip();//call unequip function
 		}
 		else{
 			printf("You have no items to unequip");
@@ -339,6 +341,20 @@ bool World::keyboard(MyString& input){ //input check
 		}
 		else{
 			printf("I need 2 or more items to combine them!");
+		}
+	}//
+	else if (input == "uncombine" || input == "unc" || input == "uncomb"){
+		check = 0;
+		for (i = 0; i < N_ITEMS; i++){
+			if (items[i]->connect == true){
+				check++;
+			}
+		}
+		if (check == 2){
+			Uncombine();
+		}
+		else{
+			printf("I need 2 items combined to uncombine them!");
 		}
 	}
 	else{
@@ -447,11 +463,8 @@ void World::Inventory(){
 			if (items[i]->equiped == true){
 				printf("  (equiped)");
 			}
-			if (items[i]->connect == true && items[i]->equiped==true){
-				printf("  (combined with %s and equiped)\n", items[i]->combined->name);
-			}
-			else if (items[i]->connect == true){
-				printf("  (combined with %s\n)", items[i]->combined->name);
+			if (items[i]->connect == true ){
+				printf("  (combined )\n");//, items[i]->combined->name
 			}
 			else{
 				printf("\n");
@@ -466,6 +479,7 @@ void World::Equip(MyString& item){
 		if (items[i]->picked == true && items[i]->name==item){
 			items[i]->equiped = true;
 			player->attack += items[i]->attack_boost;
+			player->armor += items[i]->armor_boost;
 			printf("Item equiped!");
 			player->bag--;
 			check++;
@@ -477,13 +491,13 @@ void World::Equip(MyString& item){
 
 }
 
-void World::UnEquip(MyString& item){
+void World::UnEquip(){
 	int check = 0;
 	for (i = 0; i < N_ITEMS; i++){
-		if (items[i]->picked == true && items[i]->name == item){
+		if (items[i]->equiped == true){
 			items[i]->equiped = false;
 			player->attack -= items[i]->attack_boost;
-			printf("Item unequiped!");
+			printf("%s unequiped!", items[i]->name);
 			check++;
 			player->bag++;
 		}
@@ -509,23 +523,42 @@ void World::Combine(MyString& item1, MyString& item2){
 	if (check == 2){
 		printf("Items combined!");
 		items[it1]->connect = true;
-		items[it1]->combined = items[it2];
+		items[it1]->attack_combined = items[it2]->attack_boost;
+		items[it1]->armor_combined = items[it2]->armor_boost;
 		items[it2]->connect = true;
-		items[it2]->combined = items[it1];
+		items[it2]->attack_combined = items[it1]->attack_boost;
+		items[it2]->armor_combined = items[it1]->armor_boost;
 		player->bag--;
 		items[it1]->attack_boost += items[it2]->attack_boost;
+		items[it1]->armor_boost += items[it2]->armor_boost;
 		items[it2]->attack_boost += items[it1]->attack_boost;
+		items[it2]->armor_boost += items[it1]->armor_boost;
 	}
 	else{
 		printf("I can't combine those items...");
 	}
 
 }
+void World::Uncombine(){
+	player->bag++;
+	for (i = 0; i < N_ITEMS; i++){
+		if (items[i]->connect == true){
+			items[i]->connect = false;
+			items[i]->attack_boost -= items[i]->attack_combined;
+			items[i]->armor_boost -= items[i]->armor_combined;
+			items[i]->attack_combined=0;
+			items[i]->armor_combined = 0;
+		}
+	}
+	printf("items uncombined!");
+}
+
 
 void World::Stats(){
 
 	printf("\t-BAG: %i/10", player->bag);
 	printf("\t-ATTACK: %i", player->attack);
+	printf("\t-ARMOR: %i", player->armor);
 	printf("\t-HP: %i/100", player->hp);
 }
 
@@ -534,9 +567,18 @@ void World:: Help()const{//help commands
 	printf("All you can do in this build is moving around the map with movement lock, look around and open/close doors\n");
 	printf("- Commands:\n");
 	printf("\t- Movement: north/n, south/s, east/e, west/w\n");
-	printf("\t- Look description of your base: look/l\n");
+	printf("\t- Look description of your base (it looks the floor also ;) ): look/l\n");
 	printf("\t- Look to a direction: look north/look n, look south/look s... \n");
 	printf("\t- Open/Close a door: open, open north/open n, open south/open s...\n  ");
+	printf("\t- ITEM COMMANDS:\n  ");
+	printf("\t- Picking and item: Use pick/p and when asked for the item, type item name \n\t -->(ej. -pick +Wich item do you want to pick? -sword)\n  ");
+	printf("\t- Droping and item: Use drop/d and when asked for the item, type item name \n  ");
+	printf("\t- Equipping and item: Use equip/eq and when asked for the item, type item name \n  ");
+	printf("\t- Unequipping and item: Use unequip/u/un it will automatically unequip the item you are holding \n  ");
+	printf("\t- Combining items: Use combine/combin/comb and when asked for the items to combine, type their name \n\t -->(ej. -combine +Put: -sword +Into: -bag) \n  ");
+	printf("\t- Uncombining items: use unc/uncombine/uncomb and will automatically uncombine the items you combined\n");
+	printf("\t- Inventory: i/inv/inventory, it shows inventory items and descriptions\n");
+	printf("\t- Stats: stats/stat, it shows your stats as a palyer (HP/ATTACK/ARMOR/BAG CAPACITY)\n");
 	printf("\t- Quit: quit\n\n\n");
 };
 

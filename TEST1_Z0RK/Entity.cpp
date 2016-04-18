@@ -5,3 +5,6 @@ Entity::Entity(const char* name, const char *description) :name(name), descripti
 
 Entity::Entity(const char *description) : description(description){
 }
+
+Entity::Entity(){
+}
