@@ -21,6 +21,7 @@ Zerk
 	 - Inventory: i/inv/inventory, it shows inventory items and descriptions
 	 - Stats: stats/stat, it shows your stats as a palyer (HP/ATTACK/ARMOR/BAG CAPACITY)
 	 - Caps allowed in commands in 2.0!
+	 - NOTE: YOU CAN ONLY HAVE 1 ITEM EQUIPED AND 1 ITEM COMBINED AT A TIME, GAMEPLAY RESTRICTION
 Look the map in the wiki for bug testing and oriented gameplay
 
 
