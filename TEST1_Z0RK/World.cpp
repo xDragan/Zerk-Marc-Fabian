@@ -113,7 +113,7 @@ World::World(){
 	 items.pushback(new Item("Map", "A worn map", test[4], 0, 0));
 };
 
-bool World::keyboard(MyString& input){ //input check
+bool World::keyboard(const MyString& input){ //input check
 	int check;
 	bool keycheck = true;
 	char direct[10];
@@ -363,7 +363,7 @@ bool World::keyboard(MyString& input){ //input check
 	
 	return keycheck;
 }
-void World::Open(dir direct){
+void World::Open(const dir direct){
 	int i, exit = 0;
 	for (i = 0; i < N_EXIT; i++){
 		if ((numb[i]->origin == player->actual) && (direct == numb[i]->direction)){
@@ -378,7 +378,7 @@ void World::Open(dir direct){
 
 }
 
-void World::Close(dir direct){
+void World::Close(const dir direct){
 	int i, exit = 0;
 	for (i = 0; i < N_EXIT; i++){
 		if ((numb[i]->origin == player->actual) && (direct == numb[i]->direction)){
@@ -392,7 +392,7 @@ void World::Close(dir direct){
 	if (exit == 0){ printf("There is no door there\n"); }
 
 }
-void World::Go(dir nsew){
+void World::Go(const dir nsew){
 	int i, exit = 0;
 	for (i = 0; i < N_EXIT; i++){
 		if (numb[i]->origin == player->actual && nsew == numb[i]->direction &&numb[i]->door == false){
@@ -408,7 +408,7 @@ void World::Go(dir nsew){
 		printf("I can't go to that direction\n");
 	}
 }
-void World::LookItems(){
+void World::LookItems()const {
 	int i;
 	for (i = 0; i < N_ITEMS; i++){
 		if (items[i]->location == player->actual){
@@ -417,7 +417,7 @@ void World::LookItems(){
 	}
 	printf("\n");
 }
-void World::Pick(MyString& object){
+void World::Pick(const MyString& object){
 	int i, check=0;
 	if (player->bag == CAP_BAG){
 		printf("Your inventory is full! You can only hold 10 items, search for a bigger bag or drop/combine items to make some space!\n");
@@ -437,7 +437,7 @@ void World::Pick(MyString& object){
 	}
 }
 
-void World::Drop(MyString& object){
+void World::Drop(const MyString& object){
 	int check = 0;
 		for (i = 0; i < N_ITEMS; i++){
 			if (items[i]->picked=true && object==items[i]->name.ret_str()){
@@ -454,7 +454,7 @@ void World::Drop(MyString& object){
 	
 }
 
-void World::Inventory(){
+void World::Inventory()const{
 	int i;
 	printf("\t\tINVENTORY (%i/10)\n\n", player->bag);
 	for (i = 0; i < N_ITEMS; i++){
@@ -472,7 +472,7 @@ void World::Inventory(){
 	}
 }
 
-void World::Equip(MyString& item){
+void World::Equip(const MyString& item){
 	int check = 0;
 	for (i = 0; i < N_ITEMS; i++){
 		if (items[i]->picked == true && items[i]->name==item){
@@ -506,7 +506,7 @@ void World::UnEquip(){
 	}
 }
 
-void World::Combine(MyString& item1, MyString& item2){
+void World::Combine(const MyString& item1,const  MyString& item2){
 	int check = 0,it1,it2;
 
 	for (i = 0; i < N_ITEMS; i++){
@@ -553,7 +553,7 @@ void World::Uncombine(){
 }
 
 
-void World::Stats(){
+void World::Stats()const{
 
 	printf("\t-BAG: %i/10", player->bag);
 	printf("\t-ATTACK: %i", player->attack);
