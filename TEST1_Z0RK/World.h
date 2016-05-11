@@ -15,19 +15,19 @@ public:
 	World();
 	~World();
 public:
-	bool keyboard(MyString&);
-	void LookItems();
-	void Inventory();
-	void Stats();
+	bool keyboard(const MyString&);
+	void LookItems()const;
+	void Inventory()const;
+	void Stats()const;
 	void Help()const;
-	void Go(dir);
-	void Open(dir);
-	void Close(dir);
-	void Pick(MyString&);
-	void Drop(MyString&);
-	void Equip(MyString&);
+	void Go(const dir);
+	void Open(const dir);
+	void Close(const dir);
+	void Pick(const MyString&);
+	void Drop(const MyString&);
+	void Equip(const MyString&);
 	void UnEquip();
-	void Combine(MyString&, MyString&);
+	void Combine(const MyString&,const MyString&);
 	void Uncombine();
 public:
 	vector<Room*>test;	// test are rooms
