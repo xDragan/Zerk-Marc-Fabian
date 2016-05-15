@@ -14,6 +14,10 @@ Item::Item(const Item &other){
 	attack_boost = other.attack_boost;
 	armor_boost = other.armor_boost;
 }
-void Item::Look() const{
-	printf("%s", name.ret_str());
+const MyString Item::Look() const{
+	return name;
+	//name.ret_str();
+}
+const MyString Item::Desc() const{
+	return description;
 }

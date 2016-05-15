@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Rooms.h"
 #include "Entity.h"
-enum dir{n,s,e,w};
+enum dir{n,s,e,w};//north south east west
 
 
 class Exit:public Entity{

@@ -1,7 +1,7 @@
 #ifndef _Rooms
 #define _Rooms
 #include <iostream>
-#include "Exit.h"
+#include "Entity.h"
 
 class Room :public Entity{
 public:

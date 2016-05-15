@@ -1,11 +1,5 @@
 #include <iostream>
-#include "Character.h"
 #include "World.h"
-#include "Rooms.h"
-#include "Exit.h"
-#include "Vector.h"
-#include "Items.h"
-#include "Functions.h"
 
 World::World(){
 	
@@ -412,7 +406,7 @@ void World::LookItems()const {
 	int i;
 	for (i = 0; i < N_ITEMS; i++){
 		if (items[i]->location == player->actual){
-			printf(", you can see a %s on the floor", items[i]->name.ret_str());
+			printf(", you can see a %s on the floor", items[i]->Look());
 		}
 	}
 	printf("\n");
@@ -424,8 +418,8 @@ void World::Pick(const MyString& object){
 	}
 	else{
 		for (i = 0; i < N_ITEMS; i++){
-			if (items[i]->location == player->actual && object==items[i]->name.ret_str()){
-				printf("%s picked!", items[i]->name.ret_str());
+			if (items[i]->location == player->actual && object==items[i]->Look()){
+				printf("%s picked!", items[i]->Look());
 				items[i]->picked = true;
 				player->bag++;
 				check++;
@@ -440,8 +434,8 @@ void World::Pick(const MyString& object){
 void World::Drop(const MyString& object){
 	int check = 0;
 		for (i = 0; i < N_ITEMS; i++){
-			if (items[i]->picked=true && object==items[i]->name.ret_str()){
-				printf("%s droped!", items[i]->name.ret_str());
+			if (items[i]->picked=true && object==items[i]->Look()){
+				printf("%s droped!", items[i]->Look());
 				items[i]->picked = false;
 				player->bag--;
 				items[i]->location = player->actual;
@@ -465,8 +459,8 @@ void World::Inventory()const{
 			if (items[i]->connect == true ){
 				printf("and(combined)");//, items[i]->combined->name
 			}
-			printf("\t- %s | ", items[i]->name.ret_str());
-			printf("  %s\n", items[i]->description.ret_str());
+			printf("\t- %s | ", items[i]->Look());
+			printf("  %s\n", items[i]->Desc());
 
 		}
 	}
@@ -475,7 +469,7 @@ void World::Inventory()const{
 void World::Equip(const MyString& item){
 	int check = 0;
 	for (i = 0; i < N_ITEMS; i++){
-		if (items[i]->picked == true && items[i]->name==item){
+		if (items[i]->picked == true && items[i]->Look()==item){
 			items[i]->equiped = true;
 			player->attack += items[i]->attack_boost;
 			player->armor += items[i]->armor_boost;
@@ -496,7 +490,7 @@ void World::UnEquip(){
 		if (items[i]->equiped == true){
 			items[i]->equiped = false;
 			player->attack -= items[i]->attack_boost;
-			printf("%s unequiped!", items[i]->name);
+			printf("%s unequiped!", items[i]->Look());
 			check++;
 			player->bag++;
 		}
@@ -510,11 +504,11 @@ void World::Combine(const MyString& item1,const  MyString& item2){
 	int check = 0,it1,it2;
 
 	for (i = 0; i < N_ITEMS; i++){
-		if (items[i]->name == item1 && items[i]->picked == true && items[i]->connect == false && items[i]->equiped == false){
+		if (items[i]->Look() == item1 && items[i]->picked == true && items[i]->connect == false && items[i]->equiped == false){
 			check++;
 			it1=i;
 		}
-		if (items[i]->name == item2 && items[i]->picked == true && items[i]->connect == false && items[i]->equiped == false){
+		if (items[i]->Look() == item2 && items[i]->picked == true && items[i]->connect == false && items[i]->equiped == false){
 			check++;
 			it2 = i;
 		}

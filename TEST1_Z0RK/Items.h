@@ -1,7 +1,7 @@
 #ifndef _Items
 #define _Items
 #include "Entity.h"
-
+#include "Rooms.h"
 class Item: public Entity{
 public:
 	Room* location;
@@ -10,7 +10,8 @@ public:
 	Item(const char*, const char*, Room*,int,int);
 	Item(const Item &other);
 public:
-	void Look() const;
+	const MyString Look() const;
+	const MyString Desc() const;
 	bool picked;
 	bool connect;
 	bool equiped;

@@ -1,5 +1,4 @@
 #include <iostream>
-#include "World.h"
 #include "Exit.h"
 
 

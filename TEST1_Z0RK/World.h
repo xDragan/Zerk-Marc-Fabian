@@ -1,9 +1,13 @@
 #ifndef _World
 #define _World
 #include <iostream>
-#include "Rooms.h"
 #include "Character.h"
+#include "World.h"
+#include "Rooms.h"
+#include "Exit.h"
 #include "Vector.h"
+#include "Items.h"
+#include "Functions.h"
 #define N_ROOM 25
 #define N_EXIT 59
 #define N_ITEMS 9

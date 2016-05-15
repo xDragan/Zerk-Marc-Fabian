@@ -4,17 +4,14 @@
 #include "MyString.h"
 
 class Entity{
-private:
+protected:
 	Entity(const char* name, const char *desc);
 	Entity(const char *desc);
 	Entity();
-private:
+protected:
 	MyString name;
 	MyString description;
-	friend class Room;
-	friend class Exit; 
-	friend class Item;
-	friend class World;
+
 };
 
 #endif
