@@ -7,6 +7,8 @@ enum dir{n,s,e,w};//north south east west
 
 
 class Exit:public Entity{
+private:
+	types type = Exits;
 public:
 	bool door;
 public:

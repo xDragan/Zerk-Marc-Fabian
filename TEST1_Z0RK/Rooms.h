@@ -4,6 +4,8 @@
 #include "Entity.h"
 
 class Room :public Entity{
+private:
+	types type = Rooms;
 public:
 	void Look()const;
 public:

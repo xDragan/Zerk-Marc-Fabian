@@ -6,36 +6,36 @@ World::World(){
 	//player (name)
 	 player = new Character(100);
 	 // new room[n room]	 // test are rooms
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Base", "You are in your Base"));// [2]
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Safe House", "You are in an unknown Safe House"));
-	 test.pushback(new Room("Forest", "You are in the forest"));//[6]
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Safe House", "You are in an unknown Safe House"));
-	 test.pushback(new Room("Forest", "You are in the forest"));//[10]
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Subway Entrance", "You are in the subway entrance"));
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Enemy Base", "Seems like you are in Bob's base..."));//[20]
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Forest", "You are in the forest"));
-	 test.pushback(new Room("Enemy Base", "With this type of decoration  this might be Lizz base..."));//[24]
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Base", "You are in your Base"));// [2]
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Safe House", "You are in an unknown Safe House"));
+	 world.pushback(new Room("Forest", "You are in the forest"));//[6]
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Safe House", "You are in an unknown Safe House"));
+	 world.pushback(new Room("Forest", "You are in the forest"));//[10]
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Subway Entrance", "You are in the subway entrance"));
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Enemy Base", "Seems like you are in Bob's base..."));//[20]
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Forest", "You are in the forest"));
+	 world.pushback(new Room("Enemy Base", "With this type of decoration  this might be Lizz base..."));//[24]
 	 subway = new Room("Subway Exit", "You are in the center of the subway");
-	 player->actual =test[2];//puting player on starting room
+	 player->actual =(Room*)world[2];//puting player on starting room
 	 // new exits [n exits] 
 	 // numb are exits
-	 numb.pushback(new Exit(test[0], test[1], "You see a forest with a bright light in the end", e, false));
+	 numb.pushback(new Exit((Room*)world[0], (Room*)world[1], "You see a forest with a bright light in the end", e, false));
 	 numb.pushback(new Exit(test[1], test[0], "You see a deep forest", w, false));
 	 numb.pushback(new Exit(test[1], test[6], "You see a forest with a bright light coming from somewhere", s, false));
 	 numb.pushback(new Exit(test[2], test[7], "You see a deep forest", s, false));

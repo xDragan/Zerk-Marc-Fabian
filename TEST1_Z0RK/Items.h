@@ -3,9 +3,10 @@
 #include "Entity.h"
 #include "Rooms.h"
 class Item: public Entity{
+private: 
+	types type = Items;
 public:
 	Room* location;
-	//Item* combined;
 public:
 	Item(const char*, const char*, Room*,int,int);
 	Item(const Item &other);

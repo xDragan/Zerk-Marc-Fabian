@@ -3,7 +3,7 @@
 #include "Rooms.h"
 
 
-	Room::Room(const char* name,const char* description):Entity(name,description){
+	Room::Room(const char* name,const char* description):Entity(name,description,type){
 	}
 
 	void Room::Look()const{

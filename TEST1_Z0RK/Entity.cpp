@@ -1,10 +1,10 @@
 #include "Entity.h"
 
-Entity::Entity(const char* name, const char *description) :name(name), description(description){
+Entity::Entity(const char* name, const char *description, types type) :name(name), description(description), type(type){
 }
 
-Entity::Entity(const char *description) : description(description){
+Entity::Entity(const char *description, types type) : description(description), type(type){
 }
 
-Entity::Entity(){
+Entity::Entity(types type): type(type){
 }
