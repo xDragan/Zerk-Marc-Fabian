@@ -5,7 +5,7 @@
 
 class Room :public Entity{
 private:
-	types type = Rooms;
+	//types type = Rooms;
 public:
 	void Look()const;
 public:

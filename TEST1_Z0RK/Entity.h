@@ -2,9 +2,11 @@
 #define _Entity
 #include <iostream>
 #include "MyString.h"
-enum types{Characters,Exits,Items, Rooms};
+enum types{NO_TYPE,Characters,Exits,Items, Rooms};
 
 class Entity{
+public:
+	types type;
 protected:
 	Entity(const char* name, const char *desc, types type);
 	Entity(const char *desc, types type);
@@ -12,7 +14,6 @@ protected:
 protected:
 	MyString name;
 	MyString description;
-	types type;
 };
 
 #endif

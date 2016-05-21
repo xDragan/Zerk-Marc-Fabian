@@ -35,76 +35,75 @@ World::World(){
 	 player->actual =(Room*)world[2];//puting player on starting room
 	 // new exits [n exits] 
 	 // numb are exits
-	 numb.pushback(new Exit((Room*)world[0], (Room*)world[1], "You see a forest with a bright light in the end", e, false));
-	 numb.pushback(new Exit(test[1], test[0], "You see a deep forest", w, false));
-	 numb.pushback(new Exit(test[1], test[6], "You see a forest with a bright light coming from somewhere", s, false));
-	 numb.pushback(new Exit(test[2], test[7], "You see a deep forest", s, false));
-	 numb.pushback(new Exit(test[3], test[8], "You see a forest with a bright light coming from somewhere", s, false));
-	 numb.pushback(new Exit(test[3], test[4], "You see a deep forest", e, false));
-	 numb.pushback(new Exit(test[4], test[3], "You see a deep forest", w, false));
-	 numb.pushback(new Exit(test[5], test[6], "You see a deep forest", e, false));
-	 numb.pushback(new Exit(test[6], test[5], "You see a dirty and creppy safe house..", w, false));
-	 numb.pushback(new Exit(test[6], test[1], "You see a deep forest", n, false));
-	 numb.pushback(new Exit(test[6], test[7], "You see a forest with a bright light coming from somewhere", e, false));
-	 numb.pushback(new Exit(test[6], test[11], "You see a deep forest", s, false));
-	 numb.pushback(new Exit(test[7], test[6], "You see a forest with a bright light coming from somewhere", w, false));
-	 numb.pushback(new Exit(test[7], test[2], "You see your clean and beautiful base", n, false));
-	 numb.pushback(new Exit(test[7], test[8], "You see a forest with a bright light coming from somewhere", e, false));
-	 numb.pushback(new Exit(test[7], test[12], "You see a forest with a bright light coming from somewhere", s, false));
-	 numb.pushback(new Exit(test[8], test[3], "You see a deep forest ", n, false));
-	 numb.pushback(new Exit(test[8], test[7], "You see a forest with a bright light coming from somewhere", w, false));
-	 numb.pushback(new Exit(test[8], test[13], "You see a deep forest", s, false));
-	 numb.pushback(new Exit(test[8], test[9], "You see a dirty and creppy safe house..", e, false));
-	 numb.pushback(new Exit(test[9], test[8], "You see a deep forest", w, false));
-	 numb.pushback(new Exit(test[10], test[11], "You see deep forest", e, false));
-	 numb.pushback(new Exit(test[10], test[15], "You see a forest with a bright light coming from somewhere", s, false));
-	 numb.pushback(new Exit(test[11], test[6], "You see a forest with a bright light coming from somewhere", n, false));
-	 numb.pushback(new Exit(test[11], test[10], "You see a deep forest", w, false));
-	 numb.pushback(new Exit(test[11], test[12], "You see a forest with a bright light coming from somewhere", e, false));
-	 numb.pushback(new Exit(test[11], test[16], "You see a deep forest", s, false));
-	 numb.pushback(new Exit(test[12], test[7], "You see a forest with a bright light coming from somewhere", n, false));
-	 numb.pushback(new Exit(test[12], test[11], "You see a deep forest", w, false));
-	 numb.pushback(new Exit(test[12], test[13], "You see a deep forest", e, false));
-	 numb.pushback(new Exit(test[12], test[17], "You see a subway entrance", s, false));
-	 numb.pushback(new Exit(test[13], test[8], "You see a forest with a bright light coming from somewhere", n, false));
-	 numb.pushback(new Exit(test[13], test[12], "You see a forest with a bright light coming from somewhere", w, false));
-	 numb.pushback(new Exit(test[13], test[14], "You see a deep forest", e, false));
-	 numb.pushback(new Exit(test[13], test[18], "You see a deep forest", s, false));
-	 numb.pushback(new Exit(test[14], test[13], "You see a deep forest", w, false));
-	 numb.pushback(new Exit(test[14], test[19], "You see a forest with a bright light coming from somewhere", s, false));
-	 numb.pushback(new Exit(test[15], test[10], "You see a deep forest", n, false));
-	 numb.pushback(new Exit(test[15], test[16], "You see a forest with a bright light coming from somewhere", e, false));
-	 numb.pushback(new Exit(test[15], test[20], "You see an enemy base... might be Bob one...", s, false));
-	 numb.pushback(new Exit(test[16], test[11], "You see a deep forest", n, false));
-	 numb.pushback(new Exit(test[16], test[15], "You see a forest with a bright light coming from somewhere", w, false));
-	 numb.pushback(new Exit(test[16], test[21], "You see a deep forest", s, false));
-	 numb.pushback(new Exit(test[17], test[12], "You see a deep forest", n, false));
-	 numb.pushback(new Exit(test[17], subway, "You see a door into the subway", s, true));
-	 numb.pushback(new Exit(test[18], test[13], "You see a deep forest", n, false));
-	 numb.pushback(new Exit(test[18], test[19], "You see a deep forest", e, false));
-	 numb.pushback(new Exit(test[18], test[23], "You see a deep forest", s, false));
-	 numb.pushback(new Exit(test[19], test[18], "You see a deep forest", w, false));
-	 numb.pushback(new Exit(test[19], test[24], "You see an enemy base... but it's not Bob one...", s, false));
-	 numb.pushback(new Exit(test[20], test[15], "You see a deep forest", n, false));
-	 numb.pushback(new Exit(test[21], test[16], "You see a deep forest", n, false));
-	 numb.pushback(new Exit(test[21], test[22], "You see a deep forest", e, false));
-	 numb.pushback(new Exit(test[22], test[21], "You see a deep forest", w, false));
-	 numb.pushback(new Exit(test[22], test[23], "You see a deep forest", e, false));
-	 numb.pushback(new Exit(test[23], test[18], "You see a deep forest", n, false));
-	 numb.pushback(new Exit(test[23], test[22], "You see a deep forest", w, false));
-	 numb.pushback(new Exit(test[24], test[19], "You see a deep forest", n, false));
-	 numb.pushback(new Exit(subway, test[17], "You see a bright light coming from upstairs", n, false));
-	 // numb are exits
+	 world.pushback(new Exit((Room*)world[0], (Room*)world[1], "You see a forest with a bright light in the end", e, false));
+	 world.pushback(new Exit((Room*)world[1], (Room*)world[0], "You see a deep forest", w, false));
+	 world.pushback(new Exit((Room*)world[1], (Room*)world[6], "You see a forest with a bright light coming from somewhere", s, false));
+	 world.pushback(new Exit((Room*)world[2], (Room*)world[7], "You see a deep forest", s, false));
+	 world.pushback(new Exit((Room*)world[3], (Room*)world[8], "You see a forest with a bright light coming from somewhere", s, false));
+	 world.pushback(new Exit((Room*)world[3], (Room*)world[4], "You see a deep forest", e, false));
+	 world.pushback(new Exit((Room*)world[4], (Room*)world[3], "You see a deep forest", w, false));
+	 world.pushback(new Exit((Room*)world[5], (Room*)world[6], "You see a deep forest", e, false));
+	 world.pushback(new Exit((Room*)world[6], (Room*)world[5], "You see a dirty and creppy safe house..", w, false));
+	 world.pushback(new Exit((Room*)world[6], (Room*)world[1], "You see a deep forest", n, false));
+	 world.pushback(new Exit((Room*)world[6], (Room*)world[7], "You see a forest with a bright light coming from somewhere", e, false));
+	 world.pushback(new Exit((Room*)world[6], (Room*)world[11], "You see a deep forest", s, false));
+	 world.pushback(new Exit((Room*)world[7], (Room*)world[6], "You see a forest with a bright light coming from somewhere", w, false));
+	 world.pushback(new Exit((Room*)world[7], (Room*)world[2], "You see your clean and beautiful base", n, false));
+	 world.pushback(new Exit((Room*)world[7], (Room*)world[8], "You see a forest with a bright light coming from somewhere", e, false));
+	 world.pushback(new Exit((Room*)world[7], (Room*)world[12], "You see a forest with a bright light coming from somewhere", s, false));
+	 world.pushback(new Exit((Room*)world[8], (Room*)world[3], "You see a deep forest ", n, false));
+	 world.pushback(new Exit((Room*)world[8], (Room*)world[7], "You see a forest with a bright light coming from somewhere", w, false));
+	 world.pushback(new Exit((Room*)world[8], (Room*)world[13], "You see a deep forest", s, false));
+	 world.pushback(new Exit((Room*)world[8], (Room*)world[9], "You see a dirty and creppy safe house..", e, false));
+	 world.pushback(new Exit((Room*)world[9], (Room*)world[8], "You see a deep forest", w, false));
+	 world.pushback(new Exit((Room*)world[10], (Room*)world[11], "You see deep forest", e, false));
+	 world.pushback(new Exit((Room*)world[10], (Room*)world[15], "You see a forest with a bright light coming from somewhere", s, false));
+	 world.pushback(new Exit((Room*)world[11], (Room*)world[6], "You see a forest with a bright light coming from somewhere", n, false));
+	 world.pushback(new Exit((Room*)world[11], (Room*)world[10], "You see a deep forest", w, false));
+	 world.pushback(new Exit((Room*)world[11], (Room*)world[12], "You see a forest with a bright light coming from somewhere", e, false));
+	 world.pushback(new Exit((Room*)world[11], (Room*)world[16], "You see a deep forest", s, false));
+	 world.pushback(new Exit((Room*)world[12], (Room*)world[7], "You see a forest with a bright light coming from somewhere", n, false));
+	 world.pushback(new Exit((Room*)world[12], (Room*)world[11], "You see a deep forest", w, false));
+	 world.pushback(new Exit((Room*)world[12], (Room*)world[13], "You see a deep forest", e, false));
+	 world.pushback(new Exit((Room*)world[12], (Room*)world[17], "You see a subway entrance", s, false));
+	 world.pushback(new Exit((Room*)world[13], (Room*)world[8], "You see a forest with a bright light coming from somewhere", n, false));
+	 world.pushback(new Exit((Room*)world[13], (Room*)world[12], "You see a forest with a bright light coming from somewhere", w, false));
+	 world.pushback(new Exit((Room*)world[13], (Room*)world[14], "You see a deep forest", e, false));
+	 world.pushback(new Exit((Room*)world[13], (Room*)world[18], "You see a deep forest", s, false));
+	 world.pushback(new Exit((Room*)world[14], (Room*)world[13], "You see a deep forest", w, false));
+	 world.pushback(new Exit((Room*)world[14], (Room*)world[19], "You see a forest with a bright light coming from somewhere", s, false));
+	 world.pushback(new Exit((Room*)world[15], (Room*)world[10], "You see a deep forest", n, false));
+	 world.pushback(new Exit((Room*)world[15], (Room*)world[16], "You see a forest with a bright light coming from somewhere", e, false));
+	 world.pushback(new Exit((Room*)world[15], (Room*)world[20], "You see an enemy base... might be Bob one...", s, false));
+	 world.pushback(new Exit((Room*)world[16], (Room*)world[11], "You see a deep forest", n, false));
+	 world.pushback(new Exit((Room*)world[16], (Room*)world[15], "You see a forest with a bright light coming from somewhere", w, false));
+	 world.pushback(new Exit((Room*)world[16], (Room*)world[21], "You see a deep forest", s, false));
+	 world.pushback(new Exit((Room*)world[17], (Room*)world[12], "You see a deep forest", n, false));
+	 world.pushback(new Exit((Room*)world[17], subway, "You see a door into the subway", s, true));
+	 world.pushback(new Exit((Room*)world[18], (Room*)world[13], "You see a deep forest", n, false));
+	 world.pushback(new Exit((Room*)world[18], (Room*)world[19], "You see a deep forest", e, false));
+	 world.pushback(new Exit((Room*)world[18], (Room*)world[23], "You see a deep forest", s, false));
+	 world.pushback(new Exit((Room*)world[19], (Room*)world[18], "You see a deep forest", w, false));
+	 world.pushback(new Exit((Room*)world[19], (Room*)world[24], "You see an enemy base... but it's not Bob one...", s, false));
+	 world.pushback(new Exit((Room*)world[20], (Room*)world[15], "You see a deep forest", n, false));
+	 world.pushback(new Exit((Room*)world[21], (Room*)world[16], "You see a deep forest", n, false));
+	 world.pushback(new Exit((Room*)world[21], (Room*)world[22], "You see a deep forest", e, false));
+	 world.pushback(new Exit((Room*)world[22], (Room*)world[21], "You see a deep forest", w, false));
+	 world.pushback(new Exit((Room*)world[22], (Room*)world[23], "You see a deep forest", e, false));
+	 world.pushback(new Exit((Room*)world[23], (Room*)world[18], "You see a deep forest", n, false));
+	 world.pushback(new Exit((Room*)world[23], (Room*)world[22], "You see a deep forest", w, false));
+	 world.pushback(new Exit((Room*)world[24], (Room*)world[19], "You see a deep forest", n, false));
+	 world.pushback(new Exit(subway, (Room*)world[17], "You see a bright light coming from upstairs", n, false));
 	 //items:
-	 items.pushback(new Item("torch", "A Torch that lights you further away", test[2],10,0));
-	 items.pushback(new Item("coin", "A 5cent coin, gives you luck", test[7], 1,1));
-	 items.pushback(new Item("kevlar helmet", "A kevlar helmet, gives you tons of armor", subway, 0, 70));
-	 items.pushback(new Item("dagger", "A fast dagger, gives you decent damage very fast", test[5], 40, 0));
-	 items.pushback(new Item("key", "A useless key... or not", test[9], 2, 0));
-	 items.pushback(new Item("katana", "A big katana, deals tons of damage", test[24], 90, 0));
-	 items.pushback(new Item("bulletproof shield", "A bulletproof shield, gives you some armor and a bit of damage", test[20], 5, 40));
-	 items.pushback(new Item("rock", "A rock", test[0], 5, 0));
-	 items.pushback(new Item("Map", "A worn map", test[4], 0, 0));
+	 world.pushback(new Item("torch", "A Torch that lights you further away", (Room*)world[2],10,0));
+	 world.pushback(new Item("coin", "A 5cent coin, gives you luck", (Room*)world[7], 1, 1));
+	 world.pushback(new Item("kevlar helmet", "A kevlar helmet, gives you tons of armor", subway, 0, 70));
+	 world.pushback(new Item("dagger", "A fast dagger, gives you decent damage very fast", (Room*)world[5], 40, 0));
+	 world.pushback(new Item("key", "A useless key... or not", (Room*)world[9], 2, 0));
+	 world.pushback(new Item("katana", "A big katana, deals tons of damage", (Room*)world[24], 90, 0));
+	 world.pushback(new Item("bulletproof shield", "A bulletproof shield, gives you some armor and a bit of damage", (Room*)world[20], 5, 40));
+	 world.pushback(new Item("rock", "A rock", (Room*)world[0], 5, 0));
+	  world.pushback(new Item("Map", "A worn map", (Room*)world[4], 0, 0));
 };
 
 bool World::keyboard(const MyString& input){ //input check
@@ -121,36 +120,36 @@ bool World::keyboard(const MyString& input){ //input check
 	// to look what exits you see from your room:
 	else if (input == "look north" || input == "look n"){
 		check=0;
-		for (i = 0; i < N_EXIT; i++){
-			if ((numb[i]->origin == player->actual) && (n == numb[i]->direction)){
-				numb[i]->lookdescript(); check++;
+		for (i = 0; i < world.size(); i++){
+			if (((Exit*)world[i])->origin == player->actual && n == ((Exit*)world[i])->direction && world[i]->type == Exits){
+				((Exit*)world[i])->lookdescript(); check++;
 			}
 		}
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
 	}
 	else if (input == "look south" || input == "look s"){
 		check = 0;
-		for (i = 0; i < N_EXIT; i++){
-			if ((numb[i]->origin == player->actual) && (s == numb[i]->direction)){
-				numb[i]->lookdescript(); check++;
+		for (i = 0; i < world.size(); i++){
+			if (((Exit*)world[i])->origin == player->actual && s == ((Exit*)world[i])->direction && world[i]->type == Exits){
+				((Exit*)world[i])->lookdescript(); check++;
 			}
 		}
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
 	}
 	else if (input == "look east" || input == "look e"){
 		check = 0;
-		for (i = 0; i < N_EXIT; i++){
-			if ((numb[i]->origin == player->actual) && (e == numb[i]->direction)){
-				numb[i]->lookdescript(); check++;
+		for (i = 0; i < world.size(); i++){
+			if (((Exit*)world[i])->origin == player->actual && e == ((Exit*)world[i])->direction && world[i]->type == Exits){
+				((Exit*)world[i])->lookdescript(); check++;
 			}
 		}
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
 	}
 	else if (input == "look west" || input == "look w"){
 		check = 0;
-		for (i = 0; i < N_EXIT; i++){
-			if ((numb[i]->origin == player->actual) && (w == numb[i]->direction)){
-				numb[i]->lookdescript(); check++;
+		for (i = 0; i < world.size(); i++){
+			if (((Exit*)world[i])->origin == player->actual && w == ((Exit*)world[i])->direction && world[i]->type == Exits){
+				((Exit*)world[i])->lookdescript(); check++;
 			}
 		}
 		if (check == 0){ printf("I can't see nothing in that direction\n"); }
@@ -242,8 +241,8 @@ bool World::keyboard(const MyString& input){ //input check
 	} 
 	else if (input == "pick" || input == "p"){
 		check = 0;
-		for (i = 0; i < N_ITEMS; i++){
-			if (items[i]->location == player->actual){
+		for (i = 0; i < world.size(); i++){
+			if (world[i]->type==Items && ((Item*)world[i])->location == player->actual){
 				check++;
 			}
 		}
@@ -275,11 +274,11 @@ bool World::keyboard(const MyString& input){ //input check
 	}
 	else if (input == "equip" || input == "eq"){
 		check = 0; int test = 0;
-		for (i = 0; i < N_ITEMS; i++){
-			if (items[i]->picked == true){
+		for (i = 0; i < world.size(); i++){
+			if (((Item*)world[i])->picked == true && world[i]->type == Items){
 				check++;
 			}
-			if (items[i]->equiped == true){
+			if (((Item*)world[i])->equiped == true && world[i]->type == Items){
 				printf("You already have 1 item equipped!");
 				test++;
 				//break; //FIX THISSSSSSS
@@ -299,8 +298,8 @@ bool World::keyboard(const MyString& input){ //input check
 	}
 	else if (input == "unequip" || input == "u" || input == "un"){
 		check = 0;
-		for (i = 0; i < N_ITEMS; i++){
-			if (items[i]->equiped == true){
+		for (i = 0; i < world.size(); i++){
+			if (((Item*)world[i])->equiped == true && world[i]->type == Items){
 				check++;
 			}
 		}
@@ -316,8 +315,8 @@ bool World::keyboard(const MyString& input){ //input check
 	}
 	else if (input == "combine" || input == "c" || input == "comb"){
 		check = 0;
-		for (i = 0; i < N_ITEMS; i++){
-			if (items[i]->picked == true){
+		for (i = 0; i < world.size(); i++){
+			if (((Item*)world[i])->picked == true && world[i]->type == Items){
 				check++;
 			}
 		}
@@ -339,8 +338,8 @@ bool World::keyboard(const MyString& input){ //input check
 	}//
 	else if (input == "uncombine" || input == "unc" || input == "uncomb"){
 		check = 0;
-		for (i = 0; i < N_ITEMS; i++){
-			if (items[i]->connect == true){
+		for (i = 0; i < world.size(); i++){
+			if (((Item*)world[i])->connect == true && world[i]->type == Items){
 				check++;
 			}
 		}
@@ -359,10 +358,10 @@ bool World::keyboard(const MyString& input){ //input check
 }
 void World::Open(const dir direct){
 	int i, exit = 0;
-	for (i = 0; i < N_EXIT; i++){
-		if ((numb[i]->origin == player->actual) && (direct == numb[i]->direction)){
-			if (numb[i]->door == true && i == 44){
-				numb[i]->door = false; exit++;
+	for (i = 0; i < world.size(); i++){//((Item*)world[i])->equiped == true && world[i]->type == Items
+		if ((((Exit*)world[i])->origin == player->actual) && (direct == ((Exit*)world[i])->direction) && world[i]->type==Exits){
+			if (((Exit*)world[i])->door == true && i == 44){
+				((Exit*)world[i])->door = false; exit++;
 				printf("The door is now open and you can go that way\n");
 			}
 			else if (i == 44){ printf("You don't need to open nothing in that direction :)\n"); exit++; }
@@ -374,10 +373,10 @@ void World::Open(const dir direct){
 
 void World::Close(const dir direct){
 	int i, exit = 0;
-	for (i = 0; i < N_EXIT; i++){
-		if ((numb[i]->origin == player->actual) && (direct == numb[i]->direction)){
-			if (numb[i]->door == false && i == 44){
-				numb[i]->door = true; exit++;
+	for (i = 0; i < world.size(); i++){
+		if ((((Exit*)world[i])->origin == player->actual) && (direct == ((Exit*)world[i])->direction) && world[i]->type == Exits){
+			if (((Exit*)world[i])->door == false && i == 44){
+				((Exit*)world[i])->door = true; exit++;
 				printf("The door is now closed\n");
 			}
 			else if (i == 44){ printf("The door is already closed\n"); exit++; }
@@ -388,13 +387,13 @@ void World::Close(const dir direct){
 }
 void World::Go(const dir nsew){
 	int i, exit = 0;
-	for (i = 0; i < N_EXIT; i++){
-		if (numb[i]->origin == player->actual && nsew == numb[i]->direction &&numb[i]->door == false){
-			player->actual = numb[i]->destiny;
+	for (i = 0; i < world.size(); i++){
+		if (((Exit*)world[i])->origin == player->actual && nsew == ((Exit*)world[i])->direction && ((Exit*)world[i])->door == false && world[i]->type==Exits){
+			player->actual = ((Exit*)world[i])->destiny;
 			exit++;
 			break;
 		}
-		else if (numb[i]->origin == player->actual && nsew == numb[i]->direction && numb[i]->door == true){
+		else if (((Exit*)world[i])->origin == player->actual && nsew == ((Exit*)world[i])->direction && ((Exit*)world[i])->door == true && world[i]->type == Exits){
 			printf("There is a creepy door in this way...\n");
 		}
 	}
@@ -404,9 +403,9 @@ void World::Go(const dir nsew){
 }
 void World::LookItems()const {
 	int i;
-	for (i = 0; i < N_ITEMS; i++){
-		if (items[i]->location == player->actual){
-			printf(", you can see a %s on the floor", items[i]->Look());
+	for (i = 0; i < world.size(); i++){
+		if ((((Item*)world[i])->location == player->actual) && world[i]->type==Items){
+			printf(", you can see a %s on the floor", ((Item*)world[i])->Look());
 		}
 	}
 	printf("\n");
@@ -417,10 +416,10 @@ void World::Pick(const MyString& object){
 		printf("Your inventory is full! You can only hold 10 items, search for a bigger bag or drop/combine items to make some space!\n");
 	}
 	else{
-		for (i = 0; i < N_ITEMS; i++){
-			if (items[i]->location == player->actual && object==items[i]->Look()){
-				printf("%s picked!", items[i]->Look());
-				items[i]->picked = true;
+		for (i = 0; i < world.size(); i++){
+			if (((Item*)world[i])->location == player->actual && object == ((Item*)world[i])->Look() && world[i]->type == Items){
+				printf("%s picked!", ((Item*)world[i])->Look());
+				((Item*)world[i])->picked = true;
 				player->bag++;
 				check++;
 			}
@@ -433,12 +432,12 @@ void World::Pick(const MyString& object){
 
 void World::Drop(const MyString& object){
 	int check = 0;
-		for (i = 0; i < N_ITEMS; i++){
-			if (items[i]->picked=true && object==items[i]->Look()){
-				printf("%s droped!", items[i]->Look());
-				items[i]->picked = false;
+		for (i = 0; i < world.size(); i++){
+			if (((Item*)world[i])->picked = true && object == ((Item*)world[i])->Look() && world[i]->type == Items){
+				printf("%s droped!", ((Item*)world[i])->Look());
+				((Item*)world[i])->picked = false;
 				player->bag--;
-				items[i]->location = player->actual;
+				((Item*)world[i])->location = player->actual;
 				check++;
 			}
 		}
@@ -450,17 +449,17 @@ void World::Drop(const MyString& object){
 
 void World::Inventory()const{
 	int i;
-	printf("\t\tINVENTORY (%i/10)\n\n", player->bag);
-	for (i = 0; i < N_ITEMS; i++){
-		if (items[i]->picked == true){
-			if (items[i]->equiped == true){
+	printf("\t\tINVENTORY (%i/%i)\n\n", player->bag, CAP_BAG);
+	for (i = 0; i < world.size(); i++){
+		if (((Item*)world[i])->picked == true&& world[i]->type==Items){
+			if (((Item*)world[i])->equiped == true){
 				printf("  (equiped)");
 			}
-			if (items[i]->connect == true ){
+			if (((Item*)world[i])->connect == true){
 				printf("and(combined)");//, items[i]->combined->name
 			}
-			printf("\t- %s | ", items[i]->Look());
-			printf("  %s\n", items[i]->Desc());
+			printf("\t- %s | ", ((Item*)world[i])->Look());
+			printf("  %s\n", ((Item*)world[i])->Desc());
 
 		}
 	}
@@ -468,11 +467,11 @@ void World::Inventory()const{
 
 void World::Equip(const MyString& item){
 	int check = 0;
-	for (i = 0; i < N_ITEMS; i++){
-		if (items[i]->picked == true && items[i]->Look()==item){
-			items[i]->equiped = true;
-			player->attack += items[i]->attack_boost;
-			player->armor += items[i]->armor_boost;
+	for (i = 0; i < world.size(); i++){
+		if (((Item*)world[i])->picked == true && ((Item*)world[i])->Look() == item && world[i]->type==Items){
+			((Item*)world[i])->equiped = true;
+			player->attack += ((Item*)world[i])->attack_boost;
+			player->armor += ((Item*)world[i])->armor_boost;
 			printf("Item equiped!");
 			player->bag--;
 			check++;
@@ -486,11 +485,11 @@ void World::Equip(const MyString& item){
 
 void World::UnEquip(){
 	int check = 0;
-	for (i = 0; i < N_ITEMS; i++){
-		if (items[i]->equiped == true){
-			items[i]->equiped = false;
-			player->attack -= items[i]->attack_boost;
-			printf("%s unequiped!", items[i]->Look());
+	for (i = 0; i < world.size(); i++){
+		if (((Item*)world[i])->equiped == true && world[i]->type == Items){
+			((Item*)world[i])->equiped = false;
+			player->attack -= ((Item*)world[i])->attack_boost;
+			printf("%s unequiped!", ((Item*)world[i])->Look());
 			check++;
 			player->bag++;
 		}
@@ -503,29 +502,29 @@ void World::UnEquip(){
 void World::Combine(const MyString& item1,const  MyString& item2){
 	int check = 0,it1,it2;
 
-	for (i = 0; i < N_ITEMS; i++){
-		if (items[i]->Look() == item1 && items[i]->picked == true && items[i]->connect == false && items[i]->equiped == false){
+	for (i = 0; i < world.size(); i++){
+		if (((Item*)world[i])->Look() == item1 && ((Item*)world[i])->picked == true && ((Item*)world[i])->connect == false && ((Item*)world[i])->equiped == false && world[i]->type == Items){
 			check++;
 			it1=i;
 		}
-		if (items[i]->Look() == item2 && items[i]->picked == true && items[i]->connect == false && items[i]->equiped == false){
+		if (((Item*)world[i])->Look() == item2 && ((Item*)world[i])->picked == true && ((Item*)world[i])->connect == false && ((Item*)world[i])->equiped == false && world[i]->type == Items){
 			check++;
 			it2 = i;
 		}
 	}
 	if (check == 2){
 		printf("Items combined!");
-		items[it1]->connect = true;
-		items[it1]->attack_combined = items[it2]->attack_boost;
-		items[it1]->armor_combined = items[it2]->armor_boost;
-		items[it2]->connect = true;
-		items[it2]->attack_combined = items[it1]->attack_boost;
-		items[it2]->armor_combined = items[it1]->armor_boost;
+		((Item*)world[it1])->connect = true;
+		((Item*)world[it1])->attack_combined = ((Item*)world[it2])->attack_boost;
+		((Item*)world[it1])->armor_combined = ((Item*)world[it2])->armor_boost;
+		((Item*)world[it2])->connect = true;
+		((Item*)world[it2])->attack_combined = ((Item*)world[it1])->attack_boost;
+		((Item*)world[it2])->armor_combined = ((Item*)world[it1])->armor_boost;
 		player->bag--;
-		items[it1]->attack_boost += items[it2]->attack_boost;
-		items[it1]->armor_boost += items[it2]->armor_boost;
-		items[it2]->attack_boost += items[it1]->attack_boost;
-		items[it2]->armor_boost += items[it1]->armor_boost;
+		((Item*)world[it1])->attack_boost += ((Item*)world[it2])->attack_boost;
+		((Item*)world[it1])->armor_boost += ((Item*)world[it2])->armor_boost;
+		((Item*)world[it2])->attack_boost += ((Item*)world[it1])->attack_boost;
+		((Item*)world[it2])->armor_boost += ((Item*)world[it1])->armor_boost;
 	}
 	else{
 		printf("I can't combine those items...");
@@ -534,13 +533,13 @@ void World::Combine(const MyString& item1,const  MyString& item2){
 }
 void World::Uncombine(){
 	player->bag++;
-	for (i = 0; i < N_ITEMS; i++){
-		if (items[i]->connect == true){
-			items[i]->connect = false;
-			items[i]->attack_boost -= items[i]->attack_combined;
-			items[i]->armor_boost -= items[i]->armor_combined;
-			items[i]->attack_combined=0;
-			items[i]->armor_combined = 0;
+	for (i = 0; i < world.size(); i++){
+		if (((Item*)world[i])->connect == true&& world[i]->type==Items){
+			((Item*)world[i])->connect = false;
+			((Item*)world[i])->attack_boost -= ((Item*)world[i])->attack_combined;
+			((Item*)world[i])->armor_boost -= ((Item*)world[i])->armor_combined;
+			((Item*)world[i])->attack_combined = 0;
+			((Item*)world[i])->armor_combined = 0;
 		}
 	}
 	printf("items uncombined!");
@@ -549,7 +548,7 @@ void World::Uncombine(){
 
 void World::Stats()const{
 
-	printf("\t-BAG: %i/10", player->bag);
+	printf("\t-BAG: %i/%i", player->bag, CAP_BAG);
 	printf("\t-ATTACK: %i", player->attack);
 	printf("\t-ARMOR: %i", player->armor);
 	printf("\t-HP: %i/100", player->hp);
@@ -557,7 +556,7 @@ void World::Stats()const{
 
 void World:: Help()const{//help commands
 
-	printf("All you can do in this build is moving around the map with movement lock, look around and open/close doors\n");
+	printf("FINAL BUILD! GO TO 'github.com/xDragan/Zork-in-c--' for the readme, wiki and orientated gameplay \n");
 	printf("- Commands:\n");
 	printf("\t- Movement: north/n, south/s, east/e, west/w\n");
 	printf("\t- Look description of your base (it looks the floor also ;) ): look/l\n");
@@ -577,9 +576,7 @@ void World:: Help()const{//help commands
 };
 
 World::~World(){//destructor deleting dynamic memory
-	//delete[] numb;
 	delete subway;
-	//delete[] test;
 	delete player;
 
 };

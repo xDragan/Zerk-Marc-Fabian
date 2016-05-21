@@ -6,7 +6,7 @@
 
 class Character{
 private:
-	types type = Characters;
+	//types type = Characters;
 public:
 	int bag; //delimites nº of items you can have in your inventory
 	int hp;

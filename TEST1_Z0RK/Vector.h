@@ -12,11 +12,11 @@ class vector{
 	uint num_elements = 0;
 public:
 	TIPUS operator[](uint numb)const{
-		assert(numb <= N_EXIT);
+		assert(numb <= num_elements);
 		return buffer[numb];
 	}
 	TIPUS& operator[](uint numb){
-		assert(numb <= N_EXIT);
+		assert(numb <= num_elements);
 		return buffer[numb];
 	}
 	vector(){
@@ -48,11 +48,11 @@ public:
 		*(buffer + num_elements++) = colocar;
 	}
 	void pushfront(const TIPUS& colocar){
-		TYPE* temp = nullptr;
+		TIPUS* temp = nullptr;
 		if (num_elements == capacity)
 		{
 			capacity *= 2;
-			temp = new TYPE[capacity];
+			temp = new TIPUS[capacity];
 			for (int i = 0; i < capacity; i++)
 			{
 				*(temp + i) = *(buffer + i);

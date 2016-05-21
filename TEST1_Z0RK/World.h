@@ -34,11 +34,12 @@ public:
 	void Combine(const MyString&,const MyString&);
 	void Uncombine();
 public:
-	vector<Room*>test;	// test are rooms
+	vector<Entity*>world;
+	//vector<Room*>test;	// test are rooms
 	Room* subway=nullptr;
-	vector<Exit*>numb; // numb are exits
+	//vector<Exit*>numb; // numb are exits
 	Character* player= nullptr;
-	vector<Item*> items;
+	//vector<Item*> items;
 private:
 	int i;
 	

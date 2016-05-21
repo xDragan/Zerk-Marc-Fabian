@@ -4,7 +4,7 @@
 #include "Rooms.h"
 class Item: public Entity{
 private: 
-	types type = Items;
+	//types type = Items;
 public:
 	Room* location;
 public:
