@@ -103,7 +103,7 @@ World::World(){
 	 world.pushback(new Item("katana", "A big katana, deals tons of damage", (Room*)world[24], 90, 0));
 	 world.pushback(new Item("bulletproof shield", "A bulletproof shield, gives you some armor and a bit of damage", (Room*)world[20], 5, 40));
 	 world.pushback(new Item("rock", "A rock", (Room*)world[0], 5, 0));
-	  world.pushback(new Item("Map", "A worn map", (Room*)world[4], 0, 0));
+	 world.pushback(new Item("Map", "A worn map", (Room*)world[4], 0, 0));
 };
 
 bool World::keyboard(const MyString& input){ //input check
@@ -432,18 +432,18 @@ void World::Pick(const MyString& object){
 
 void World::Drop(const MyString& object){
 	int check = 0;
-		for (i = 0; i < world.size(); i++){
-			if (((Item*)world[i])->picked = true && object == ((Item*)world[i])->Look() && world[i]->type == Items){
-				printf("%s droped!", ((Item*)world[i])->Look());
-				((Item*)world[i])->picked = false;
-				player->bag--;
-				((Item*)world[i])->location = player->actual;
-				check++;
-			}
+	for (i = 84; i < world.size(); i++){
+		if (((Item*)world[i])->picked = true && object == ((Item*)world[i])->Look() ){//&& world[i]->type == Items
+			printf("%s droped!", ((Item*)world[i])->Look());
+			((Item*)world[i])->picked = false;
+			player->bag--;
+			((Item*)world[i])->location = player->actual;
+			check++;
 		}
-		if (check == 0){
-			printf("You don't have that item...");
-		}
+	}
+	if (check == 0){
+		printf("You don't have that item...");
+	}
 	
 }
 
