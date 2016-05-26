@@ -80,6 +80,7 @@
     <ClInclude Include="Exit.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="Items.h" />
+    <ClInclude Include="List.h" />
     <ClInclude Include="MyString.h" />
     <ClInclude Include="Rooms.h" />
     <ClInclude Include="Vector.h" />

@@ -71,5 +71,8 @@
     <ClInclude Include="Functions.h">
       <Filter>Archivos de código fuente</Filter>
     </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>Archivos de código fuente</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
