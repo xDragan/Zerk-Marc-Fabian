@@ -4,8 +4,10 @@
 World::World(){
 	
 	//player (name)
-	 player = new Character(100);
-	 // new room[n room]	 // test are rooms
+	 player = new Character(100, "Markuss");
+	 bob = new Character(300, "Bob");
+	 lizz = new Character(120, "Lizz");
+	 // Rooms:
 	 world.pushback(new Room("Forest", "You are in the forest"));
 	 world.pushback(new Room("Forest", "You are in the forest"));
 	 world.pushback(new Room("Base", "You are in your Base"));// [2]
@@ -33,10 +35,11 @@ World::World(){
 	 world.pushback(new Room("Enemy Base", "With this type of decoration  this might be Lizz base..."));//[24]
 	 subway = new Room("Subway Exit", "You are in the center of the subway");
 	 player->actual =(Room*)world[2];//puting player on starting room
-	 // new exits [n exits] 
-	 // numb are exits
+	 bob->actual = (Room*)world[20];//puting bob on starting room
+	 lizz->actual = (Room*)world[24];//puting lizz on starting room
+	 //Exits:
 	 world.pushback(new Exit((Room*)world[0], (Room*)world[1], "You see a forest with a bright light in the end", e, false));
-	 world.pushback(new Exit((Room*)world[1], (Room*)world[0], "You see a deep forest", w, false));
+	 world.pushback(new Exit((Room*)world[1], (Room*)world[0], "You see a deep forest", w, false));//27
 	 world.pushback(new Exit((Room*)world[1], (Room*)world[6], "You see a forest with a bright light coming from somewhere", s, false));
 	 world.pushback(new Exit((Room*)world[2], (Room*)world[7], "You see a deep forest", s, false));
 	 world.pushback(new Exit((Room*)world[3], (Room*)world[8], "You see a forest with a bright light coming from somewhere", s, false));
@@ -59,7 +62,7 @@ World::World(){
 	 world.pushback(new Exit((Room*)world[10], (Room*)world[11], "You see deep forest", e, false));
 	 world.pushback(new Exit((Room*)world[10], (Room*)world[15], "You see a forest with a bright light coming from somewhere", s, false));
 	 world.pushback(new Exit((Room*)world[11], (Room*)world[6], "You see a forest with a bright light coming from somewhere", n, false));
-	 world.pushback(new Exit((Room*)world[11], (Room*)world[10], "You see a deep forest", w, false));
+	 world.pushback(new Exit((Room*)world[11], (Room*)world[10], "You see a deep forest", w, false));//51
 	 world.pushback(new Exit((Room*)world[11], (Room*)world[12], "You see a forest with a bright light coming from somewhere", e, false));
 	 world.pushback(new Exit((Room*)world[11], (Room*)world[16], "You see a deep forest", s, false));
 	 world.pushback(new Exit((Room*)world[12], (Room*)world[7], "You see a forest with a bright light coming from somewhere", n, false));
@@ -78,7 +81,7 @@ World::World(){
 	 world.pushback(new Exit((Room*)world[16], (Room*)world[11], "You see a deep forest", n, false));
 	 world.pushback(new Exit((Room*)world[16], (Room*)world[15], "You see a forest with a bright light coming from somewhere", w, false));
 	 world.pushback(new Exit((Room*)world[16], (Room*)world[21], "You see a deep forest", s, false));
-	 world.pushback(new Exit((Room*)world[17], (Room*)world[12], "You see a deep forest", n, false));
+	 world.pushback(new Exit((Room*)world[17], (Room*)world[12], "You see a deep forest", n, false));//70
 	 world.pushback(new Exit((Room*)world[17], subway, "You see a door into the subway", s, true));
 	 world.pushback(new Exit((Room*)world[18], (Room*)world[13], "You see a deep forest", n, false));
 	 world.pushback(new Exit((Room*)world[18], (Room*)world[19], "You see a deep forest", e, false));
@@ -156,16 +159,16 @@ bool World::keyboard(const MyString& input){ //input check
 	}
 	//now the other basic inputs for movement north south east west
 	else if (input == "north" || input == "n"){
-		Go(n);
+		Go(n, player);
 	}
 	else if (input == "south" || input == "s"){
-		Go(s);
+		Go(s, player);
 	}
 	else if (input == "east" || input == "e"){
-		Go(e);
+		Go(e, player);
 	}
 	else if (input == "west" || input == "w" ){
-		Go(w);
+		Go(w, player);
 	}
 	//input for open a door
 	else if (input == "open" || input == "o"){
@@ -335,7 +338,7 @@ bool World::keyboard(const MyString& input){ //input check
 		else{
 			printf("I need 2 or more items to combine them!");
 		}
-	}//
+	}
 	else if (input == "uncombine" || input == "unc" || input == "uncomb"){
 		check = 0;
 		for (i = 0; i < world.size(); i++){
@@ -356,6 +359,26 @@ bool World::keyboard(const MyString& input){ //input check
 	
 	return keycheck;
 }
+
+
+void World::Go(const dir nsew, Character* npc){
+	int i, exit = 0;
+	
+	for (i = 0; i < world.size(); i++){
+		if (((Exit*)world[i])->origin == npc->actual && nsew == ((Exit*)world[i])->direction && ((Exit*)world[i])->door == false && world[i]->type == Exits){
+			npc->actual = ((Exit*)world[i])->destiny;
+			exit++;
+			break;
+		}
+		else if (((Exit*)world[i])->origin == npc->actual && nsew == ((Exit*)world[i])->direction && ((Exit*)world[i])->door == true && world[i]->type == Exits){
+			printf("There is a creepy door in this way...\n");
+		}
+	}
+	if (exit == 0){
+		printf("I can't go to that direction\n");
+	}
+}
+
 void World::Open(const dir direct){
 	int i, exit = 0;
 	for (i = 0; i < world.size(); i++){//((Item*)world[i])->equiped == true && world[i]->type == Items
@@ -383,24 +406,8 @@ void World::Close(const dir direct){
 		}
 	}
 	if (exit == 0){ printf("There is no door there\n"); }
+}
 
-}
-void World::Go(const dir nsew){
-	int i, exit = 0;
-	for (i = 0; i < world.size(); i++){
-		if (((Exit*)world[i])->origin == player->actual && nsew == ((Exit*)world[i])->direction && ((Exit*)world[i])->door == false && world[i]->type==Exits){
-			player->actual = ((Exit*)world[i])->destiny;
-			exit++;
-			break;
-		}
-		else if (((Exit*)world[i])->origin == player->actual && nsew == ((Exit*)world[i])->direction && ((Exit*)world[i])->door == true && world[i]->type == Exits){
-			printf("There is a creepy door in this way...\n");
-		}
-	}
-	if (exit == 0){
-		printf("I can't go to that direction\n");
-	}
-}
 void World::LookItems()const {
 	int i;
 	for (i = 0; i < world.size(); i++){

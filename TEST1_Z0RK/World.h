@@ -24,7 +24,6 @@ public:
 	void Inventory()const;
 	void Stats()const;
 	void Help()const;
-	void Go(const dir);
 	void Open(const dir);
 	void Close(const dir);
 	void Pick(const MyString&);
@@ -33,13 +32,13 @@ public:
 	void UnEquip();
 	void Combine(const MyString&,const MyString&);
 	void Uncombine();
+	void Go(const dir,Character* npc);
 public:
 	vector<Entity*>world;
-	//vector<Room*>test;	// test are rooms
 	Room* subway=nullptr;
-	//vector<Exit*>numb; // numb are exits
-	Character* player= nullptr;
-	//vector<Item*> items;
+	Character* player = nullptr;
+	Character* bob = nullptr;
+	Character* lizz = nullptr;
 private:
 	int i;
 	

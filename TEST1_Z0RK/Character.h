@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "Rooms.h"
 
-class Character{
+class Character:public Entity{
 private:
 	//types type = Characters;
 public:
@@ -15,7 +15,7 @@ public:
 public:
 	Room* actual;
 public:
-	Character(int hp);
+	Character(int hp,const char*name);
 		
 };
 #endif

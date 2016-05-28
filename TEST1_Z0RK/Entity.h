@@ -9,13 +9,16 @@ class Entity{
 public:
 	types type;
 	list<Entity*> inside;
+	void Name();
 protected:
 	MyString name;
 	MyString description;
 protected:
 	Entity(const char* name, const char *desc, types type);
 	Entity(const char *desc, types type);
+	Entity(const char *name, types type, int null);
 	Entity(types type);
+	
 };
 
 #endif
