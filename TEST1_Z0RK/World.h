@@ -32,7 +32,8 @@ public:
 	void UnEquip();
 	void Combine(const MyString&,const MyString&);
 	void Uncombine();
-	void Go(const dir,Character* npc);
+	bool Go(const dir,Character* npc);
+	void Npc_Path(Character* npc);
 public:
 	vector<Entity*>world;
 	Room* subway=nullptr;

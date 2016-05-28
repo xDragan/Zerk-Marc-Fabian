@@ -15,31 +15,38 @@ int main(){
 	char buffer[20];
 	uint t_start, t_actual, position=0;
 	t_start = GetTickCount();
+	t_actual = GetTickCount();
 	MyString command;
 
 	printf("\t Welcome to Zerk! a Zork type game created by Marc Fabian! ENJOY! :)\n\n");
 	zorkworld->Help();//type all comands at the start
+
 	while (1){//game loop
-		t_actual = GetTickCount();
+		if (t_actual+1000 < GetTickCount()){
+			t_actual = GetTickCount();
+			printf("MOVE\n");
+		}
 		if (_kbhit()){
 			input = _getch();
 			buffer[position++] = input;
+
 			if (buffer[position-1] == '\r'){
 				buffer[position-1] = '\0';
 				printf("%s\n",buffer);
 				Minus(buffer, buffer); // changes player input to full lowercase so there is no problem later reading the input
 				command = buffer;
+
 				if (zorkworld->keyboard(command) == false){
 					printf("I can't understand this comand\n");
 				}
 				printf("\n");
 				printf("___________________________________________________\n");
 				zorkworld->player->actual->Look();
-				printf("\n");
+				printf("\n\n");
 				position = 0;
 			}
 		}
-}
+	}
 
 	system("pause");
 	return 0;

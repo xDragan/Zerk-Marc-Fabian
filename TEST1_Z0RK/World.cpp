@@ -1,5 +1,6 @@
 #include <iostream>
 #include "World.h"
+#include "time.h"
 
 World::World(){
 	
@@ -361,7 +362,7 @@ bool World::keyboard(const MyString& input){ //input check
 }
 
 
-void World::Go(const dir nsew, Character* npc){
+bool World::Go(const dir nsew, Character* npc){
 	int i, exit = 0;
 	
 	for (i = 0; i < world.size(); i++){
@@ -369,14 +370,18 @@ void World::Go(const dir nsew, Character* npc){
 			npc->actual = ((Exit*)world[i])->destiny;
 			exit++;
 			break;
+			return true;
 		}
-		else if (((Exit*)world[i])->origin == npc->actual && nsew == ((Exit*)world[i])->direction && ((Exit*)world[i])->door == true && world[i]->type == Exits){
+		else if (((Exit*)world[i])->origin == npc->actual && nsew == ((Exit*)world[i])->direction && ((Exit*)world[i])->door == true && world[i]->type == Exits && npc==player){
 			printf("There is a creepy door in this way...\n");
+			return false;
 		}
 	}
 	if (exit == 0){
-		printf("I can't go to that direction\n");
+		return false;
 	}
+	if (npc==player&&exit==0)
+		printf("I can't go to that direction\n");
 }
 
 void World::Open(const dir direct){
@@ -551,6 +556,30 @@ void World::Uncombine(){
 	}
 	printf("items uncombined!");
 }
+
+void World::Npc_Path(Character* npc) {
+	int dir;
+	srand(time(NULL));
+	dir = rand() % 4;
+	
+	switch (dir){
+		case 0:
+			Go(n, npc);
+			break;
+		case 1:
+			Go(s, npc);
+			break;
+		case 2:
+			Go(e, npc);
+			break;
+		case 3:
+			Go(n, npc);
+			break;
+	}
+
+
+}
+
 
 
 void World::Stats()const{
