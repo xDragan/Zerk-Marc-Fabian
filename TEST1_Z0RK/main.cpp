@@ -26,6 +26,7 @@ int main(){
 			t_bob = GetTickCount();
 			zorkworld->Npc_interact(zorkworld->bob);
 		}
+		//zorkworld->lizz->status = attack;
 		if (t_lizz + 1000 < GetTickCount()){
 			t_lizz = GetTickCount();
 			zorkworld->Npc_interact(zorkworld->lizz);
