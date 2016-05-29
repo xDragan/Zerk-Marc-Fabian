@@ -58,7 +58,7 @@ int main(){
 			t_lizz = GetTickCount();
 			zorkworld->Npc_interact(zorkworld->lizz);
 		}
-		if (_kbhit()){
+		if (_kbhit()){ //detects player input
 			input = _getch();
 			buffer[position++] = input;
 			if (buffer[position - 1] == '\b'){

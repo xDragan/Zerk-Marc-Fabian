@@ -630,7 +630,7 @@ void World::Npc_interact(Character* npc) {
 		printf("There is someone in your base!");
 		world.pushback(new Item(NULL,"Note", "handwritten note", (Room*)world[2], 0, 0));
 	}
-	if (((Item*)world[92])->connect == true && ((Item*)world[93])->connect == true && ((Item*)world[94])->equiped == true && lizz->armor != 0 && npc->status != paralyzed){
+	if (((Item*)world[89])->connect == true && ((Item*)world[90])->connect == true && ((Item*)world[91])->equiped == true && lizz->armor != 0 && npc->status != paralyzed){
 		lizz->armor = 0;
 		lizz->attack = 0;
 		lizz->status = paralyzed;
@@ -659,7 +659,14 @@ void World::Fight(Character* npc){
 	srand(time(NULL));
 	uint random = rand() % 3;
 	if (random == 0){
-		uint crit = rand() % 4;
+		uint chance;
+		if (hardcore == true){
+			chance = 3;
+		}
+		else{
+			chance = 5;
+		}
+		uint crit = rand() % chance;
 		if (crit == 0){
 			printf(" - ");
 			npc->Name();
@@ -695,7 +702,7 @@ void World::Attack(bool special){
 			if (player->special_attack < GetTickCount()){
 				lizz->armor /= 2;
 				player->special_attack = GetTickCount() + 3000; //3 sec CD
-				printf(" + You have reduced Lizz armor by 50 %!");
+				printf(" + You have reduced Lizz armor by %i!",lizz->armor/2);
 			}
 			else{
 				printf(" + Your special ability is on cooldown!\n");
