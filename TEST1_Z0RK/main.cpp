@@ -13,6 +13,7 @@ int main(){
 	World* zorkworld=new World;
 	char input;
 	char buffer[20];
+	char hardcore[10];
 	uint t_bob, t_lizz, position=0;
 	t_bob = GetTickCount();
 	t_lizz = GetTickCount();
@@ -23,12 +24,30 @@ int main(){
 	//->lizz->status = paralyzed;
 	//zorkworld->bob->status = paralyzed;  ENEMIES PARALYZED FOR TESTING PURPOSES
 
+	printf("\t\t Would you like to play in harcore mode?\n\n");
+	printf("\t\t Press 1 if yes, any other for normal mode\n\n\t\t\t\t    ");
+	gets_s(hardcore);
+	MyString hard(hardcore);
+	if ( hard == "1"){
+		system("cls");
+		zorkworld->hardcore = true;
+		printf("\n\n\t\t\t\t\t    WELCOME TO HELL\n\n");
+	}
+	else{
+		system("cls");
+		printf("\n\n\t\t    Let's play in normal mode then...\n\n");
+	}
+	printf("\n");
+	printf("___________________________________________________\n");
+	zorkworld->player->actual->Look();
+	printf("\n");
+	
+
 	while (zorkworld->player->alive == true && zorkworld->lizz->alive == true){//game loop
 		if (t_bob + 4000 < GetTickCount()){
 			t_bob = GetTickCount();
 			zorkworld->Npc_interact(zorkworld->bob);
 		}
-		//zorkworld->lizz->status = attack;
 		if (t_lizz + 1000 < GetTickCount()){
 			t_lizz = GetTickCount();
 			zorkworld->Npc_interact(zorkworld->lizz);
@@ -62,9 +81,9 @@ int main(){
 		printf("You have won!\n\n"); //placeholder
 	}
 	else{
-		printf("You got REKT by Lizz!!!... tryhard more next time...\n\n");
+		printf("You got...REKT!!!  tryhard more next time...\n\n");
 	}
-	Sleep(4000);
+	Sleep(3000);
 	system("pause");
 	return 0;
 }

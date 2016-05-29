@@ -382,7 +382,7 @@ bool World::keyboard(const MyString& input){ //input check
 
 bool World::Go(const dir nsew, Character* npc){
 	int i, exit = 0;
-	
+	npc->status = move;
 	for (i = 0; i < world.size(); i++){
 		if (((Exit*)world[i])->origin == npc->actual && nsew == ((Exit*)world[i])->direction && ((Exit*)world[i])->door == false && world[i]->type == Exits){
 			npc->actual = ((Exit*)world[i])->destiny;
@@ -685,7 +685,7 @@ void World::Attack(bool special){
 			if (player->special_attack < GetTickCount()){
 				lizz->armor /= 2;
 				player->special_attack = GetTickCount() + 3000; //3 sec CD
-				printf(" + You have reduced Lizz armor by 50%!");
+				printf(" + You have reduced Lizz armor by 50 %!");
 			}
 			else{
 				printf(" + Your special ability is on cooldown!\n");
