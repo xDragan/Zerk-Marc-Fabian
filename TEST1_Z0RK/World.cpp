@@ -1,17 +1,21 @@
 #include <iostream>
 #include "World.h"
 #include "time.h"
+#include <Windows.h>
+#include <conio.h>
 
 World::World(){
 	
 	//player (name)
-	 player = new Character(100, "Markuss");
+	 player = new Character(150, "Markuss");
 	 player->cash = 10;
 	 bob = new Character(300, "Bob");
+	 bob->attack = 80;
 	 bob->cash = 300;
 	 bob->agressive = false;
+	 bob->armor = 50;
 	 lizz = new Character(120, "Lizz");
-	 lizz->attack = 50;
+	 lizz->attack = 40;
 	 lizz->armor = 60;
 	 lizz->agressive = true;
 	 // Rooms:
@@ -39,7 +43,7 @@ World::World(){
 	 world.pushback(new Room("Forest", "You are in the forest"));
 	 world.pushback(new Room("Forest", "You are in the forest"));
 	 world.pushback(new Room("Forest", "You are in the forest"));
-	 world.pushback(new Room("Enemy Base", "With this type of decoration  this might be Lizz base..."));//[24]
+	 world.pushback(new Room("Lizz Base", "With this type of decoration  this might be Lizz base..."));//[24]
 	 subway = new Room("Subway Exit", "You are in the center of the subway");
 	 player->actual =(Room*)world[2];//puting player on starting room
 	 bob->actual = (Room*)world[20];//puting bob on starting room
@@ -109,7 +113,7 @@ World::World(){
 	 world.pushback(new Item("wad of cash", "100$", (Room*)world[7], 1, 1));
 	 world.pushback(new Item("kevlar helmet", "A kevlar helmet, gives you tons of armor", subway, 0, 70));
 	 world.pushback(new Item("dagger", "A fast dagger, gives you decent damage very fast", (Room*)world[5], 40, 0));
-	 world.pushback(new Item("key", "A useless key... or not", (Room*)world[9], 2, 0));//90
+	 world.pushback(new Item("brass knuckles", "brass knuckles, punch your enemies in the face for x2 damage!", (Room*)world[9], 60, 0));//90
 	 world.pushback(new Item("katana", "A big katana, deals tons of damage", (Room*)world[24], 90, 0));
 	 world.pushback(new Item("red emerald", "shiny red emerald", (Room*)world[24], 0, 0));
 	 world.pushback(new Item("green emerald", "shiny green emerald", (Room*)world[20], 0, 0));
@@ -363,11 +367,14 @@ bool World::keyboard(const MyString& input){ //input check
 			printf("I need 2 items combined to uncombine them!");
 		}
 	}
+	else if (input == "attack" || input == "a" || input == "att"){
+		Attack(false);
+	}
+	else if (input == "special attack" || input == "attack special" || input == "s a"){
+		Attack(true);
+	}
 	else{
 		keycheck = false;
-	}
-	if (player->actual == lizz->actual){
-		printf("You are in the same room that Lizz!!! attack quick or run!\n");
 	}
 	return keycheck;
 }
@@ -388,11 +395,15 @@ bool World::Go(const dir nsew, Character* npc){
 			return false;
 		}
 	}
+	if (npc == player && exit == 0){
+		printf("I can't go to that direction\n");
+		return false;
+	}
 	if (exit == 0){
 		return false;
 	}
-	if (npc==player&&exit==0)
-		printf("I can't go to that direction\n");
+
+		
 }
 
 void World::Open(const dir direct){
@@ -486,7 +497,7 @@ void World::Inventory()const{
 				printf("  (equiped)");
 			}
 			if (((Item*)world[i])->connect == true){
-				printf("and(combined)");//, items[i]->combined->name
+				printf("  (combined)");//, items[i]->combined->name
 			}
 			printf("\t- %s | ", ((Item*)world[i])->Look());
 			printf("  %s\n", ((Item*)world[i])->Desc());
@@ -576,6 +587,11 @@ void World::Uncombine(){
 }
 
 void World::Npc_interact(Character* npc) {
+	if (hardcore == true){
+		lizz->attack++;
+		bob->agressive == true;
+	}
+
 	int dir;
 	srand(time(NULL));
 	dir = rand() % 4;
@@ -591,7 +607,7 @@ void World::Npc_interact(Character* npc) {
 				Go(e, npc);
 				break;
 			case 3:
-				Go(n, npc);
+				Go(w, npc);
 				break;
 		}
 	}
@@ -600,36 +616,108 @@ void World::Npc_interact(Character* npc) {
 		npc->Name();
 		printf(" making noise in an unknown safe house...");	
 	}
-	if (npc->actual == ((Room*)world[2]) && player->actual != ((Room*)world[2]) && npc==lizz ){
+	if (npc->actual == ((Room*)world[2]) && player->actual != ((Room*)world[2]) && npc == lizz && npc->status != paralyzed){
 		printf("There is someone in your base!");
 		world.pushback(new Item("Note", "handwritten note", (Room*)world[2], 0, 0));
 	}
-	if (((Item*)world[92])->connect == true && ((Item*)world[93])->connect == true && ((Item*)world[92])->equiped == true && lizz->armor != 0){
+	if (((Item*)world[92])->connect == true && ((Item*)world[93])->connect == true && ((Item*)world[92])->equiped == true && lizz->armor != 0 && npc->status != paralyzed){
 		lizz->armor = 0;
 		lizz->attack = 0;
-		lizz->active = false;
+		lizz->status = paralyzed;
 		printf("with the power of the emeralds you have paralized lizz, that means she can't move, or fight, now you should find her and decide her destiny... ");
 	}
-	if (npc->actual == player->actual && npc->agressive==true){
+	if (npc->actual == player->actual && npc->agressive==true && npc->status!=paralyzed&&player->alive==true){
 		npc->status = attack;
 		Fight(npc);
+	}
+	if (npc->actual != player->actual && npc->status == attack){
+		npc->status = move;
+		flag = false;
+	}
+	if (player->actual == lizz->actual && flag==false){
+		printf("You are in the same room that Lizz!!! attack quick or run!\n");
+		flag = true;
 	}
 }
 
 void World::Fight(Character* npc){
 
 	int damage = npc->attack - (player->armor / 2);
+	if (damage < 5){
+		damage = 5;
+	}
 	srand(time(NULL));
-	int random = rand() % 3;
+	uint random = rand() % 3;
 	if (random == 0){
-		npc->Name();
-		printf(" has attacked you and dealt %i damage!\n",damage );
-		player->hp -= damage;
+		uint crit = rand() % 4;
+		if (crit == 0){
+			printf(" - ");
+			npc->Name();
+			printf(" made a critical attack and dealt you %i damage!\n", damage*2);
+			player->hp -= damage*2;
+		}
+		else{
+			printf(" - ");
+			npc->Name();
+			printf(" has attacked you and dealt %i damage!\n", damage);
+			player->hp -= damage;
+		}
+		if (player->hp <= 0){
+			player->alive = false;
+		}
 	}
 	if (npc->hp<50 && player->hp>50 && hardcore == true){
 		npc->status = move;
 	}
 	
+}
+
+void World::Attack(bool special){
+
+	player->status = attack;
+	if (lizz->actual != player->actual && bob->actual != player->actual){
+		printf("there is nobody here to attack...\n");
+		return;
+	}
+	if (lizz->actual == player->actual){
+		printf("\n");
+		if (special == true){
+			if (player->special_attack < GetTickCount()){
+				lizz->armor /= 2;
+				player->special_attack = GetTickCount() + 3000; //3 sec CD
+				printf(" + You have reduced Lizz armor by 50%!");
+			}
+			else{
+				printf(" + Your special ability is on cooldown!\n");
+			}
+			return;
+		}
+		else{
+			int damage = player->attack - (lizz->armor / 2);
+			if (damage < 5){
+				damage = 5;
+			}
+			printf(" + You have damaged Lizz for %i damage!\n", damage);
+			lizz->hp -= damage;
+		}
+	}
+	if (bob->actual == player->actual){
+		printf("\n");
+		bob->agressive = true;
+		printf(" + You attacked your ally Bob!!! he is now agressive, care!");
+		if (special == true){
+			printf(" + Bob is inmune against armor reduction!");
+			return;
+		}
+		else{
+			int damage = player->attack - (bob->armor / 2);
+			if (damage < 5){
+				damage = 5;
+			}
+			printf(" + You have damaged Bob for %i damage!\n", damage);
+			bob->hp -= damage;
+		}
+	}
 }
 
 void World::Stats()const{

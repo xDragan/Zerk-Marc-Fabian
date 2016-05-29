@@ -35,6 +35,8 @@ public:
 	bool Go(const dir,Character* npc);
 	void Npc_interact(Character* npc);
 	void Fight(Character* npc);
+	void Attack(bool special);
+	bool flag = false;
 public:
 	vector<Entity*>world;
 	Room* subway=nullptr;

@@ -20,8 +20,10 @@ int main(){
 
 	printf("\t Welcome to Zerk! a Zork type game created by Marc Fabian! ENJOY! :)\n\n");
 	zorkworld->Help();//type all comands at the start
+	//->lizz->status = paralyzed;
+	//zorkworld->bob->status = paralyzed;  ENEMIES PARALYZED FOR TESTING PURPOSES
 
-	while (1){//game loop
+	while (zorkworld->player->alive == true && zorkworld->lizz->alive == true){//game loop
 		if (t_bob + 4000 < GetTickCount()){
 			t_bob = GetTickCount();
 			zorkworld->Npc_interact(zorkworld->bob);
@@ -34,7 +36,9 @@ int main(){
 		if (_kbhit()){
 			input = _getch();
 			buffer[position++] = input;
-
+			if (buffer[position - 1] == '\b'){
+				position-=2;
+			}
 			if (buffer[position-1] == '\r'){
 				buffer[position-1] = '\0';
 				printf("%s\n",buffer);
@@ -44,15 +48,23 @@ int main(){
 				if (zorkworld->keyboard(command) == false){
 					printf("I can't understand this comand\n");
 				}
-				printf("\n");
-				printf("___________________________________________________\n");
-				zorkworld->player->actual->Look();
-				printf("\n\n");
+				if (zorkworld->player->status != attack){
+					printf("\n");
+					printf("___________________________________________________\n");
+					zorkworld->player->actual->Look();
+					printf("\n\n");
+				}
 				position = 0;
 			}
 		}
 	}
-
+	if (zorkworld->player->alive == true){
+		printf("You have won!\n\n"); //placeholder
+	}
+	else{
+		printf("You got REKT by Lizz!!!... tryhard more next time...\n\n");
+	}
+	Sleep(4000);
 	system("pause");
 	return 0;
 }

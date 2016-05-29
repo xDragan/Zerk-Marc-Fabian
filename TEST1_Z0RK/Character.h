@@ -3,7 +3,7 @@
 #include <iostream>
 #include <stdio.h>
 #include "Rooms.h"
-enum state{move, attack, shop};
+enum state{move, attack, shop, paralyzed};
 
 class Character:public Entity{
 private:
@@ -14,9 +14,10 @@ public:
 	int hp;
 	int attack;
 	int armor;
-	bool active = true;
+	bool alive=true;
 	int cash;
 	bool agressive;
+	uint special_attack=0;
 public:
 	Room* actual;
 public:
