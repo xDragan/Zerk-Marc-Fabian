@@ -23,6 +23,7 @@ public:
 	bool empty()const{
 		return first == NULL;
 	}
+
 	uint size()const{
 		uint ret = 0;
 		node*temp = first;

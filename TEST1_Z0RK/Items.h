@@ -8,7 +8,7 @@ private:
 public:
 	Room* location;
 public:
-	Item(const char*, const char*, Room*,int,int);
+	Item(uint value, const char*, const char*, Room*, int, int);
 	Item(const Item &other);
 public:
 	const MyString Look() const;
@@ -20,6 +20,7 @@ public:
 	int armor_boost;
 	int attack_combined = 0;
 	int armor_combined=0;
+	uint value;
 };
 
 

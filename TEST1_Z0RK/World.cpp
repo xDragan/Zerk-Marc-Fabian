@@ -1,6 +1,7 @@
 #include <iostream>
 #include "World.h"
 #include "time.h"
+#include "List.h"
 #include <Windows.h>
 #include <conio.h>
 
@@ -8,13 +9,13 @@ World::World(){
 	
 	//player (name)
 	 player = new Character(150, "Markuss");
-	 player->cash = 10;
+	 player->cash = 30;
 	 bob = new Character(300, "Bob");
 	 bob->attack = 80;
 	 bob->cash = 300;
 	 bob->agressive = false;
 	 bob->armor = 50;
-	 lizz = new Character(120, "Lizz");
+	 lizz = new Character(150, "Lizz");
 	 lizz->attack = 40;
 	 lizz->armor = 60;
 	 lizz->agressive = true;
@@ -109,18 +110,19 @@ World::World(){
 	 world.pushback(new Exit((Room*)world[24], (Room*)world[19], "You see a deep forest", n, false));
 	 world.pushback(new Exit(subway, (Room*)world[17], "You see a bright light coming from upstairs", n, false));
 	 //items:
-	 world.pushback(new Item("torch", "A Torch that lights you further away", (Room*)world[2],10,0));
-	 world.pushback(new Item("wad of cash", "100$", (Room*)world[7], 1, 1));
-	 world.pushback(new Item("kevlar helmet", "A kevlar helmet, gives you tons of armor", subway, 0, 70));
-	 world.pushback(new Item("dagger", "A fast dagger, gives you decent damage very fast", (Room*)world[5], 40, 0));
-	 world.pushback(new Item("brass knuckles", "brass knuckles, punch your enemies in the face for x2 damage!", (Room*)world[9], 60, 0));//90
-	 world.pushback(new Item("katana", "A big katana, deals tons of damage", (Room*)world[24], 90, 0));
-	 world.pushback(new Item("red emerald", "shiny red emerald", (Room*)world[24], 0, 0));
-	 world.pushback(new Item("green emerald", "shiny green emerald", (Room*)world[20], 0, 0));
-	 world.pushback(new Item("black emerald", "black emerald", (Room*)world[0], 0, -50));
-	 world.pushback(new Item("bulletproof shield", "A bulletproof shield, gives you some armor and a bit of damage", (Room*)world[20], 5, 40));
-	 world.pushback(new Item("rock", "A rock", (Room*)world[0], 5, 0));
-	 world.pushback(new Item("Map", "A worn map", (Room*)world[4], 0, 0));
+	 world.pushback(new Item(3,"torch", "A Torch that lights you further away", (Room*)world[2],10,0));
+	 world.pushback(new Item(100,"wad of cash", "100$", (Room*)world[7], 1, 1));
+	 world.pushback(new Item(70, "kevlar helmet", "A kevlar helmet, gives you tons of armor", subway, 0, 70));
+	 world.pushback(new Item(40, "dagger", "A fast dagger, gives you decent damage very fast", (Room*)world[5], 40, 0));
+	 world.pushback(new Item(60, "brass knuckles", "brass knuckles, punch your enemies in the face for x2 damage!", (Room*)world[9], 60, 0));//90
+	 world.pushback(new Item(NULL,"red emerald", "shiny red emerald", (Room*)world[24], 0, 0));
+	 world.pushback(new Item(NULL, "green emerald", "shiny green emerald", (Room*)world[20], 0, 0));
+	 world.pushback(new Item(NULL, "black emerald", "black emerald", (Room*)world[0], 0, -50));
+	 world.pushback(new Item(1,"rock", "A rock", (Room*)world[0], 15, 0));
+	 world.pushback(new Item(10,"Gloves", "worn gloves", (Room*)world[4], 2, 0));
+	 world.pushback(new Item(100,"Medkit", "Restores full hp", nullptr, 0, 0));
+	 world.pushback(new Item(200,"katana", "A big katana, deals tons of damage", nullptr, 90, 0));
+	 world.pushback(new Item(70,"bulletproof shield", "A bulletproof shield, gives you some armor and a bit of damage", nullptr, 5, 40));
 };
 
 bool World::keyboard(const MyString& input){ //input check
@@ -265,6 +267,7 @@ bool World::keyboard(const MyString& input){ //input check
 		}
 		if (check != 0){
 		printf("Wich thing i have to pick?\n");
+		fflush(stdin);
 		gets_s(direct);
 		Minus(direct, direct);
 		direction = direct;
@@ -373,6 +376,12 @@ bool World::keyboard(const MyString& input){ //input check
 	else if (input == "special attack" || input == "attack special" || input == "s a"){
 		Attack(true);
 	}
+	else if (input == "buy" || input == "b"){
+		Buy(false);
+	}
+	else if (input == "sell" || input == "sel"){
+		Buy(true);
+	}
 	else{
 		keycheck = false;
 	}
@@ -454,6 +463,7 @@ void World::Pick(const MyString& object){
 	}
 	if (player->bag == CAP_BAG){
 		printf("Your inventory is full! You can only hold 10 items, search for a bigger bag or drop/combine items to make some space!\n");
+		return;
 	}
 	else{
 		for (i = 0; i < world.size(); i++){
@@ -618,25 +628,25 @@ void World::Npc_interact(Character* npc) {
 	}
 	if (npc->actual == ((Room*)world[2]) && player->actual != ((Room*)world[2]) && npc == lizz && npc->status != paralyzed){
 		printf("There is someone in your base!");
-		world.pushback(new Item("Note", "handwritten note", (Room*)world[2], 0, 0));
+		world.pushback(new Item(NULL,"Note", "handwritten note", (Room*)world[2], 0, 0));
 	}
-	if (((Item*)world[92])->connect == true && ((Item*)world[93])->connect == true && ((Item*)world[92])->equiped == true && lizz->armor != 0 && npc->status != paralyzed){
+	if (((Item*)world[92])->connect == true && ((Item*)world[93])->connect == true && ((Item*)world[94])->equiped == true && lizz->armor != 0 && npc->status != paralyzed){
 		lizz->armor = 0;
 		lizz->attack = 0;
 		lizz->status = paralyzed;
 		printf("with the power of the emeralds you have paralized lizz, that means she can't move, or fight, now you should find her and decide her destiny... ");
 	}
+	if (player->actual == lizz->actual && flag == false){
+		printf("You are in the same room that Lizz!!! attack quick or run!\n");
+		flag = true;
+	}
 	if (npc->actual == player->actual && npc->agressive==true && npc->status!=paralyzed&&player->alive==true){
 		npc->status = attack;
 		Fight(npc);
 	}
-	if (npc->actual != player->actual && npc->status == attack){
+	if (npc->actual != player->actual && (npc->status == attack || npc->status == shop)){
 		npc->status = move;
 		flag = false;
-	}
-	if (player->actual == lizz->actual && flag==false){
-		printf("You are in the same room that Lizz!!! attack quick or run!\n");
-		flag = true;
 	}
 }
 
@@ -720,12 +730,105 @@ void World::Attack(bool special){
 	}
 }
 
+void World::Buy(bool sell){
+
+	if (player->bag == CAP_BAG && sell==false){
+		printf("Your inventory is full! You can only hold 10 items, search for a bigger bag or drop/combine items to make some space!\n");
+		return;
+	}
+
+	if (player->actual == (Room*)world[2]){
+		if (sell == false){
+			uint option;
+			printf("\t Wich item do you want to buy? (select number)\n\n");
+			printf("\t 1- Medkit, fully restores your health  [100$] \n"); 
+			printf("\t 2- Katana, tons of damage  [200$]\n");
+			printf("\t 3- bulletproof shield, gives you extra armor and little attack boost  [70$] \n\n\t");
+			fflush(stdin);
+			scanf_s("%i", &option);
+			switch (option){
+			case 1:
+				if (player->cash >= 100){
+					printf("Medkit adquired, hp restored to max!\n");
+					player->hp = 150;
+					player->cash -= 100;
+				}
+				else{
+					printf("You don't have enought money for that... try selling some items");
+				}
+				break;
+			case 2:
+				if (player->cash >= 200 && ((Item*)world[95])->picked==false){
+					printf("Katana adquired, use it at your own risk!\n");
+					((Item*)world[95])->picked = true;
+					player->bag++;
+					player->cash -= 200;
+				}
+				else if (((Item*)world[95])->picked==true){
+					printf("You already have that item!");
+					return;
+				}
+				else{
+					printf("You don't have enought money for that... try selling some items");
+				}
+				break;
+			case 3:
+				if (player->cash >= 70){
+					printf("bulletproof shield adquired, you are now tankier!\n");
+					((Item*)world[96])->picked = true;
+					player -> bag++;
+					player->cash -= 70;
+				}
+				else if (((Item*)world[96])->picked == true){
+					printf("You already have that item!");
+					return;
+				}
+				else{
+					printf("You don't have enought money for that... try selling some items");
+				}
+				break;
+			default:
+				printf("You can't buy that\n");
+				break;
+			}
+			printf("Cash remaining: [%i$] \n", player->cash);
+		}
+		else{
+			char object[20];
+			printf("Wich item do you wanna sell? (you can't buy sold items!)\n");
+			Inventory();
+			fflush(stdin);
+			gets_s(object);
+			MyString item(object);
+			uint check = 0;
+			for (i = 84; i < world.size(); i++){
+				if (((Item*)world[i])->picked = true && item == ((Item*)world[i])->Look()){
+					printf("\n%s sold!\n", ((Item*)world[i])->Look());
+					((Item*)world[i])->picked = false;
+					player->bag--;
+					player->cash += (((Item*)world[i])->value);
+					check++;
+					printf("Cash remaining: [%i$]", player->cash);
+				}
+			}
+				if (check == 0){
+					printf("You don't have that item...");
+				}
+	
+		}
+	}
+	else{
+		printf("Go back to your base to buy or sell items!\n");
+	}
+
+}
+
 void World::Stats()const{
 
 	printf("      -BAG: %i/%i", player->bag, CAP_BAG);
 	printf("\t-ATTACK: %i", player->attack);
 	printf("\t-ARMOR: %i", player->armor);
-	printf("\t-HP: %i/100", player->hp);
+	printf("\t-HP: %i/150", player->hp);
 	printf("\t-CASH: %i$", player->cash);
 }
 

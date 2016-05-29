@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Items.h"
 
-Item::Item(const char*name, const char*description, Room*location, int attack_boost, int armor_boost) :Entity(name, description, Items), location(location), attack_boost(attack_boost), armor_boost(armor_boost){
+Item::Item(uint value, const char*name, const char*description, Room*location, int attack_boost, int armor_boost) :Entity(name, description, Items),value(value), location(location), attack_boost(attack_boost), armor_boost(armor_boost){
 	picked = false;
 	connect = false;
 	equiped = false;
@@ -13,6 +13,7 @@ Item::Item(const Item &other) : Entity(Items){
 	equiped = other.equiped;
 	attack_boost = other.attack_boost;
 	armor_boost = other.armor_boost;
+	value = other.value;
 }
 const MyString Item::Look() const{
 	return name;

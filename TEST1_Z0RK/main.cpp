@@ -13,7 +13,7 @@ int main(){
 	World* zorkworld=new World;
 	char input;
 	char buffer[20];
-	char hardcore[10];
+	uint hardcore;
 	uint t_bob, t_lizz, position=0;
 	t_bob = GetTickCount();
 	t_lizz = GetTickCount();
@@ -26,11 +26,14 @@ int main(){
 
 	printf("\t\t Would you like to play in harcore mode?\n\n");
 	printf("\t\t Press 1 if yes, any other for normal mode\n\n\t\t\t\t    ");
-	gets_s(hardcore);
-	MyString hard(hardcore);
-	if ( hard == "1"){
+	scanf_s("%i", &hardcore);
+
+
+	if (hardcore == 1){
 		system("cls");
 		zorkworld->hardcore = true;
+		zorkworld->player->cash = 0;
+		zorkworld->player->hp = 100;
 		printf("\n\n\t\t\t\t\t    WELCOME TO HELL\n\n");
 	}
 	else{
@@ -43,10 +46,13 @@ int main(){
 	printf("\n");
 	
 
-	while (zorkworld->player->alive == true && zorkworld->lizz->alive == true){//game loop
+	while (zorkworld->player->alive == true && zorkworld->lizz->alive == true){   //game loop
 		if (t_bob + 4000 < GetTickCount()){
 			t_bob = GetTickCount();
 			zorkworld->Npc_interact(zorkworld->bob);
+			if (zorkworld->player->hp < 150){
+				zorkworld->player->hp++;
+			}
 		}
 		if (t_lizz + 1000 < GetTickCount()){
 			t_lizz = GetTickCount();

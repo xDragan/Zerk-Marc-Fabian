@@ -36,6 +36,7 @@ public:
 	void Npc_interact(Character* npc);
 	void Fight(Character* npc);
 	void Attack(bool special);
+	void Buy(bool sell);
 	bool flag = false;
 public:
 	vector<Entity*>world;
