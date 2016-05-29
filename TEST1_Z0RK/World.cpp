@@ -6,8 +6,14 @@ World::World(){
 	
 	//player (name)
 	 player = new Character(100, "Markuss");
+	 player->cash = 10;
 	 bob = new Character(300, "Bob");
+	 bob->cash = 300;
+	 bob->agressive = false;
 	 lizz = new Character(120, "Lizz");
+	 lizz->attack = 50;
+	 lizz->armor = 60;
+	 lizz->agressive = true;
 	 // Rooms:
 	 world.pushback(new Room("Forest", "You are in the forest"));
 	 world.pushback(new Room("Forest", "You are in the forest"));
@@ -100,11 +106,14 @@ World::World(){
 	 world.pushback(new Exit(subway, (Room*)world[17], "You see a bright light coming from upstairs", n, false));
 	 //items:
 	 world.pushback(new Item("torch", "A Torch that lights you further away", (Room*)world[2],10,0));
-	 world.pushback(new Item("coin", "A 5cent coin, gives you luck", (Room*)world[7], 1, 1));
+	 world.pushback(new Item("wad of cash", "100$", (Room*)world[7], 1, 1));
 	 world.pushback(new Item("kevlar helmet", "A kevlar helmet, gives you tons of armor", subway, 0, 70));
 	 world.pushback(new Item("dagger", "A fast dagger, gives you decent damage very fast", (Room*)world[5], 40, 0));
-	 world.pushback(new Item("key", "A useless key... or not", (Room*)world[9], 2, 0));
+	 world.pushback(new Item("key", "A useless key... or not", (Room*)world[9], 2, 0));//90
 	 world.pushback(new Item("katana", "A big katana, deals tons of damage", (Room*)world[24], 90, 0));
+	 world.pushback(new Item("red emerald", "shiny red emerald", (Room*)world[24], 0, 0));
+	 world.pushback(new Item("green emerald", "shiny green emerald", (Room*)world[20], 0, 0));
+	 world.pushback(new Item("black emerald", "black emerald", (Room*)world[0], 0, -50));
 	 world.pushback(new Item("bulletproof shield", "A bulletproof shield, gives you some armor and a bit of damage", (Room*)world[20], 5, 40));
 	 world.pushback(new Item("rock", "A rock", (Room*)world[0], 5, 0));
 	 world.pushback(new Item("Map", "A worn map", (Room*)world[4], 0, 0));
@@ -113,8 +122,8 @@ World::World(){
 bool World::keyboard(const MyString& input){ //input check
 	int check;
 	bool keycheck = true;
-	char direct[10];
-	char direct2[10];
+	char direct[20];
+	char direct2[20];
 	MyString direction;
 	MyString direction2;
 	if (input == "look" || input == "l"){ // to look you room
@@ -357,7 +366,9 @@ bool World::keyboard(const MyString& input){ //input check
 	else{
 		keycheck = false;
 	}
-	
+	if (player->actual == lizz->actual){
+		printf("You are in the same room that Lizz!!! attack quick or run!\n");
+	}
 	return keycheck;
 }
 
@@ -386,13 +397,13 @@ bool World::Go(const dir nsew, Character* npc){
 
 void World::Open(const dir direct){
 	int i, exit = 0;
-	for (i = 0; i < world.size(); i++){//((Item*)world[i])->equiped == true && world[i]->type == Items
+	for (i = 0; i < world.size(); i++){
 		if ((((Exit*)world[i])->origin == player->actual) && (direct == ((Exit*)world[i])->direction) && world[i]->type==Exits){
-			if (((Exit*)world[i])->door == true && i == 44){
+			if (((Exit*)world[i])->door == true){
 				((Exit*)world[i])->door = false; exit++;
 				printf("The door is now open and you can go that way\n");
 			}
-			else if (i == 44){ printf("You don't need to open nothing in that direction :)\n"); exit++; }
+			else if (i == 71){ printf("You don't need to open nothing in that direction :)\n"); exit++; }
 		}
 	}
 	if (exit == 0){ printf("I can't open a door in that direction\n"); }
@@ -403,11 +414,11 @@ void World::Close(const dir direct){
 	int i, exit = 0;
 	for (i = 0; i < world.size(); i++){
 		if ((((Exit*)world[i])->origin == player->actual) && (direct == ((Exit*)world[i])->direction) && world[i]->type == Exits){
-			if (((Exit*)world[i])->door == false && i == 44){
+			if (((Exit*)world[i])->door == false && i == 69){
 				((Exit*)world[i])->door = true; exit++;
 				printf("The door is now closed\n");
 			}
-			else if (i == 44){ printf("The door is already closed\n"); exit++; }
+			else if (i == 69){ printf("The door is already closed\n"); exit++; }
 		}
 	}
 	if (exit == 0){ printf("There is no door there\n"); }
@@ -424,6 +435,12 @@ void World::LookItems()const {
 }
 void World::Pick(const MyString& object){
 	int i, check=0;
+
+	if (object == "wad of cash"){
+		player->cash += 100;
+		printf("cash added!");
+		return;
+	}
 	if (player->bag == CAP_BAG){
 		printf("Your inventory is full! You can only hold 10 items, search for a bigger bag or drop/combine items to make some space!\n");
 	}
@@ -432,6 +449,7 @@ void World::Pick(const MyString& object){
 			if (((Item*)world[i])->location == player->actual && object == ((Item*)world[i])->Look() && world[i]->type == Items){
 				printf("%s picked!", ((Item*)world[i])->Look());
 				((Item*)world[i])->picked = true;
+				((Item*)world[i])->location = nullptr;
 				player->bag++;
 				check++;
 			}
@@ -557,37 +575,70 @@ void World::Uncombine(){
 	printf("items uncombined!");
 }
 
-void World::Npc_Path(Character* npc) {
+void World::Npc_interact(Character* npc) {
 	int dir;
 	srand(time(NULL));
 	dir = rand() % 4;
-	
-	switch (dir){
-		case 0:
-			Go(n, npc);
-			break;
-		case 1:
-			Go(s, npc);
-			break;
-		case 2:
-			Go(e, npc);
-			break;
-		case 3:
-			Go(n, npc);
-			break;
+	if (npc->status == move){ //movement
+		switch (dir){
+			case 0:
+				Go(n, npc);
+				break;
+			case 1:
+				Go(s, npc);
+				break;
+			case 2:
+				Go(e, npc);
+				break;
+			case 3:
+				Go(n, npc);
+				break;
+		}
 	}
-
-
+	if (npc->actual == ((Room*)world[5]) || npc->actual == ((Room*)world[9])){
+		printf("you hear ");
+		npc->Name();
+		printf(" making noise in an unknown safe house...");	
+	}
+	if (npc->actual == ((Room*)world[2]) && player->actual != ((Room*)world[2]) && npc==lizz ){
+		printf("There is someone in your base!");
+		world.pushback(new Item("Note", "handwritten note", (Room*)world[2], 0, 0));
+	}
+	if (((Item*)world[92])->connect == true && ((Item*)world[93])->connect == true && ((Item*)world[92])->equiped == true && lizz->armor != 0){
+		lizz->armor = 0;
+		lizz->attack = 0;
+		lizz->active = false;
+		printf("with the power of the emeralds you have paralized lizz, that means she can't move, or fight, now you should find her and decide her destiny... ");
+	}
+	if (npc->actual == player->actual && npc->agressive==true){
+		npc->status = attack;
+		Fight(npc);
+	}
 }
 
+void World::Fight(Character* npc){
 
+	int damage = npc->attack - (player->armor / 2);
+	srand(time(NULL));
+	int random = rand() % 3;
+	if (random == 0){
+		npc->Name();
+		printf(" has attacked you and dealt %i damage!\n",damage );
+		player->hp -= damage;
+	}
+	if (npc->hp<50 && player->hp>50 && hardcore == true){
+		npc->status = move;
+	}
+	
+}
 
 void World::Stats()const{
 
-	printf("\t-BAG: %i/%i", player->bag, CAP_BAG);
+	printf("      -BAG: %i/%i", player->bag, CAP_BAG);
 	printf("\t-ATTACK: %i", player->attack);
 	printf("\t-ARMOR: %i", player->armor);
 	printf("\t-HP: %i/100", player->hp);
+	printf("\t-CASH: %i$", player->cash);
 }
 
 void World:: Help()const{//help commands

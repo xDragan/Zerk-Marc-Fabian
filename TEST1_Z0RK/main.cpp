@@ -13,18 +13,22 @@ int main(){
 	World* zorkworld=new World;
 	char input;
 	char buffer[20];
-	uint t_start, t_actual, position=0;
-	t_start = GetTickCount();
-	t_actual = GetTickCount();
+	uint t_bob, t_lizz, position=0;
+	t_bob = GetTickCount();
+	t_lizz = GetTickCount();
 	MyString command;
 
 	printf("\t Welcome to Zerk! a Zork type game created by Marc Fabian! ENJOY! :)\n\n");
 	zorkworld->Help();//type all comands at the start
 
 	while (1){//game loop
-		if (t_actual+1000 < GetTickCount()){
-			t_actual = GetTickCount();
-			printf("MOVE\n");
+		if (t_bob + 4000 < GetTickCount()){
+			t_bob = GetTickCount();
+			zorkworld->Npc_interact(zorkworld->bob);
+		}
+		if (t_lizz + 1000 < GetTickCount()){
+			t_lizz = GetTickCount();
+			zorkworld->Npc_interact(zorkworld->lizz);
 		}
 		if (_kbhit()){
 			input = _getch();

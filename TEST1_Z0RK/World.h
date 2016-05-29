@@ -33,13 +33,15 @@ public:
 	void Combine(const MyString&,const MyString&);
 	void Uncombine();
 	bool Go(const dir,Character* npc);
-	void Npc_Path(Character* npc);
+	void Npc_interact(Character* npc);
+	void Fight(Character* npc);
 public:
 	vector<Entity*>world;
 	Room* subway=nullptr;
 	Character* player = nullptr;
 	Character* bob = nullptr;
 	Character* lizz = nullptr;
+	bool hardcore = false;
 private:
 	int i;
 	
