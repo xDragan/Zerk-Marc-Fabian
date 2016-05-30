@@ -14,7 +14,7 @@ public:
 	MyString();
 	MyString(const char *string);
 	MyString(const MyString &other);
-	~MyString();
+	virtual ~MyString();
 public:
 	void my_gets(char*); // testing
 	const char *ret_str() const;

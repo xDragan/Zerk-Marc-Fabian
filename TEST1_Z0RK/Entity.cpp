@@ -15,3 +15,6 @@ Entity::Entity(types type): type(type){
 void Entity::Name(){
 	printf("%s", name);
 }
+
+Entity::~Entity(){
+}

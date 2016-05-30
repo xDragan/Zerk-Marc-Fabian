@@ -17,7 +17,7 @@ class World{
 
 public:
 	World();
-	~World();
+	virtual ~World();
 public:
 	bool keyboard(const MyString&);
 	void LookItems()const;
@@ -38,6 +38,7 @@ public:
 	void Attack(bool special);
 	void Buy(bool sell);
 	bool flag = false;
+	bool interrupt = false;
 public:
 	vector<Entity*>world;
 	Room* subway=nullptr;

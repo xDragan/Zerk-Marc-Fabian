@@ -18,7 +18,7 @@ protected:
 	Entity(const char *desc, types type);
 	Entity(const char *name, types type, int null);
 	Entity(types type);
-	
+	virtual ~Entity();
 };
 
 #endif

@@ -14,7 +14,7 @@ World::World(){
 	 bob->attack = 80;
 	 bob->cash = 300;
 	 bob->agressive = false;
-	 bob->armor = 50;
+	 bob->armor = 90;
 	 lizz = new Character(150, "Lizz");
 	 lizz->attack = 40;
 	 lizz->armor = 60;
@@ -307,6 +307,8 @@ bool World::keyboard(const MyString& input){ //input check
 		if (check >= 1&&test==0){
 			printf("Wich item i have to equip?\n");
 			Inventory();
+			printf("\n\t");
+			fflush(stdin);
 			gets_s(direct);
 			Minus(direct, direct);
 			direction = direct;
@@ -601,7 +603,10 @@ void World::Npc_interact(Character* npc) {
 		lizz->attack++;
 		bob->agressive == true;
 	}
-
+	if (lizz->hp <= 0){
+		lizz->alive = false;
+		return;
+	}
 	int dir;
 	srand(time(NULL));
 	dir = rand() % 4;
@@ -624,7 +629,7 @@ void World::Npc_interact(Character* npc) {
 	if (npc->actual == ((Room*)world[5]) || npc->actual == ((Room*)world[9])){
 		printf("you hear ");
 		npc->Name();
-		printf(" making noise in an unknown safe house...");	
+		printf(" making noise in an unknown safe house...\n\n");	
 	}
 	if (npc->actual == ((Room*)world[2]) && player->actual != ((Room*)world[2]) && npc == lizz && npc->status != paralyzed){
 		printf("There is someone in your base!");
@@ -634,7 +639,9 @@ void World::Npc_interact(Character* npc) {
 		lizz->armor = 0;
 		lizz->attack = 0;
 		lizz->status = paralyzed;
-		printf("with the power of the emeralds you have paralized lizz, that means she can't move, or fight, now you should find her and decide her destiny... ");
+		printf("\nWith the power of the emeralds you have paralized lizz, that means she can't move, or fight, now you should find her and decide her destiny... ");
+		printf("Lizz is in the");
+		lizz->actual->Name();
 	}
 	if (player->actual == lizz->actual && flag == false){
 		printf("You are in the same room that Lizz!!! attack quick or run!\n");
@@ -647,6 +654,12 @@ void World::Npc_interact(Character* npc) {
 	if (npc->actual != player->actual && (npc->status == attack || npc->status == shop)){
 		npc->status = move;
 		flag = false;
+		interrupt = true;
+	}
+	if (bob->actual == player->actual && bob->agressive == false && interrupt ==false){
+		printf(" - Hey Markuss! It's bob! i can buy or sell you the items that you can find on the shop!\n\n");
+		bob->status = shop;
+		interrupt = true;
 	}
 }
 
@@ -702,7 +715,7 @@ void World::Attack(bool special){
 			if (player->special_attack < GetTickCount()){
 				lizz->armor /= 2;
 				player->special_attack = GetTickCount() + 3000; //3 sec CD
-				printf(" + You have reduced Lizz armor by %i!",lizz->armor/2);
+				printf(" + You have reduced Lizz armor by %i!\n",lizz->armor/2);
 			}
 			else{
 				printf(" + Your special ability is on cooldown!\n");
@@ -721,9 +734,9 @@ void World::Attack(bool special){
 	if (bob->actual == player->actual){
 		printf("\n");
 		bob->agressive = true;
-		printf(" + You attacked your ally Bob!!! he is now agressive, care!");
+		printf(" + You attacked your ally Bob!!! he is now agressive, care!\n");
 		if (special == true){
-			printf(" + Bob is inmune against armor reduction!");
+			printf(" + Bob is inmune against armor reduction!\n");
 			return;
 		}
 		else{
@@ -744,7 +757,7 @@ void World::Buy(bool sell){
 		return;
 	}
 
-	if (player->actual == (Room*)world[2]){
+	if (player->actual == (Room*)world[2] || bob->status==shop){
 		if (sell == false){
 			uint option;
 			printf("\t Wich item do you want to buy? (select number)\n\n");
@@ -761,7 +774,7 @@ void World::Buy(bool sell){
 					player->cash -= 100;
 				}
 				else{
-					printf("You don't have enought money for that... try selling some items");
+					printf("You don't have enought money for that... try selling some items\n");
 				}
 				break;
 			case 2:
@@ -809,7 +822,15 @@ void World::Buy(bool sell){
 			MyString item(object);
 			uint check = 0;
 			for (i = 84; i < world.size(); i++){
-				if (((Item*)world[i])->picked = true && item == ((Item*)world[i])->Look()){
+				if (((Item*)world[i])->picked == true && item == ((Item*)world[i])->Look()){
+					if (((Item*)world[i])->equiped == true){
+						printf("Unequip that item before you sell it!\n");
+						return;
+					}
+					if (((Item*)world[i])->connect == true){
+						printf("Uncombine that item before you sell it!\n");
+						return;
+					}
 					printf("\n%s sold!\n", ((Item*)world[i])->Look());
 					((Item*)world[i])->picked = false;
 					player->bag--;
@@ -832,11 +853,17 @@ void World::Buy(bool sell){
 
 void World::Stats()const{
 
-	printf("      -BAG: %i/%i", player->bag, CAP_BAG);
-	printf("\t-ATTACK: %i", player->attack);
-	printf("\t-ARMOR: %i", player->armor);
-	printf("\t-HP: %i/150", player->hp);
-	printf("\t-CASH: %i$", player->cash);
+	if (hardcore == true){
+		printf("You can't see your stats in hardcore mode... HA!\n");
+	}
+	else{
+		printf("      -BAG: %i/%i", player->bag, CAP_BAG);
+		printf("\t-ATTACK: %i", player->attack);
+		printf("\t-ARMOR: %i", player->armor);
+		printf("\t-HP: %i/150", player->hp);
+		printf("\t-CASH: %i$", player->cash);
+	}
+
 }
 
 void World:: Help()const{//help commands

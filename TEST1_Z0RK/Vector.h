@@ -29,7 +29,7 @@ public:
 			buffer[i] = vector.buffer[i];
 		}
 	}
-	~vector(){
+	virtual ~vector(){
 		delete[]buffer;
 	}
 	void pushback(const TIPUS& colocar){

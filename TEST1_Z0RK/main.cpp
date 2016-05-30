@@ -50,7 +50,7 @@ int main(){
 		if (t_bob + 4000 < GetTickCount()){
 			t_bob = GetTickCount();
 			zorkworld->Npc_interact(zorkworld->bob);
-			if (zorkworld->player->hp < 150){
+			if (zorkworld->player->hp < 150 && hardcore==false){
 				zorkworld->player->hp++;
 			}
 		}
@@ -84,7 +84,7 @@ int main(){
 		}
 	}
 	if (zorkworld->player->alive == true){
-		printf("You have won!\n\n"); //placeholder
+		printf("\n\nYou have WON! CONGRATS! Lizz is.. DEAD!\n\n"); //placeholder
 	}
 	else{
 		printf("You got...REKT!!!  tryhard more next time...\n\n");
