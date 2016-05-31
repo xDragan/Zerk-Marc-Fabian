@@ -751,7 +751,7 @@ void World::Attack(bool special){
 	}
 }
 
-void World::Buy(bool sell){
+void World::Buy(const bool sell){
 
 	if (player->bag == CAP_BAG && sell==false){
 		printf("Your inventory is full! You can only hold 10 items, search for a bigger bag or drop/combine items to make some space!\n");

@@ -12,7 +12,7 @@ Entity::Entity(const char *name, types type, int null) : name(name), type(type){
 Entity::Entity(types type): type(type){
 }
 
-void Entity::Name(){
+void Entity::Name()const{
 	printf("%s", name.ret_str());
 }
 

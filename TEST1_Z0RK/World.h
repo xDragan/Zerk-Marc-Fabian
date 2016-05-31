@@ -36,7 +36,7 @@ public:
 	void Npc_interact(Character* npc);
 	void Fight(Character* npc);
 	void Attack(bool special);
-	void Buy(bool sell);
+	void Buy(const bool sell);
 	bool flag = false;
 	bool interrupt = false;
 public:

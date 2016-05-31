@@ -9,7 +9,7 @@ class Entity{
 public:
 	types type;
 	list<Entity*> inside;
-	void Name();
+	void Name()const;
 protected:
 	MyString name;
 	MyString description;
