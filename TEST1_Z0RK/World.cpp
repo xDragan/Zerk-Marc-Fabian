@@ -446,11 +446,13 @@ void World::Close(const dir direct){
 	if (exit == 0){ printf("There is no door there\n"); }
 }
 
-void World::LookItems()const {
+void World::LookItems()const{
 	int i;
 	for (i = 0; i < world.size(); i++){
 		if ((((Item*)world[i])->location == player->actual) && world[i]->type==Items){
-			printf(", you can see a %s on the floor", ((Item*)world[i])->Look());
+			printf(", you can see a ");
+			((Item*)world[i])->Name();
+			printf(" on the floor");
 		}
 	}
 	printf("\n");
@@ -469,8 +471,8 @@ void World::Pick(const MyString& object){
 	}
 	else{
 		for (i = 0; i < world.size(); i++){
-			if (((Item*)world[i])->location == player->actual && object == ((Item*)world[i])->Look() && world[i]->type == Items){
-				printf("%s picked!", ((Item*)world[i])->Look());
+			if (((Item*)world[i])->location == player->actual && object == ((Item*)world[i])->retName() && world[i]->type == Items){
+				printf("%s picked!", ((Item*)world[i])->retName());
 				((Item*)world[i])->picked = true;
 				((Item*)world[i])->location = nullptr;
 				player->bag++;
@@ -486,8 +488,8 @@ void World::Pick(const MyString& object){
 void World::Drop(const MyString& object){
 	int check = 0;
 	for (i = 84; i < world.size(); i++){
-		if (((Item*)world[i])->picked = true && object == ((Item*)world[i])->Look() ){//&& world[i]->type == Items
-			printf("%s droped!", ((Item*)world[i])->Look());
+		if (((Item*)world[i])->picked = true && object == ((Item*)world[i])->retName()){//&& world[i]->type == Items
+			printf("%s droped!", ((Item*)world[i])->retName());
 			((Item*)world[i])->picked = false;
 			player->bag--;
 			((Item*)world[i])->location = player->actual;
@@ -511,7 +513,7 @@ void World::Inventory()const{
 			if (((Item*)world[i])->connect == true){
 				printf("  (combined)");//, items[i]->combined->name
 			}
-			printf("\t- %s | ", ((Item*)world[i])->Look());
+			printf("\t- %s | ", ((Item*)world[i])->retName());
 			printf("  %s\n", ((Item*)world[i])->Desc());
 
 		}

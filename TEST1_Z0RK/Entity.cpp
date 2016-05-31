@@ -16,5 +16,9 @@ void Entity::Name()const{
 	printf("%s", name.ret_str());
 }
 
+const MyString Entity::retName()const{
+	return name;
+}
+
 Entity::~Entity(){
 }

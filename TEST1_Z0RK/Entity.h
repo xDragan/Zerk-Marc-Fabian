@@ -10,6 +10,7 @@ public:
 	types type;
 	list<Entity*> inside;
 	void Name()const;
+	const MyString retName()const;
 protected:
 	MyString name;
 	MyString description;
