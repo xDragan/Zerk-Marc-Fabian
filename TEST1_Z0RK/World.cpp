@@ -599,6 +599,7 @@ void World::Uncombine(){
 }
 
 void World::Npc_interact(Character* npc) {
+
 	if (hardcore == true){
 		lizz->attack++;
 		bob->agressive == true;

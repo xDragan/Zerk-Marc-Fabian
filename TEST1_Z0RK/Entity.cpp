@@ -13,7 +13,7 @@ Entity::Entity(types type): type(type){
 }
 
 void Entity::Name(){
-	printf("%s", name);
+	printf("%s", name.ret_str());
 }
 
 Entity::~Entity(){
